@@ -8,34 +8,37 @@
         Title="Авторизация" 
         Height="220" MinHeight="220"
         Width="320" MinWidth="320"
-        >
+        WindowStartupLocation="CenterScreen">
     <Grid>
-        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-            <DockPanel>
-                <Label Content="Логин" Width="60"/>
-                <TextBox x:Name="tbLogin" Margin="5, 5, 5, 5"/>
-            </DockPanel>
-            <DockPanel>
-                <Label Content="Пароль" Width="60"/>
-                <TextBox x:Name="tbPassword" Margin="5, 5, 5, 5"/>
-            </DockPanel>
+        <StackPanel 
+            VerticalAlignment="Center" 
+            HorizontalAlignment="Center"
+            MinWidth="200">
+
+            <Label Content="Логин"/>
+            <TextBox x:Name="tbLogin" Margin="5, 0, 5, 5"/>
+
+            <Label Content="Пароль"/>
+            <TextBox x:Name="tbPassword" Margin="5, 0, 5, 5"/>
+
             <DockPanel>
                 <Button x:Name="bExit" 
-                        Height="30" Width="100"
+                        Height="30" Width="90"
                         Content="Выйти" 
                         HorizontalAlignment="Left" 
                         Margin="5, 5, 0, 0"
                         Background="Red"
                         Click="bExit_Click"/>
-                
+
                 <Button x:Name="bSignIn"
-                        Height="30" Width="100"
+                        Height="30" Width="90"
                         Content="Войти" 
                         HorizontalAlignment="Right"
                         Margin="0, 5, 5, 0" 
                         Background="LawnGreen"
                         Click="bSignIn_Click"/>
             </DockPanel>
+
         </StackPanel>
     </Grid>
 </Window>
