@@ -1,4 +1,5 @@
-﻿using System;
+﻿using source.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,7 @@ namespace source
         public MainWindow()
         {
             InitializeComponent();
-            Title = "Создание отчётов";
+            Title = $"Создание отчётов | {DataClass.UserInfo.name}";
         }
     }
 }

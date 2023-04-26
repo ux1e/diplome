@@ -19,7 +19,7 @@
             <TextBox x:Name="tbLogin" Margin="5, 0, 5, 5"/>
 
             <Label Content="Пароль"/>
-            <TextBox x:Name="tbPassword" Margin="5, 0, 5, 5"/>
+            <PasswordBox x:Name="pbPassword" Margin="5, 0, 5, 5"/>
 
             <DockPanel>
                 <Button x:Name="bExit" 
