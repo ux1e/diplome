@@ -1,18 +1,9 @@
 ﻿using source.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using QuestPDF.Fluent;
+using QuestPDF.Infrastructure;
+using QuestPDF.Helpers;
+using System;
 
 namespace source
 {
@@ -25,6 +16,45 @@ namespace source
         {
             InitializeComponent();
             Title = $"Создание отчётов | {DataClass.UserInfo.name}";
+        }
+
+        private void bMakeReport_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime currentDateTime = DateTime.Now;
+            string formattedDateTime = currentDateTime.ToString("MM-dd-yyyy HH.mm.ss");
+
+            Document.Create(container =>
+            {
+                container.Page(page =>
+                {
+                    page.Size(PageSizes.A4);
+                    page.Margin(2, Unit.Centimetre);
+                    page.PageColor(Colors.White);
+                    page.DefaultTextStyle(x => x.FontSize(20));
+
+                    page.Header()
+                        .Text("Вау! Это что, ОТЧЁТ!??!!?")
+                        .SemiBold().FontSize(36).FontColor(Colors.Blue.Medium).FontFamily("Arial");
+
+                    page.Content()
+                        .PaddingVertical(1, Unit.Centimetre)
+                        .Column(x =>
+                        {
+                            x.Spacing(20);
+
+                            x.Item().Text(Placeholders.LoremIpsum());
+                            x.Item().Image(Placeholders.Image(200, 100));
+                        });
+
+                    page.Footer()
+                        .AlignCenter()
+                        .Text(x =>
+                        {
+                            x.Span("Page ");
+                            x.CurrentPageNumber();
+                        });
+                });
+            }).GeneratePdf($"{DataClass.UserInfo.name}({formattedDateTime}).pdf");
         }
     }
 }

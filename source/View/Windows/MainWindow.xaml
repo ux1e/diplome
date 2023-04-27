@@ -25,18 +25,27 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0" Margin="5">
-                    <TextBlock Text="Отчёты" Foreground="Gray" FontFamily="AppleSDGothicNeo-Regular" FontSize="20"/>
-                    
+                    <TextBlock Text="Отчёты" Foreground="Gray" FontFamily="AppleSDGothicNeo-Regular" FontSize="20" Margin="5,5,5,15"/>
+
+                    <Button x:Name="bMakeReport"
+                        Height="100" 
+                        Margin="5"
+                        Content="Создать отчёт"
+                        Click="bMakeReport_Click"/>
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" Margin="5">
-                    <TextBlock Text="Импорт\Экспорт" Foreground="Gray" FontFamily="AppleSDGothicNeo-Regular" FontSize="20"/>
+                    <TextBlock Text="Импорт\Экспорт" Foreground="Gray" FontFamily="AppleSDGothicNeo-Regular" FontSize="20" Margin="5,5,5,15"/>
 
+                    <Button Height="100" Margin="5" Content="Импорт"/>
+                    <Button Height="100" Margin="5" Content="Экспорт"/>
                 </StackPanel>
 
                 <StackPanel Grid.Column="2" Margin="5">
-                    <TextBlock Text="Настройки" Foreground="Gray" FontFamily="AppleSDGothicNeo-Regular" FontSize="20"/>
+                    <TextBlock Text="Настройки" Foreground="Gray" FontFamily="AppleSDGothicNeo-Regular" FontSize="20" Margin="5,5,5,15"/>
 
+                    <Button Height="100" Margin="5" Content="Настройки"/>
+                    <Button Height="100" Margin="5" Content="Создать пользователя"/>
                 </StackPanel>
             </Grid>
         </DockPanel>
