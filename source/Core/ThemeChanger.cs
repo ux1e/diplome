@@ -1,12 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 
 namespace source.Core
 {
-    internal class ThemeChanger
+    static internal class ThemeChanger
     {
+        public static void ChangeTheme()
+        {
+            DataClass.IsEnabledDarkMode = !DataClass.IsEnabledDarkMode;
+            Application.Current.Resources.MergedDictionaries.Clear();
+
+            if (DataClass.IsEnabledDarkMode)
+            {
+                Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { 
+                    Source = new Uri("../Themes/DarkTheme.xaml", UriKind.RelativeOrAbsolute)
+                });
+            }
+            else
+            {
+                Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { 
+                    Source = new Uri("../Themes/LightTheme.xaml", UriKind.RelativeOrAbsolute) 
+                });
+            }
+        }
     }
 }

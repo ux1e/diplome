@@ -9,12 +9,17 @@
         Height="450" MinHeight="450"
         Width="800" MinWidth="800"
         WindowStartupLocation="CenterScreen">
-    <Grid>
+    <Grid Style="{DynamicResource BackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*" MinHeight="45"/>
             <RowDefinition Height="0.8*"/>
             <RowDefinition Height="0.1*" MinHeight="45"/>
         </Grid.RowDefinitions>
-        <Frame x:Name="MainFrame" Grid.Row="1" Background="AliceBlue" NavigationUIVisibility="Hidden"/>
+        <Frame x:Name="MainFrame" 
+               Grid.Row="1"
+               NavigationUIVisibility="Hidden"/>
+        
+        <!--Background="AliceBlue"-->
+
     </Grid>
 </Window>

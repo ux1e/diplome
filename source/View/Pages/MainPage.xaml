@@ -23,42 +23,42 @@
 
             <Label Content="Отчёты" 
                        Grid.Column="0" Grid.Row="0"
-                       Style="{StaticResource CustomLabelStyle}"/>
+                       Style="{DynamicResource CustomLabelStyle}"/>
 
             <Button x:Name="bMakeReport" 
                         Grid.Column="0" Grid.Row="1"
                         Content="Создать отчёт"
                         Click="bMakeReport_Click"
-                        Style="{StaticResource CustomButtonStyle}"/>
+                        Style="{DynamicResource CustomButtonStyle}"/>
 
             <Label Content="Импорт\Экспорт" 
                        Grid.Column="1" Grid.Row="0"
-                       Style="{StaticResource CustomLabelStyle}"/>
+                       Style="{DynamicResource CustomLabelStyle}"/>
 
             <Button x:Name="bImport"
                         Grid.Column="1" Grid.Row="1"
                         Content="Импорт"
-                        Style="{StaticResource CustomButtonStyle}"/>
+                        Style="{DynamicResource CustomButtonStyle}"/>
 
             <Button x:Name="bExport"
                         Grid.Column="1" Grid.Row="2"
                         Content="Экспорт"
-                        Style="{StaticResource CustomButtonStyle}"/>
+                        Style="{DynamicResource CustomButtonStyle}"/>
 
             <Label Content="Настройки" 
                        Grid.Column="2" Grid.Row="0"
-                       Style="{StaticResource CustomLabelStyle}"/>
+                       Style="{DynamicResource CustomLabelStyle}"/>
 
             <Button x:Name="bSettings"
                         Grid.Column="2" Grid.Row="1"
                         Content="Настройки"
-                        Style="{StaticResource CustomButtonStyle}"
+                        Style="{DynamicResource CustomButtonStyle}"
                         Click="bSettings_Click"/>
 
             <Button x:Name="bUserList"
                         Grid.Column="2" Grid.Row="2"
                         Content="Создать пользователя"
-                        Style="{StaticResource CustomButtonStyle}"/>
+                        Style="{DynamicResource CustomButtonStyle}"/>
         </Grid>
     </Grid>
 </Page>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using source.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,6 +29,11 @@ namespace source.View.Pages
         private void bGoBack_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
+        }
+
+        private void bChangeTheme_Click(object sender, RoutedEventArgs e)
+        {
+            ThemeChanger.ChangeTheme();
         }
     }
 }

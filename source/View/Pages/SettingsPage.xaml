@@ -9,7 +9,10 @@
       Title="SettingsPage">
 
     <Grid Background="Orange">
-        <Label Content="SettingPage"/>
-        <Button Width="100" Height="100" Content="Go Back" x:Name="bGoBack" Click="bGoBack_Click"/>
+        <StackPanel>
+            <Label Content="SettingPage" Style="{DynamicResource CustomLabelStyle}"/>
+            <Button Width="200" Height="100" Content="Go Back" x:Name="bGoBack" Click="bGoBack_Click" Style="{DynamicResource CustomButtonStyle}"/>
+            <Button Width="200" Height="100" Content="Change Theme" x:Name="bChangeTheme" Click="bChangeTheme_Click" Style="{DynamicResource CustomButtonStyle}"/>
+        </StackPanel>
     </Grid>
 </Page>
