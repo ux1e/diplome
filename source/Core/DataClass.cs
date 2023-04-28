@@ -11,5 +11,7 @@ namespace source.Core
     {
         public static diplomeEntities DataBase = null;
         public static User UserInfo = null;
+        public static bool IsUserLoggedIn = false;
+        public static bool IsEnabledDarkMode = false;
     }
 }

@@ -15,57 +15,6 @@
             <RowDefinition Height="0.8*"/>
             <RowDefinition Height="0.1*" MinHeight="45"/>
         </Grid.RowDefinitions>
-        <DockPanel Grid.Row="1" Background="AliceBlue">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0.35*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                </Grid.RowDefinitions>
-
-                <Label Content="Отчёты" 
-                       Grid.Column="0" Grid.Row="0"
-                       Style="{StaticResource CustomLabelStyle}"/>
-
-                <Button x:Name="bMakeReport" 
-                        Grid.Column="0" Grid.Row="1"
-                        Content="Создать отчёт"
-                        Click="bMakeReport_Click"
-                        Style="{StaticResource CustomButtonStyle}"/>
-
-                <Label Content="Импорт\Экспорт" 
-                       Grid.Column="1" Grid.Row="0"
-                       Style="{StaticResource CustomLabelStyle}"/>
-                
-                <Button x:Name="bImport"
-                        Grid.Column="1" Grid.Row="1"
-                        Content="Импорт"
-                        Style="{StaticResource CustomButtonStyle}"/>
-                
-                <Button x:Name="bExport"
-                        Grid.Column="1" Grid.Row="2"
-                        Content="Экспорт"
-                        Style="{StaticResource CustomButtonStyle}"/>
-
-                <Label Content="Настройки" 
-                       Grid.Column="2" Grid.Row="0"
-                       Style="{StaticResource CustomLabelStyle}"/>
-                
-                <Button x:Name="bSettings"
-                        Grid.Column="2" Grid.Row="1"
-                        Content="Настройки"
-                        Style="{StaticResource CustomButtonStyle}"/>
-
-                <Button x:Name="bUserList"
-                        Grid.Column="2" Grid.Row="2"
-                        Content="Создать пользователя"
-                        Style="{StaticResource CustomButtonStyle}"/>
-            </Grid>
-        </DockPanel>
+        <Frame x:Name="MainFrame" Grid.Row="1" Background="AliceBlue" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

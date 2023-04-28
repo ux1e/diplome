@@ -18,7 +18,6 @@ namespace source.View.Windows
             try
             {
                 DataClass.DataBase = new diplomeEntities();
-                //MessageBox.Show($"БД Подключенно! {DataClass.DataBase.Database}");
             }
             catch (Exception e)
             {
