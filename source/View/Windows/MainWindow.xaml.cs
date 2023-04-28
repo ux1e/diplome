@@ -15,7 +15,7 @@ namespace source
         public MainWindow()
         {
             InitializeComponent();
-            Title = $"Создание отчётов | {DataClass.UserInfo.name}";
+            Title = $"Создание отчётов | {DataClass.UserInfo.Name}";
         }
 
         private void bMakeReport_Click(object sender, RoutedEventArgs e)
@@ -54,7 +54,7 @@ namespace source
                             x.CurrentPageNumber();
                         });
                 });
-            }).GeneratePdf($"{DataClass.UserInfo.name}({formattedDateTime}).pdf");
+            }).GeneratePdf($"{DataClass.UserInfo.Name}({formattedDateTime}).pdf");
         }
     }
 }

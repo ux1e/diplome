@@ -15,40 +15,57 @@
             <RowDefinition Height="0.8*"/>
             <RowDefinition Height="0.1*" MinHeight="45"/>
         </Grid.RowDefinitions>
-
         <DockPanel Grid.Row="1" Background="AliceBlue">
-            <Grid DockPanel.Dock="Top">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.35*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
 
-                <StackPanel Grid.Column="0" Margin="5">
-                    <TextBlock Text="Отчёты" Foreground="Gray" FontFamily="AppleSDGothicNeo-Regular" FontSize="20" Margin="5,5,5,15"/>
+                <Label Content="Отчёты" 
+                       Grid.Column="0" Grid.Row="0"
+                       Style="{StaticResource CustomLabelStyle}"/>
 
-                    <Button x:Name="bMakeReport"
-                        Height="100" 
-                        Margin="5"
+                <Button x:Name="bMakeReport" 
+                        Grid.Column="0" Grid.Row="1"
                         Content="Создать отчёт"
-                        Click="bMakeReport_Click"/>
-                </StackPanel>
+                        Click="bMakeReport_Click"
+                        Style="{StaticResource CustomButtonStyle}"/>
 
-                <StackPanel Grid.Column="1" Margin="5">
-                    <TextBlock Text="Импорт\Экспорт" Foreground="Gray" FontFamily="AppleSDGothicNeo-Regular" FontSize="20" Margin="5,5,5,15"/>
+                <Label Content="Импорт\Экспорт" 
+                       Grid.Column="1" Grid.Row="0"
+                       Style="{StaticResource CustomLabelStyle}"/>
+                
+                <Button x:Name="bImport"
+                        Grid.Column="1" Grid.Row="1"
+                        Content="Импорт"
+                        Style="{StaticResource CustomButtonStyle}"/>
+                
+                <Button x:Name="bExport"
+                        Grid.Column="1" Grid.Row="2"
+                        Content="Экспорт"
+                        Style="{StaticResource CustomButtonStyle}"/>
 
-                    <Button Height="100" Margin="5" Content="Импорт"/>
-                    <Button Height="100" Margin="5" Content="Экспорт"/>
-                </StackPanel>
+                <Label Content="Настройки" 
+                       Grid.Column="2" Grid.Row="0"
+                       Style="{StaticResource CustomLabelStyle}"/>
+                
+                <Button x:Name="bSettings"
+                        Grid.Column="2" Grid.Row="1"
+                        Content="Настройки"
+                        Style="{StaticResource CustomButtonStyle}"/>
 
-                <StackPanel Grid.Column="2" Margin="5">
-                    <TextBlock Text="Настройки" Foreground="Gray" FontFamily="AppleSDGothicNeo-Regular" FontSize="20" Margin="5,5,5,15"/>
-
-                    <Button Height="100" Margin="5" Content="Настройки"/>
-                    <Button Height="100" Margin="5" Content="Создать пользователя"/>
-                </StackPanel>
+                <Button x:Name="bUserList"
+                        Grid.Column="2" Grid.Row="2"
+                        Content="Создать пользователя"
+                        Style="{StaticResource CustomButtonStyle}"/>
             </Grid>
         </DockPanel>
-
     </Grid>
 </Window>

@@ -31,7 +31,7 @@ namespace source.View.Windows
 
         private bool UserAuth(string _username, string _password)
         {
-            DataClass.UserInfo = DataClass.DataBase.Users.FirstOrDefault(u => u.name == _username && u.password == _password);
+            DataClass.UserInfo = DataClass.DataBase.Users.FirstOrDefault(u => u.Name == _username && u.Password == _password);
             if (DataClass.UserInfo != null) return true;
             return false;
         }
