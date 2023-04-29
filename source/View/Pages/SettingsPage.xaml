@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="SettingsPage">
 
-    <Grid Background="Orange">
+    <Grid>
         <StackPanel>
             <Label Content="SettingPage" Style="{DynamicResource CustomLabelStyle}"/>
             <Button Width="200" Height="100" Content="Go Back" x:Name="bGoBack" Click="bGoBack_Click" Style="{DynamicResource CustomButtonStyle}"/>

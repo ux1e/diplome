@@ -1,6 +1,5 @@
 ﻿using source.Core;
 using System.Windows;
-using System;
 
 namespace source
 {
@@ -13,6 +12,7 @@ namespace source
         {
             InitializeComponent();
             Title = $"Создание отчётов | {DataClass.UserInfo.Name}";
+            ThemeChanger.SetTheme(DataClass.UserInfo.IsUsingDarkMode ?? false);
             MainFrame.Content = new View.Pages.MainPage();
         }
     }

@@ -57,7 +57,7 @@
 
             <Button x:Name="bUserList"
                         Grid.Column="2" Grid.Row="2"
-                        Content="Создать пользователя"
+                        Content="Управление пользователями"
                         Style="{DynamicResource CustomButtonStyle}"/>
         </Grid>
     </Grid>
