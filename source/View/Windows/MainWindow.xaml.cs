@@ -1,4 +1,4 @@
-﻿using source.Core;
+﻿using Source.Core;
 using System.Windows;
 
 namespace source

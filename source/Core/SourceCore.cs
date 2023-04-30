@@ -1,11 +1,11 @@
-﻿using source.Model;
+﻿using Source.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace source.Core
+namespace Source.Core
 {
     class SourceCore
     {

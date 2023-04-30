@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace source.Model
+namespace Source.Model
 {
     using System;
     using System.Collections.Generic;

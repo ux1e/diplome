@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Linq;
 using System.Windows;
 
-namespace source.Core
+namespace Source.Core
 {
     static internal class ThemeChanger
     {
