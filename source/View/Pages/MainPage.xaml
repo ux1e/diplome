@@ -21,44 +21,56 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
-            <Label Content="Отчёты" 
-                       Grid.Column="0" Grid.Row="0"
-                       Style="{DynamicResource CustomLabelStyle}"/>
+            <Label Content="Отчёты"                       
+                   Grid.Column="0" Grid.Row="0"                      
+                   Style="{DynamicResource CustomLabelStyle}"/>
 
-            <Button x:Name="bMakeReport" 
-                        Grid.Column="0" Grid.Row="1"
-                        Content="Создать отчёт"
-                        Click="bMakeReport_Click"
-                        Style="{DynamicResource CustomButtonStyle}"/>
+            <!--<Button x:Name="bMakeReport"                        
+                    Grid.Column="0" Grid.Row="1"                      
+                    Content="Создать отчёт"                       
+                    Click="bMakeReport_Click"                       
+                    Style="{DynamicResource CustomButtonStyle}"/>-->
 
-            <Label Content="Импорт\Экспорт" 
-                       Grid.Column="1" Grid.Row="0"
-                       Style="{DynamicResource CustomLabelStyle}"/>
+            <Button x:Name="bReadXML"                        
+                    Grid.Column="0" Grid.Row="1"                      
+                    Content="Прочитать XML"                       
+                    Click="bReadXML_Click"                       
+                    Style="{DynamicResource CustomButtonStyle}"/>
 
-            <Button x:Name="bImport"
-                        Grid.Column="1" Grid.Row="1"
-                        Content="Импорт"
-                        Style="{DynamicResource CustomButtonStyle}"/>
+            <Button x:Name="bSZVTD" 
+                    Grid.Column="0" Grid.Row="2"
+                    Content="СЗВ-ТД"
+                    Click="bSZVTD_Click"
+                    Style="{DynamicResource CustomButtonStyle}"/>
 
-            <Button x:Name="bExport"
-                        Grid.Column="1" Grid.Row="2"
-                        Content="Экспорт"
-                        Style="{DynamicResource CustomButtonStyle}"/>
+            <Label Content="Импорт\Экспорт"                        
+                   Grid.Column="1" Grid.Row="0"                      
+                   Style="{DynamicResource CustomLabelStyle}"/>
 
-            <Label Content="Настройки" 
-                       Grid.Column="2" Grid.Row="0"
-                       Style="{DynamicResource CustomLabelStyle}"/>
+            <Button x:Name="bImport"                       
+                    Grid.Column="1" Grid.Row="1"                   
+                    Content="Импорт"                     
+                    Style="{DynamicResource CustomButtonStyle}"/>
 
-            <Button x:Name="bSettings"
-                        Grid.Column="2" Grid.Row="1"
-                        Content="Настройки"
-                        Style="{DynamicResource CustomButtonStyle}"
-                        Click="bSettings_Click"/>
+            <Button x:Name="bExport"                      
+                    Grid.Column="1" Grid.Row="2"                      
+                    Content="Экспорт"                      
+                    Style="{DynamicResource CustomButtonStyle}"/>
 
-            <Button x:Name="bUserList"
-                        Grid.Column="2" Grid.Row="2"
-                        Content="Управление пользователями"
-                        Style="{DynamicResource CustomButtonStyle}"/>
+            <Label Content="Настройки"                       
+                   Grid.Column="2" Grid.Row="0"                     
+                   Style="{DynamicResource CustomLabelStyle}"/>
+
+            <Button x:Name="bSettings"                        
+                    Grid.Column="2" Grid.Row="1"                       
+                    Content="Настройки"                        
+                    Style="{DynamicResource CustomButtonStyle}"                        
+                    Click="bSettings_Click"/>
+
+            <Button x:Name="bUserList"                        
+                    Grid.Column="2" Grid.Row="2"                       
+                    Content="Управление пользователями"                       
+                    Style="{DynamicResource CustomButtonStyle}"/>
         </Grid>
     </Grid>
 </Page>

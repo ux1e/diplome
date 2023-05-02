@@ -26,5 +26,6 @@ namespace Source.Model
         }
     
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Insurer> Insurers { get; set; }
     }
 }

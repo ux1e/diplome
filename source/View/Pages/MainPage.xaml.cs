@@ -6,6 +6,8 @@ using System.Windows.Navigation;
 using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
 using QuestPDF.Helpers;
+using System.Data;
+using Source.View.Pages;
 
 namespace source.View.Pages
 {
@@ -21,9 +23,6 @@ namespace source.View.Pages
 
         private void bMakeReport_Click(object sender, RoutedEventArgs e)
         {
-            DateTime currentDateTime = DateTime.Now;
-            string formattedDateTime = currentDateTime.ToString("MM-dd-yyyy HH.mm.ss");
-
             Document.Create(container =>
             {
                 container.Page(page =>
@@ -55,12 +54,25 @@ namespace source.View.Pages
                             x.CurrentPageNumber();
                         });
                 });
-            }).GeneratePdf($"{DataClass.UserInfo.Name}({formattedDateTime}).pdf");
+            }).GeneratePdf($"{DataClass.UserInfo.Name}({DataClass.GetDateTime()}).pdf");
         }
 
         private void bSettings_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new SettingsPage());
+        }
+
+        private void bSZVTD_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new SZVTDPage());
+        }
+
+        private void bReadXML_Click(object sender, RoutedEventArgs e)
+        {
+            DataSet dt = new DataSet();
+            dt.Clear();
+            dt.ReadXml("D:\\ПФР_123-456-789000_СЗВ-ТД_20230502_c51456e0-b486-4397-b56e-b9f7df5aec96.XML");
+            MessageBox.Show(dt.ToString());
         }
     }
 }

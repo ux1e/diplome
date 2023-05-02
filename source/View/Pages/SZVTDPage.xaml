@@ -1,0 +1,91 @@
+﻿<Page x:Class="Source.View.Pages.SZVTDPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Source.View.Pages" 
+      xmlns:local1="clr-namespace:Source.Core" 
+      xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SZVTDPage"
+      Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.1*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Background="#f2bd38" 
+                    Margin="0, 5" 
+                    Grid.Row="0" Grid.Column="0" 
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Stretch" 
+                    VerticalAlignment="Stretch">
+            <Label Content="Страхователь: "/>
+            <Label Content="[123-456-789000]" x:Name="lINN"/>
+            <Label Content="TEST" x:Name="lName"/>
+        </StackPanel>
+
+        <Button x:Name="bInsurer"                        
+                    Grid.Column="1" Grid.Row="0"                      
+                    Content="Сменить"                       
+                    Click="bChangeInsurer"                       
+                    Style="{DynamicResource CustomButtonStyle}"/>
+
+        <DockPanel Grid.Row="1" Grid.Column="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Margin="5">
+                    <DataGrid x:Name="InsurerGrid" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Дата" Binding="{Binding Path=Date}" Width="110" />
+                            <DataGridTextColumn Header="Год" Binding="{Binding Path=Year}" Width="110" />
+                            <DataGridTextColumn Header="Месяц" Binding="{Binding Path=Month}" Width="110" />
+                            <DataGridTextColumn Header="Количество сотрудников" Binding="{Binding Path=WorkerCount}" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Margin="5">
+                    <DataGrid x:Name="WorkerGrid" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ФИО" Binding="{Binding Path=FIO}" Width="*" />
+                            <DataGridTextColumn Header="СНИЛС" Binding="{Binding Path=SNILS}" Width="*" />
+                            <DataGridTextColumn Header="ИНН" Binding="{Binding Path=INN}" Width="*" />
+                            <DataGridTextColumn Header="Пол" Binding="{Binding Path=Sex}" Width="*" />
+                            <DataGridTextColumn Header="Уволен" Binding="{Binding Path=IsFired}" Width="*" />
+                            <DataGridTextColumn Header="Дата Рождения" Binding="{Binding Path=DOB}" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+
+            </Grid>
+        </DockPanel>
+        
+        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
+            <Button x:Name="bGoBack" 
+                    Click="bGoBack_Click" 
+                    Width="150"                                       
+                    Content="&lt;&lt; Назад" 
+                    Style="{DynamicResource CustomButtonStyle}"/>
+            
+            <Button x:Name="bMakeReport" 
+                    Click="bMakeReport_Click" 
+                    Width="150"                                        
+                    Content="Создать XML" 
+                    Style="{DynamicResource CustomButtonStyle}"/>
+        </StackPanel>
+
+    </Grid>
+</Page>

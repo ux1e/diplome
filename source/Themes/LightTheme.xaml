@@ -13,6 +13,15 @@
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
+    <Style x:Key="CustomLabelStyleSmall" TargetType="Label">
+        <Setter Property="Foreground" Value="Gray" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
     <Style x:Key="CustomButtonStyle" TargetType="Button">
         <Setter Property="FontSize" Value="18" />
         <Setter Property="Foreground" Value="White" />
