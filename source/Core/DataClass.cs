@@ -25,5 +25,21 @@ namespace Source.Core
             DateTime currentDateTime = DateTime.Now;
             return currentDateTime.ToString("MM-dd-yyyy HH.mm.ss");
         }
+
+        public static string ParseRegNum(string s)
+        {
+            if (!string.IsNullOrEmpty(s) && s.Length == 12)
+            {
+                return string.Concat(new string[]
+                {
+                    s.Substring(0, 3),
+                    "-",
+                    s.Substring(3, 3),
+                    "-",
+                    s.Substring(6, 6)
+                });
+            }
+            return "";
+        }
     }
 }

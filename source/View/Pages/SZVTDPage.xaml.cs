@@ -56,7 +56,8 @@ namespace Source.View.Pages
 
         private void bMakeReport_Click(object sender, RoutedEventArgs e)
         {
-            string str = string.Format("ПФР_{0}_СЗВ-ТД_{1}_{2}.XML", 123, DateTime.Now.ToString("yyyyMMdd"), 123);
+            string fileName = string.Format("ПФР_СЗВ-ТД_{0}_{1}.XML", DataClass.UserInfo.Name, DataClass.GetDateTime());
+
             XNamespace xnamespace = "http://пф.рф/СЗВ-ТД/2020-09-26";
             XNamespace xnamespace2 = "http://пф.рф/УТ/2017-08-21";
             XNamespace xnamespace3 = "http://пф.рф/ВС/ЕФС/2022-09-22";
@@ -80,16 +81,16 @@ namespace Source.View.Pages
             XElement xelement = new XElement(xnamespace + "Работодатель", new object[]
             {
                 new XElement(xnamespace2 + "РегНомер", 123),
-                new XElement(xnamespace + "НаименованиеОрганизации", 123),                          
-                //new XElement(xnamespace2 + "ИНН", (!string.IsNullOrEmpty(insurer.INN.ToString())) ? insurer.INN.ToString() : "")                      
-                new XElement(xnamespace2 + "ИНН", "")
+                new XElement(xnamespace + "НаименованиеОрганизации", 123),
+                new XElement(xnamespace2 + "ИНН",
+                (DataClass.SelectedInsurer == null) ? "" : DataClass.SelectedInsurer.INN.ToString())
             });
             XElement xelement2 = new XElement(xnamespace + "Страхователь", new object[]
             {
                 new XElement(xnamespace3 + "РегНомер", 123),
-                new XElement(xnamespace3 + "Наименование", 123),                           
-                //new XElement(xnamespace2 + "ИНН", (!string.IsNullOrEmpty(insurer.INN.ToString())) ? insurer.INN.ToString() : "")
-                new XElement(xnamespace2 + "ИНН", "")
+                new XElement(xnamespace3 + "Наименование", 123),
+                new XElement(xnamespace2 + "ИНН",
+                (DataClass.SelectedInsurer == null) ? "" : DataClass.SelectedInsurer.INN.ToString())
             });
 
             XElement xelement3 = new XElement(xnamespace + "СЗВ-ТД", xelement);
@@ -98,13 +99,13 @@ namespace Source.View.Pages
             XElement xelement25 = new XElement(xnamespace + "СлужебнаяИнформация", new object[]
             {
                 new XElement(xnamespace5 + "GUID", DataClass.GetUUID()),
-                new XElement(xnamespace5 + "ДатаВремя", DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz"))
+                new XElement(xnamespace5 + "ДатаВремя", DataClass.GetDateTime())
             });
 
             xdocument.Element(xnamespace + "ЭДПФР").Add(xelement3);
             xdocument.Element(xnamespace + "ЭДПФР").Add(xelement25);
 
-            xdocument.Save("test.xml");
+            xdocument.Save(fileName);
         }
 
         private void bChangeInsurer(object sender, RoutedEventArgs e)
