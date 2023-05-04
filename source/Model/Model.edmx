@@ -18,6 +18,21 @@
           <Property Name="InsuranceNumber" Type="nvarchar(max)" />
           <Property Name="INN" Type="int" />
         </EntityType>
+        <EntityType Name="Profession">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sex">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="Id" />
@@ -28,9 +43,57 @@
           <Property Name="Mail" Type="nvarchar" MaxLength="50" />
           <Property Name="IsUsingDarkMode" Type="bit" />
         </EntityType>
+        <EntityType Name="Workers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="MiddleName" Type="nvarchar(max)" />
+          <Property Name="InsuranceNumber" Type="bigint" />
+          <Property Name="INN" Type="bigint" />
+          <Property Name="Sex" Type="int" />
+          <Property Name="Profession" Type="int" />
+        </EntityType>
+        <Association Name="FK_Workers_Profession">
+          <End Role="Profession" Type="Self.Profession" Multiplicity="0..1" />
+          <End Role="Workers" Type="Self.Workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profession">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Workers">
+              <PropertyRef Name="Profession" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Workers_Sex">
+          <End Role="Sex" Type="Self.Sex" Multiplicity="0..1" />
+          <End Role="Workers" Type="Self.Workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sex">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Workers">
+              <PropertyRef Name="Sex" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="diplomeModelStoreContainer">
           <EntitySet Name="Insurers" EntityType="Self.Insurers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Profession" EntityType="Self.Profession" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sex" EntityType="Self.Sex" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Workers" EntityType="Self.Workers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Workers_Profession" Association="Self.FK_Workers_Profession">
+            <End Role="Profession" EntitySet="Profession" />
+            <End Role="Workers" EntitySet="Workers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Workers_Sex" Association="Self.FK_Workers_Sex">
+            <End Role="Sex" EntitySet="Sex" />
+            <End Role="Workers" EntitySet="Workers" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -39,6 +102,17 @@
         <EntityContainer Name="diplomeEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Users" EntityType="diplomeModel.User" />
           <EntitySet Name="Insurers" EntityType="diplomeModel.Insurer" />
+          <EntitySet Name="Professions" EntityType="diplomeModel.Profession" />
+          <EntitySet Name="Sexes" EntityType="diplomeModel.Sex" />
+          <EntitySet Name="Workers" EntityType="diplomeModel.Worker" />
+          <AssociationSet Name="FK_Workers_Profession" Association="diplomeModel.FK_Workers_Profession">
+            <End Role="Profession" EntitySet="Professions" />
+            <End Role="Worker" EntitySet="Workers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Workers_Sex" Association="diplomeModel.FK_Workers_Sex">
+            <End Role="Sex" EntitySet="Sexes" />
+            <End Role="Worker" EntitySet="Workers" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -63,6 +137,62 @@
           <Property Name="InsuranceNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="INN" Type="Int32" />
         </EntityType>
+        <EntityType Name="Profession">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Workers" Relationship="diplomeModel.FK_Workers_Profession" FromRole="Profession" ToRole="Worker" />
+        </EntityType>
+        <EntityType Name="Sex">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Workers" Relationship="diplomeModel.FK_Workers_Sex" FromRole="Sex" ToRole="Worker" />
+        </EntityType>
+        <EntityType Name="Worker">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InsuranceNumber" Type="Int64" />
+          <Property Name="INN" Type="Int64" />
+          <Property Name="Sex" Type="Int32" />
+          <Property Name="Profession" Type="Int32" />
+          <NavigationProperty Name="Profession1" Relationship="diplomeModel.FK_Workers_Profession" FromRole="Worker" ToRole="Profession" />
+          <NavigationProperty Name="Sex1" Relationship="diplomeModel.FK_Workers_Sex" FromRole="Worker" ToRole="Sex" />
+        </EntityType>
+        <Association Name="FK_Workers_Profession">
+          <End Type="diplomeModel.Profession" Role="Profession" Multiplicity="0..1" />
+          <End Type="diplomeModel.Worker" Role="Worker" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profession">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Worker">
+              <PropertyRef Name="Profession" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Workers_Sex">
+          <End Type="diplomeModel.Sex" Role="Sex" Multiplicity="0..1" />
+          <End Type="diplomeModel.Worker" Role="Worker" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sex">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Worker">
+              <PropertyRef Name="Sex" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -90,6 +220,37 @@
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="NameShort" ColumnName="NameShort" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Professions">
+            <EntityTypeMapping TypeName="diplomeModel.Profession">
+              <MappingFragment StoreEntitySet="Profession">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sexes">
+            <EntityTypeMapping TypeName="diplomeModel.Sex">
+              <MappingFragment StoreEntitySet="Sex">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Workers">
+            <EntityTypeMapping TypeName="diplomeModel.Worker">
+              <MappingFragment StoreEntitySet="Workers">
+                <ScalarProperty Name="Profession" ColumnName="Profession" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="INN" ColumnName="INN" />
+                <ScalarProperty Name="InsuranceNumber" ColumnName="InsuranceNumber" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

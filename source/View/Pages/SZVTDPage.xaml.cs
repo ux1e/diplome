@@ -113,33 +113,11 @@ namespace Source.View.Pages
             NavigationService.Navigate(new InsurersPage());
         }
 
-        private void test()
+        private void bShowUsers_Click(object sender, RoutedEventArgs e)
         {
-            return;
-            DataSet ds = new DataSet("ЭДПФР");
-
-            DataTable dt = new DataTable("СЗВ-ТД");
-            ds.Tables.Add(dt);
-
-            dt.Columns.Add("Name");
-            dt.Columns.Add("Age");
-            dt.Columns.Add("Programmer");
-            DataRow row = dt.NewRow();
-            row["Name"] = "Ivanov Ivan";
-            row["Age"] = 24;
-            row["Programmer"] = true;
-            dt.Rows.Add(row);
-
-            DataTable dt2 = new DataTable("СлужебнаяИнформация");
-            ds.Tables.Add(dt2);
-            dt2.Columns.Add("ДатаВремя");
-            dt2.Columns.Add("GUID");
-            DataRow row2 = dt2.NewRow();
-            row2["GUID"] = DataClass.GetUUID();
-            row2["ДатаВремя"] = DataClass.GetDateTime();
-            dt2.Rows.Add(row2);
-
-            ds.WriteXml($"D:\\Data-{DataClass.UserInfo.Name}({DataClass.GetDateTime()}).xml");
+            //Windows.WorkerInfoWindow workerInfoWindow = new Windows.WorkerInfoWindow();
+            //workerInfoWindow.ShowDialog();
+            NavigationService.Navigate(new WorkersPage());
         }
     }
 }

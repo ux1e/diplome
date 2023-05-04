@@ -47,7 +47,8 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0" Margin="5">
-                    <DataGrid x:Name="InsurerGrid" AutoGenerateColumns="False">
+                    <DataGrid x:Name="InsurerGrid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" 
+                      CanUserReorderColumns="False" CanUserSortColumns="False" IsReadOnly="True" FontSize="10">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Дата" Binding="{Binding Path=Date}" Width="110" />
                             <DataGridTextColumn Header="Год" Binding="{Binding Path=Year}" Width="110" />
@@ -58,7 +59,8 @@
                 </StackPanel>
 
                 <StackPanel Grid.Row="1" Margin="5">
-                    <DataGrid x:Name="WorkerGrid" AutoGenerateColumns="False">
+                    <DataGrid x:Name="WorkerGrid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" 
+                      CanUserReorderColumns="False" CanUserSortColumns="False" IsReadOnly="True" FontSize="10">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ФИО" Binding="{Binding Path=FIO}" Width="*" />
                             <DataGridTextColumn Header="СНИЛС" Binding="{Binding Path=SNILS}" Width="*" />
@@ -85,6 +87,10 @@
                     Width="150"                                        
                     Content="Создать XML" 
                     Style="{DynamicResource CustomButtonStyle}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical">
+            <Button x:Name="bShowUsers" Width="125" Height="35" Style="{DynamicResource CustomButtonStyle}"  Content="Пользователи" Click="bShowUsers_Click"/>
         </StackPanel>
 
     </Grid>
