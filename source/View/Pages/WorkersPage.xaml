@@ -57,27 +57,27 @@
         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                 <Label Content="СНИЛС" Margin="5,0,0,0" Width="125" Style="{DynamicResource CustomLabelStyleSmall}"/>
-                <TextBox x:Name="InsuranceNumberTextBox" Width="85" Height="35" Margin="5,0,0,0"/>
+                <TextBox x:Name="InsuranceNumberTextBox" Width="85" Height="35" Margin="5,0,0,0" Style="{DynamicResource CustomTextBoxStyle}"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                 <Label Content="ИНН" Margin="5,0,0,0" Width="125" Style="{DynamicResource CustomLabelStyleSmall}"/>
-                <TextBox x:Name="INNTextBox" Width="85" Height="35" Margin="5,0,0,0"/>
+                <TextBox x:Name="INNTextBox" Width="85" Height="35" Margin="5,0,0,0" Style="{DynamicResource CustomTextBoxStyle}"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                 <Label Content="Фамилия" Margin="5,0,0,0" Width="125" Style="{DynamicResource CustomLabelStyleSmall}"/>
-                <TextBox x:Name="LastNameTextBox" Width="85" Height="35" Margin="5,0,0,0"/>
+                <TextBox x:Name="LastNameTextBox" Width="85" Height="35" Margin="5,0,0,0" Style="{DynamicResource CustomTextBoxStyle}"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                 <Label Content="Имя" Margin="5,0,0,0" Width="125" Style="{DynamicResource CustomLabelStyleSmall}"/>
-                <TextBox x:Name="FirstNameTextBox" Width="85" Height="35" Margin="5,0,0,0"/>
+                <TextBox x:Name="FirstNameTextBox" Width="85" Height="35" Margin="5,0,0,0" Style="{DynamicResource CustomTextBoxStyle}"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                 <Label Content="Отчество" Margin="5,0,0,0" Width="125" Style="{DynamicResource CustomLabelStyleSmall}"/>
-                <TextBox x:Name="MiddleNameTextBox" Width="85" Height="35" Margin="5,0,0,0"/>
+                <TextBox x:Name="MiddleNameTextBox" Width="85" Height="35" Margin="5,0,0,0" Style="{DynamicResource CustomTextBoxStyle}"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">

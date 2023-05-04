@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,6 +14,7 @@ namespace Source.Core
         public static diplomeEntities DataBase = null;
         public static User UserInfo = null;
         public static Insurer SelectedInsurer = null;
+        public static User SelectedUser = null;
 
         public static string GetUUID()
         {
@@ -40,6 +42,14 @@ namespace Source.Core
                 });
             }
             return "";
+        }
+
+        public static string GetRandomPassword(int length)
+        {
+            byte[] data = new byte[length];
+            RNGCryptoServiceProvider rngCrypt = new RNGCryptoServiceProvider();
+            rngCrypt.GetBytes(data);
+            return Convert.ToBase64String(data);
         }
     }
 }

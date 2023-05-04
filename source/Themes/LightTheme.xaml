@@ -51,4 +51,13 @@
         </Setter>
     </Style>
 
+    <Style x:Key="CustomTextBoxStyle" TargetType="TextBox">
+        <Setter Property="TextAlignment" Value="Left"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+    </Style>
+
 </ResourceDictionary>

@@ -74,5 +74,10 @@ namespace source.View.Pages
             dt.ReadXml("D:\\ПФР_123-456-789000_СЗВ-ТД_20230502_c51456e0-b486-4397-b56e-b9f7df5aec96.XML");
             MessageBox.Show(dt.ToString());
         }
+
+        private void bUserList_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new UserListPage());
+        }
     }
 }

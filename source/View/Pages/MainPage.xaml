@@ -31,11 +31,11 @@
                     Click="bMakeReport_Click"                       
                     Style="{DynamicResource CustomButtonStyle}"/>-->
 
-            <Button x:Name="bReadXML"                        
+            <!--<Button x:Name="bReadXML"                        
                     Grid.Column="0" Grid.Row="1"                      
                     Content="Прочитать XML"                       
                     Click="bReadXML_Click"                       
-                    Style="{DynamicResource CustomButtonStyle}"/>
+                    Style="{DynamicResource CustomButtonStyle}"/>-->
 
             <Button x:Name="bSZVTD" 
                     Grid.Column="0" Grid.Row="2"
@@ -70,7 +70,8 @@
             <Button x:Name="bUserList"                        
                     Grid.Column="2" Grid.Row="2"                       
                     Content="Управление пользователями"                       
-                    Style="{DynamicResource CustomButtonStyle}"/>
+                    Style="{DynamicResource CustomButtonStyle}"
+                    Click="bUserList_Click"/>
         </Grid>
     </Grid>
 </Page>
