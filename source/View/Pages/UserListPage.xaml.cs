@@ -142,6 +142,31 @@ namespace Source.View.Pages
                 MessageBox.Show("Для удаления необходимо выбрать пользователя", "Информация");
             }
 
+            if (MessageBox.Show("Удалить пользователя?", "Внимание", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK)
+            {
+                try
+                {
+                    User DeletingItem = (User)Grid.SelectedItem;
+                    if (Grid.SelectedIndex < Grid.Items.Count - 1)
+                        Grid.SelectedIndex++;
+                    else
+                    {
+                        if (Grid.SelectedIndex > 0)
+                            Grid.SelectedIndex--;
+                    }
+                    DataClass.SelectedUser = (User)Grid.SelectedItem;
+                    DataClass.DataBase.Users.Remove(DeletingItem);
+                    DataClass.DataBase.SaveChanges();
+                    UpdateGrid(DataClass.SelectedUser);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        $"Невозможно выполнить удаление\nОшибка: {ex}.",
+                        "Предупреждение",
+                        MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.None);
+                }
+            }
         }
 
         private void bEditUser_Click(object sender, RoutedEventArgs e)
