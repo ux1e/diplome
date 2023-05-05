@@ -46,6 +46,9 @@ namespace Source.View.Pages
 
         public void DlgLoad(bool b)
         {
+            NameTextBox.Text = "";
+            MailTextBox.Text = "";
+
             FuncPanel.Width = new GridLength(b ? 200 : 0);
             Grid.IsHitTestVisible = !b;
             if (b == true)

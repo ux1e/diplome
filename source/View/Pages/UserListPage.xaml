@@ -25,6 +25,18 @@
                     <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}" Width="*" />
                     <DataGridTextColumn Header="Имя" Binding="{Binding Path=Name}" Width="*" />
                     <DataGridTextColumn Header="Почта" Binding="{Binding Path=Mail}" Width="*" />
+                    <DataGridTemplateColumn Header="Управление">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="Изм." Width="30" Margin="5,0,0,0"
+                                            FontSize="8" Click="bEditUser_Click"/>
+                                    <Button Content="Удал." Width="30" Margin="5,0,5,0"
+                                            FontSize="8" Click="bDeleteUser_Click"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
@@ -40,18 +52,6 @@
                     Click="bMakeNewUser_Click" 
                     Width="150"                                        
                     Content="Создать" 
-                    Style="{DynamicResource CustomButtonStyle}"/>
-
-            <Button x:Name="bEditUser" 
-                    Click="bEditUser_Click"
-                    Width="150"                                        
-                    Content="Изменить" 
-                    Style="{DynamicResource CustomButtonStyle}"/>
-
-            <Button x:Name="bDeleteUser" 
-                    Click="bDeleteUser_Click" 
-                    Width="150"                                        
-                    Content="Удалить" 
                     Style="{DynamicResource CustomButtonStyle}"/>
         </StackPanel>
 
