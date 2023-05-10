@@ -25,10 +25,10 @@ namespace Source.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Insurer> Insurers { get; set; }
         public virtual DbSet<Profession> Professions { get; set; }
         public virtual DbSet<Sex> Sexes { get; set; }
+        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Worker> Workers { get; set; }
     }
 }

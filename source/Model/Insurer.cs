@@ -21,6 +21,6 @@ namespace Source.Model
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string InsuranceNumber { get; set; }
-        public Nullable<int> INN { get; set; }
+        public Nullable<long> INN { get; set; }
     }
 }

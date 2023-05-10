@@ -28,8 +28,9 @@ namespace Source.Core
             return currentDateTime.ToString("MM-dd-yyyy HH.mm.ss");
         }
 
-        public static string ParseRegNum(string s)
+        public static string ParseRegNum(long n)
         {
+            string s = n.ToString();
             if (!string.IsNullOrEmpty(s) && s.Length == 12)
             {
                 return string.Concat(new string[]
@@ -50,6 +51,16 @@ namespace Source.Core
             RNGCryptoServiceProvider rngCrypt = new RNGCryptoServiceProvider();
             rngCrypt.GetBytes(data);
             return Convert.ToBase64String(data);
+        }
+
+        public static string GetInsurerINN()
+        {
+            return SelectedInsurer != null ? $"[{ParseRegNum((long)SelectedInsurer.INN)}]" : "[___-___-______]";
+        }
+
+        public static string GetInsurerShortName()
+        {
+            return SelectedInsurer != null ? SelectedInsurer.NameShort : " ";
         }
     }
 }

@@ -5,11 +5,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="d4bc2ceb9d284571aa725d47f864d69b" Name="Diagram1">
-        <EntityTypeShape EntityType="diplomeModel.User" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="diplomeModel.Insurer" Width="1.5" PointX="5.125" PointY="0.625" />
-        <EntityTypeShape EntityType="diplomeModel.Profession" Width="1.5" PointX="0.75" PointY="2.5" />
+        <EntityTypeShape EntityType="diplomeModel.Insurer" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="diplomeModel.Profession" Width="1.5" PointX="0.75" PointY="1.5" />
         <EntityTypeShape EntityType="diplomeModel.Sex" Width="1.5" PointX="0.75" PointY="5.625" />
-        <EntityTypeShape EntityType="diplomeModel.Worker" Width="1.5" PointX="3" PointY="5" />
+        <EntityTypeShape EntityType="diplomeModel.User" Width="1.5" PointX="4.75" PointY="4.75" />
+        <EntityTypeShape EntityType="diplomeModel.Worker" Width="1.5" PointX="3" PointY="1" />
         <AssociationConnector Association="diplomeModel.FK_Workers_Profession" />
         <AssociationConnector Association="diplomeModel.FK_Workers_Sex" />
       </Diagram>

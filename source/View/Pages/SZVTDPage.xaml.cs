@@ -1,21 +1,8 @@
 ﻿using Source.Core;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Xml.Linq;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Source.View.Pages
 {
@@ -37,16 +24,8 @@ namespace Source.View.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if (DataClass.SelectedInsurer == null)
-            {
-                lINN.Content = "[___-___-______]";
-                lName.Content = " ";
-            }
-            else
-            {
-                lINN.Content = $"[{DataClass.SelectedInsurer.INN}]";
-                lName.Content = DataClass.SelectedInsurer.NameShort;
-            }
+            lINN.Content = DataClass.GetInsurerINN();
+            lName.Content = DataClass.GetInsurerShortName();
         }
 
         private void bGoBack_Click(object sender, RoutedEventArgs e)
@@ -115,8 +94,6 @@ namespace Source.View.Pages
 
         private void bShowUsers_Click(object sender, RoutedEventArgs e)
         {
-            //Windows.WorkerInfoWindow workerInfoWindow = new Windows.WorkerInfoWindow();
-            //workerInfoWindow.ShowDialog();
             NavigationService.Navigate(new WorkersPage());
         }
     }
