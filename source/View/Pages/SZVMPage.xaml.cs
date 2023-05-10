@@ -41,5 +41,30 @@ namespace Source.View.Pages
         {
             NavigationService.GoBack();
         }
+
+        private void bChangeInsurer(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new InsurersPage());
+        }
+
+        private void bShowUsers_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new WorkersPage());
+        }
+
+        private void bAddSZVM_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void bEditSZVM_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void bRemoveSZVM_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

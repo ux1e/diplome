@@ -26,10 +26,106 @@
                     Orientation="Horizontal"
                     HorizontalAlignment="Stretch" 
                     VerticalAlignment="Stretch">
-            <Label Content="Страхователь: "/>
-            <Label Content="[123-456-789000]" x:Name="lINN"/>
-            <Label Content="TEST" x:Name="lName"/>
+            <Label Content="Страхователь: " VerticalAlignment="Center"/>
+            <Label Content="[123-456-789000]" x:Name="lINN" VerticalAlignment="Center"/>
+            <Label Content="TEST" x:Name="lName" VerticalAlignment="Center"/>
         </StackPanel>
+
+        <Button x:Name="bInsurer"                                           
+                Grid.Column="1" Grid.Row="0"                                          
+                Content="Сменить"                       
+                Click="bChangeInsurer"                       
+                Style="{DynamicResource CustomButtonStyle}"/>
+
+        <DockPanel Grid.Row="1" Grid.Column="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Margin="5">
+                    <DataGrid x:Name="InsurerGrid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" 
+                      CanUserReorderColumns="False" CanUserSortColumns="False" IsReadOnly="True" FontSize="10">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Год" Binding="{Binding Path=Year}" Width="*" />
+                            <DataGridTextColumn Header="Месяц" Binding="{Binding Path=Month}" Width="*" />
+                            <DataGridTextColumn Header="Тип формы" Binding="{Binding Path=Month}" Width="*" />
+                            <DataGridTextColumn Header="Количество сотрудников" Binding="{Binding Path=WorkerCount}" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Margin="5">
+                    <DataGrid x:Name="WorkerGrid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" 
+                      CanUserReorderColumns="False" CanUserSortColumns="False" IsReadOnly="True" FontSize="10">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ФИО" Binding="{Binding Path=FIO}" Width="*" />
+                            <DataGridTextColumn Header="СНИЛС" Binding="{Binding Path=SNILS}" Width="*" />
+                            <DataGridTextColumn Header="ИНН" Binding="{Binding Path=INN}" Width="*" />
+                            <DataGridTextColumn Header="Пол" Binding="{Binding Path=Sex}" Width="*" />
+                            <DataGridTextColumn Header="Уволен" Binding="{Binding Path=IsFired}" Width="*" />
+                            <DataGridTextColumn Header="Дата Рождения" Binding="{Binding Path=DOB}" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+
+            </Grid>
+        </DockPanel>
+
+        <DockPanel Grid.Row="1" Grid.Column="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                             
+                <DockPanel Grid.Row="0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Button x:Name="bAddSZVM" 
+                                Grid.Row="0"
+                                Style="{DynamicResource CustomButtonStyle}"
+                                Content="Добавить" 
+                                Click="bAddSZVM_Click"/>
+
+                        <Button x:Name="bEditSZVM" 
+                                Grid.Row="1"
+                                Style="{DynamicResource CustomButtonStyle}"
+                                Content="Изменить" 
+                                Click="bEditSZVM_Click"/>
+
+                        <Button x:Name="bRemoveSZVM" 
+                                Grid.Row="2"
+                                Style="{DynamicResource CustomButtonStyle}"
+                                Content="Удалить" 
+                                Click="bRemoveSZVM_Click"/>
+
+                    </Grid>
+                </DockPanel>
+
+                <DockPanel Grid.Row="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Button x:Name="bShowUsers" 
+                                Grid.Row="0"
+                                Style="{DynamicResource CustomButtonStyle}"
+                                Content="Добавить" 
+                                Click="bShowUsers_Click"/>
+                    </Grid>
+                </DockPanel>
+            </Grid>
+        </DockPanel>
 
         <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
             <Button x:Name="bGoBack" 

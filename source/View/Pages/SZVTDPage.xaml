@@ -17,7 +17,7 @@
             <ColumnDefinition Width="0.2*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.11*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
@@ -28,9 +28,9 @@
                     Orientation="Horizontal"
                     HorizontalAlignment="Stretch" 
                     VerticalAlignment="Stretch">
-            <Label Content="Страхователь: "/>
-            <Label Content="[123-456-789000]" x:Name="lINN"/>
-            <Label Content="TEST" x:Name="lName"/>
+            <Label Content="Страхователь: " VerticalAlignment="Center"/>
+            <Label Content="[123-456-789000]" x:Name="lINN" VerticalAlignment="Center"/>
+            <Label Content="TEST" x:Name="lName" VerticalAlignment="Center"/>
         </StackPanel>
 
         <Button x:Name="bInsurer"                        
@@ -74,14 +74,14 @@
 
             </Grid>
         </DockPanel>
-        
+
         <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
             <Button x:Name="bGoBack" 
                     Click="bGoBack_Click" 
                     Width="150"                                       
                     Content="&lt;&lt; Назад" 
                     Style="{DynamicResource CustomButtonStyle}"/>
-            
+
             <Button x:Name="bMakeReport" 
                     Click="bMakeReport_Click" 
                     Width="150"                                        
@@ -89,9 +89,42 @@
                     Style="{DynamicResource CustomButtonStyle}"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical">
-            <Button x:Name="bShowUsers" Width="125" Height="35" Style="{DynamicResource CustomButtonStyle}"  Content="Пользователи" Click="bShowUsers_Click"/>
-        </StackPanel>
+        <DockPanel Grid.Row="1" Grid.Column="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <DockPanel Grid.Row="0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                    </Grid>
+                </DockPanel>
+
+                <DockPanel Grid.Row="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        
+                        <Button x:Name="bShowUsers" 
+                            Grid.Row="0"
+                            Style="{DynamicResource CustomButtonStyle}"
+                            Content="Пользователи" 
+                            Click="bShowUsers_Click"/>
+                    </Grid>
+                   
+                </DockPanel>
+            </Grid>
+        </DockPanel>
 
     </Grid>
 </Page>

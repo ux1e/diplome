@@ -11,8 +11,19 @@
     <Grid>
         <StackPanel>
             <Label Content="SettingPage" Style="{DynamicResource CustomLabelStyle}"/>
-            <Button Width="200" Height="100" Content="Go Back" x:Name="bGoBack" Click="bGoBack_Click" Style="{DynamicResource CustomButtonStyle}"/>
-            <Button Width="200" Height="100" Content="Change Theme" x:Name="bChangeTheme" Click="bChangeTheme_Click" Style="{DynamicResource CustomButtonStyle}"/>
+            <DockPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Button Width="200" Height="100" 
+                        Content="&lt;&lt; Назад"
+                        x:Name="bGoBack"
+                        Click="bGoBack_Click" 
+                        Style="{DynamicResource CustomButtonStyle}"/>
+
+                <Button Width="200" Height="100" 
+                        Content="Сменить тему" 
+                        x:Name="bChangeTheme" 
+                        Click="bChangeTheme_Click" 
+                        Style="{DynamicResource CustomButtonStyle}"/>
+            </DockPanel>
         </StackPanel>
     </Grid>
 </Page>

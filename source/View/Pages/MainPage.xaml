@@ -9,50 +9,48 @@
       Title="MainPage">
 
     <Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0.35*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.35*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
 
-            <Label Content="Отчёты"                       
-                   Grid.Column="0" Grid.Row="0"                      
-                   Style="{DynamicResource CustomLabelStyle}"/>
+        <Label Content="Отчёты"                                         
+               Grid.Column="0" Grid.Row="0"                                        
+               Style="{DynamicResource CustomLabelStyle}"/>
 
-            <Button x:Name="bSZVM" 
-                    Grid.Column="0" Grid.Row="1"
-                    Content="СЗВ-М"
-                    Click="bSZVM_Click"
-                    Style="{DynamicResource CustomButtonStyle}"
-                    ToolTip="Сведения о застрахованных лицах"/>
-            
-            <Button x:Name="bSZVTD" 
-                    Grid.Column="0" Grid.Row="2"
-                    Content="СЗВ-ТД"
-                    Click="bSZVTD_Click"
-                    Style="{DynamicResource CustomButtonStyle}"
-                    ToolTip="Сведения о трудовой деятельности работников"/>
+        <Button x:Name="bSZVM"                
+                Grid.Column="0" Grid.Row="1"                
+                Content="СЗВ-М"                 
+                Click="bSZVM_Click"                
+                Style="{DynamicResource CustomButtonStyle}"                   
+                ToolTip="Сведения о застрахованных лицах"/>
 
-            <Label Content="Настройки"                       
-                   Grid.Column="1" Grid.Row="0"                     
-                   Style="{DynamicResource CustomLabelStyle}"/>
+        <Button x:Name="bSZVTD"                     
+                Grid.Column="0" Grid.Row="2"                   
+                Content="СЗВ-ТД"                    
+                Click="bSZVTD_Click"                   
+                Style="{DynamicResource CustomButtonStyle}"                   
+                ToolTip="Сведения о трудовой деятельности работников"/>
 
-            <Button x:Name="bSettings"                        
-                    Grid.Column="1" Grid.Row="1"                       
-                    Content="Настройки"                        
-                    Style="{DynamicResource CustomButtonStyle}"                        
-                    Click="bSettings_Click"/>
+        <Label Content="Настройки"                                          
+               Grid.Column="1" Grid.Row="0"                                       
+               Style="{DynamicResource CustomLabelStyle}"/>
 
-            <Button x:Name="bUserList"                        
-                    Grid.Column="1" Grid.Row="2"                       
-                    Content="Управление пользователями"                       
-                    Style="{DynamicResource CustomButtonStyle}"
-                    Click="bUserList_Click"/>
-        </Grid>
+        <Button x:Name="bSettings"                                            
+                Grid.Column="1" Grid.Row="1"                                           
+                Content="Настройки"                                            
+                Style="{DynamicResource CustomButtonStyle}"                                          
+                Click="bSettings_Click"/>
+
+        <Button x:Name="bUserList"                                           
+                Grid.Column="1" Grid.Row="2"                                          
+                Content="Управление пользователями"                                        
+                Style="{DynamicResource CustomButtonStyle}"                   
+                Click="bUserList_Click"/>
     </Grid>
 </Page>
