@@ -1,20 +1,12 @@
 ﻿using Source.Core;
 using Source.Model;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Source.View.Pages
 {
@@ -29,28 +21,24 @@ namespace Source.View.Pages
         public UserListPage()
         {
             InitializeComponent();
-            UpdateGrid(null);
+            UpdateListView(null);
             DlgLoad(false);
             DataContext = this;
         }
 
-        public void UpdateGrid(User u)
+        public void UpdateListView(User u)
         {
-            if ((u == null) && (Grid.ItemsSource != null))
-                u = (User)Grid.SelectedItem;
+            if ((u == null) && (lvUsers.ItemsSource != null))
+                u = (User)lvUsers.SelectedItem;
 
             User = new ObservableCollection<User>(DataClass.DataBase.Users);
-            Grid.ItemsSource = User;
-            Grid.SelectedItem = u;
+            lvUsers.ItemsSource = User;
+            lvUsers.SelectedItem = u;
         }
 
         public void DlgLoad(bool b)
         {
-            NameTextBox.Text = "";
-            MailTextBox.Text = "";
-
-            FuncPanel.Width = new GridLength(b ? 200 : 0);
-            Grid.IsHitTestVisible = !b;
+            lvUsers.IsHitTestVisible = !b;
             if (b == true)
             {
                 DlgMode = -1;
@@ -64,19 +52,22 @@ namespace Source.View.Pages
 
         private void bMakeNewUser_Click(object sender, RoutedEventArgs e)
         {
-            DlgLoad(true);
-            DataContext = null;
-            DlgMode = 0;
+            Windows.AddNewUserWindow addNewUserWindow = new Windows.AddNewUserWindow();
+            addNewUserWindow.ShowDialog();
+            //DlgLoad(true);
+            //DataContext = null;
+            //DlgMode = 0;
         }
 
         private void AddRollback_Click(object sender, RoutedEventArgs e)
         {
             DlgLoad(false);
-            UpdateGrid(null);
+            UpdateListView(null);
         }
 
         private void AddCommit_Click(object sender, RoutedEventArgs e)
         {
+            /*
             StringBuilder errors = new StringBuilder();
 
             if (string.IsNullOrEmpty(NameTextBox.Text))
@@ -126,41 +117,43 @@ namespace Source.View.Pages
                     MessageBox.Show($"Логин: {DataClass.SelectedUser.Name}\nПароль: {randomPassword}", "Пользователь создан");
                 }
             }
+            */
         }
 
         private void bDeleteUser_Click(object sender, RoutedEventArgs e)
         {
-            if (Grid.SelectedItem == DataClass.UserInfo)
+            if (lvUsers.SelectedItem == DataClass.UserInfo)
             {
                 MessageBox.Show("Стрелять конечно хорошо, но не себе же в ногу", "ПРЕДУПРЕЖДЕНИЕ!!!!!");
                 return;
             }
-            if (Grid.SelectedItem == DataClass.DataBase.Users.FirstOrDefault(p => p.Name == "Администратор"))
+            if (lvUsers.SelectedItem == DataClass.DataBase.Users.FirstOrDefault(p => p.Name == "Администратор"))
             {
                 MessageBox.Show("НЕЛЬЗЯ УДАЛИТЬ АДМИНИСТРАТОРА (◣_◢)", "ПРЕДУПРЕЖДЕНИЕ!!!!!");
                 return;
             }
-            if (Grid.SelectedItem == null)
+            if (lvUsers.SelectedItem == null)
             {
                 MessageBox.Show("Для удаления необходимо выбрать пользователя", "Информация");
+                return;
             }
 
             if (MessageBox.Show("Удалить пользователя?", "Внимание", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK)
             {
                 try
                 {
-                    User DeletingItem = (User)Grid.SelectedItem;
-                    if (Grid.SelectedIndex < Grid.Items.Count - 1)
-                        Grid.SelectedIndex++;
+                    User DeletingItem = (User)lvUsers.SelectedItem;
+                    if (lvUsers.SelectedIndex < lvUsers.Items.Count - 1)
+                        lvUsers.SelectedIndex++;
                     else
                     {
-                        if (Grid.SelectedIndex > 0)
-                            Grid.SelectedIndex--;
+                        if (lvUsers.SelectedIndex > 0)
+                            lvUsers.SelectedIndex--;
                     }
-                    DataClass.SelectedUser = (User)Grid.SelectedItem;
+                    DataClass.SelectedUser = (User)lvUsers.SelectedItem;
                     DataClass.DataBase.Users.Remove(DeletingItem);
                     DataClass.DataBase.SaveChanges();
-                    UpdateGrid(DataClass.SelectedUser);
+                    UpdateListView(DataClass.SelectedUser);
                 }
                 catch (Exception ex)
                 {
@@ -174,6 +167,7 @@ namespace Source.View.Pages
 
         private void bEditUser_Click(object sender, RoutedEventArgs e)
         {
+            /*
             if (Grid.SelectedItem == DataClass.DataBase.Users.FirstOrDefault(p => p.Name == "Администратор"))
             {
                 MessageBox.Show("НЕЛЬЗЯ ИЗМЕНИТЬ АДМИНИСТРАТОРА (◣_◢)", "ПРЕДУПРЕЖДЕНИЕ!!!!!");
@@ -189,6 +183,29 @@ namespace Source.View.Pages
             DataClass.SelectedUser = (User)Grid.SelectedItem;
             NameTextBox.Text = DataClass.SelectedUser.Name;
             MailTextBox.Text = DataClass.SelectedUser.Mail;
+            */
+        }
+
+        private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                lvUsers.ItemsSource = DataClass.DataBase.Users.Where(item => item.Name == tbSearch.Text || 
+                                                                             item.Name.Contains(tbSearch.Text) ||
+                                                                             item.Mail == tbSearch.Text ||
+                                                                             item.Mail.Contains(tbSearch.Text)
+                                                                     ).ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Произошла ошибка!!!!\n{ex}\nОбратитесь к Администратору!", "Ошибка");
+                throw;
+            }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            lvUsers.ItemsSource = DataClass.DataBase.Users.ToList();
         }
     }
 }

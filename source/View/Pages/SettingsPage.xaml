@@ -9,21 +9,32 @@
       Title="SettingsPage">
 
     <Grid>
-        <StackPanel>
-            <Label Content="SettingPage" Style="{DynamicResource CustomLabelStyle}"/>
-            <DockPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Button Width="200" Height="100" 
+        <DockPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.15*"/>
+                    <RowDefinition Height="0.35*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Grid.Row="1"
                         Content="&lt;&lt; Назад"
                         x:Name="bGoBack"
                         Click="bGoBack_Click" 
                         Style="{DynamicResource CustomButtonStyle}"/>
 
-                <Button Width="200" Height="100" 
+                <Button Grid.Column="1" Grid.Row="1"
                         Content="Сменить тему" 
                         x:Name="bChangeTheme" 
                         Click="bChangeTheme_Click" 
                         Style="{DynamicResource CustomButtonStyle}"/>
-            </DockPanel>
-        </StackPanel>
+            </Grid>
+
+        </DockPanel>
     </Grid>
 </Page>
