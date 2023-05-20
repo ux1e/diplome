@@ -33,6 +33,12 @@
                         x:Name="bChangeTheme" 
                         Click="bChangeTheme_Click" 
                         Style="{DynamicResource CustomButtonStyle}"/>
+
+                <Button Grid.Column="0" Grid.Row="2"
+                        Content="Тестовое окно" 
+                        x:Name="bTestWindow" 
+                        Click="bTestWindow_Click" 
+                        Style="{DynamicResource CustomButtonStyle}"/>
             </Grid>
 
         </DockPanel>

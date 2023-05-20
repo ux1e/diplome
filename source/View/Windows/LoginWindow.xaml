@@ -16,10 +16,12 @@
             MinWidth="200">
 
             <Label Content="Логин"/>
-            <TextBox x:Name="tbLogin" Margin="5, 0, 5, 5"/>
+            <TextBox x:Name="tbLogin" Margin="5, 0, 5, 5"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
 
             <Label Content="Пароль"/>
-            <PasswordBox x:Name="pbPassword" Margin="5, 0, 5, 5"/>
+            <PasswordBox x:Name="pbPassword" Margin="5, 0, 5, 5"
+                         Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}"/>
 
             <DockPanel>
                 <Button x:Name="bExit" 

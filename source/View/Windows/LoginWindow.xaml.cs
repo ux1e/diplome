@@ -1,5 +1,6 @@
 ﻿using Source.Core;
 using Source.Model;
+using Source.View.Windows;
 using System;
 using System.Linq;
 using System.Windows;
@@ -42,7 +43,7 @@ namespace source.View.Windows
 
             if (UserAuth(_login, _password))
             {
-                new MainWindow().Show();
+                new TestMainWindow().Show();
                 Close();
             }
             else MessageBox.Show("Ошибка входа, првоерьте данные на корректность!");

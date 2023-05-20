@@ -4,12 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:source"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="MainWindow" 
         Height="450" MinHeight="450"
         Width="800" MinWidth="800"
         WindowStartupLocation="CenterScreen">
-    <Grid Style="{DynamicResource BackgroundColor}">
+    <Grid Background="{DynamicResource MaterialDesignPaper}">
         <Frame x:Name="MainFrame" 
                NavigationUIVisibility="Hidden"/>
     </Grid>

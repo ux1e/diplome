@@ -1,14 +1,15 @@
-﻿using System;
-using System.Windows;
+﻿using MaterialDesignThemes.Wpf;
 
 namespace Source.Core
 {
     static internal class ThemeChanger
     {
+        private static readonly PaletteHelper _pHellper = new PaletteHelper();
+        private static readonly ITheme _theme = _pHellper.GetTheme();
+
         public static void ChangeTheme()
         {
             DataClass.UserInfo.IsUsingDarkMode = !DataClass.UserInfo.IsUsingDarkMode;
-            Application.Current.Resources.MergedDictionaries.Clear();
             SetTheme(DataClass.UserInfo.IsUsingDarkMode ?? false);
             DataClass.DataBase.SaveChanges();
         }
@@ -17,22 +18,12 @@ namespace Source.Core
         {
             if (enableDarkTheme) SetDarkTheme();
             else SetLightTheme();
+
+            _pHellper.SetTheme(_theme);
         }
 
-        public static void SetDarkTheme()
-        {
-            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary()
-            {
-                Source = new Uri("../Themes/DarkTheme.xaml", UriKind.RelativeOrAbsolute)
-            });
-        }
+        public static void SetDarkTheme() => _theme.SetBaseTheme(Theme.Dark);
 
-        public static void SetLightTheme()
-        {
-            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary()
-            {
-                Source = new Uri("../Themes/LightTheme.xaml", UriKind.RelativeOrAbsolute)
-            });
-        }
+        public static void SetLightTheme() => _theme.SetBaseTheme(Theme.Light);
     }
 }
