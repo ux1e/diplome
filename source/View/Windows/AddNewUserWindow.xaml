@@ -8,39 +8,48 @@
         Title="Добавить нового пользователя" 
         Height="450" MinHeight="450"
         Width="450" MinWidth="450"
-        WindowStartupLocation="CenterScreen">
-    <Grid Style="{DynamicResource BackgroundColor}">
-        <StackPanel VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    MinWidth="200">
-            
-            <Label Content="Логин"/>
-            <TextBox x:Name="tbLogin" Margin="5, 0, 5, 5"/>
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True"
+        Background="Transparent" 
+        MouseLeftButtonDown="Window_Drag"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+    <Border CornerRadius="6" Background="{DynamicResource MaterialDesignPaper}" 
+            BorderBrush="Transparent" BorderThickness="0.25">
+        <Grid>
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        MinWidth="200">
 
-            <Label Content="Пароль" ToolTip="Можно оставить пустым, тогда пароль сгенерируется сам"/>
-            <PasswordBox x:Name="pbPassword" Margin="5, 0, 5, 5"
-                         ToolTip="Можно оставить пустым, тогда пароль сгенерируется сам"/>
+                <Label Content="Логин"/>
+                <TextBox x:Name="tbLogin" Margin="5, 0, 5, 5"/>
 
-            <Label Content="Почта" ToolTip="Можно оставить пустым"/>
-            <TextBox x:Name="tbMail" Margin="5, 0, 5, 5" ToolTip="Можно оставить пустым"/>
+                <Label Content="Пароль" ToolTip="Можно оставить пустым, тогда пароль сгенерируется сам"/>
+                <PasswordBox x:Name="pbPassword" Margin="5, 0, 5, 5"
+                             ToolTip="Можно оставить пустым, тогда пароль сгенерируется сам"/>
 
-            <DockPanel>
-                <Button x:Name="bCancel" 
-                        Height="30" Width="90"
-                        Content="Отмена" 
-                        HorizontalAlignment="Left" 
-                        Margin="5, 5, 0, 0"
-                        Background="Red"
-                        Click="bCancel_Click"/>
+                <Label Content="Почта" ToolTip="Можно оставить пустым"/>
+                <TextBox x:Name="tbMail" Margin="5, 0, 5, 5" ToolTip="Можно оставить пустым"/>
 
-                <Button x:Name="bCreate"
-                        Height="30" Width="90"
-                        Content="Создать" 
-                        HorizontalAlignment="Right"
-                        Margin="0, 5, 5, 0" 
-                        Background="LawnGreen"
-                        Click="bCreate_Click"/>
-            </DockPanel>
-        </StackPanel>
-    </Grid>
+                <DockPanel>
+                    <Button x:Name="bCancel" 
+                            Height="30" Width="90"
+                            Content="Отмена" 
+                            HorizontalAlignment="Left" 
+                            Margin="5, 5, 0, 0"
+                            Background="Red"
+                            Click="bCancel_Click"/>
+
+                    <Button x:Name="bCreate"
+                            Height="30" Width="90"
+                            Content="Создать" 
+                            HorizontalAlignment="Right"
+                            Margin="0, 5, 5, 0" 
+                            Background="LawnGreen"
+                            Click="bCreate_Click"/>
+                </DockPanel>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Window>

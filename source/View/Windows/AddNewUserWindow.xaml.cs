@@ -55,5 +55,7 @@ namespace Source.View.Windows
         }
 
         private void bCancel_Click(object sender, RoutedEventArgs e) => Close();
+
+        private void Window_Drag(object sender, System.Windows.Input.MouseButtonEventArgs e) => DragMove();
     }
 }

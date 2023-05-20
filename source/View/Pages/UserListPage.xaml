@@ -27,7 +27,7 @@
             <TextBox Width="300" x:Name="tbSearch" TextChanged="tbSearch_TextChanged"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.Column="0" Margin="5">
+        <StackPanel Grid.Row="1" Grid.Column="0" Margin="5, 0, 5, 0">
             <ListView x:Name="lvUsers">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -63,31 +63,34 @@
             </DataGrid>-->
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
-            <Button x:Name="bGoBack" 
-                    Click="bGoBack_Click" 
-                    Width="150"                                       
-                    Content="&lt;&lt; Назад" 
-                    Style="{DynamicResource CustomButtonStyle}"/>
+        <DockPanel Grid.Row="2" Grid.Column="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                <Button x:Name="bMakeNewUser" 
+                        Click="bMakeNewUser_Click" 
+                        Margin="2"
+                        Grid.Column="0"                                       
+                        Content="Создать"/>
 
-            <Button x:Name="bMakeNewUser" 
-                    Click="bMakeNewUser_Click" 
-                    Width="150"                                        
-                    Content="Создать" 
-                    Style="{DynamicResource CustomButtonStyle}"/>
+                <Button x:Name="bEditUser" 
+                        Click="bEditUser_Click" 
+                        Margin="2"
+                        Grid.Column="1"                                       
+                        Content="Изменить"/>
 
-            <Button x:Name="bEditUser" 
-                    Click="bEditUser_Click" 
-                    Width="150"                                        
-                    Content="Изменить" 
-                    Style="{DynamicResource CustomButtonStyle}"/>
-
-            <Button x:Name="bDeleteUser" 
-                    Click="bDeleteUser_Click" 
-                    Width="150"                                        
-                    Content="Удалить" 
-                    Style="{DynamicResource CustomButtonStyle}"/>
-        </StackPanel>
+                <Button x:Name="bDeleteUser" 
+                        Click="bDeleteUser_Click" 
+                        Margin="2"
+                        Grid.Column="2"                                        
+                        Content="Удалить"/>
+            </Grid>
+        </DockPanel>
 
         <!--
         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">

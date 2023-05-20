@@ -1,5 +1,4 @@
 ﻿using Source.Core;
-using Source.Model;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -18,13 +17,13 @@ namespace Source.View.Windows
             tbUserWelcome.Text += DataClass.UserInfo.Name;
         }
 
-        private void Window_Drag(object sender, MouseButtonEventArgs e) => DragMove(); // перемещаем окно
+        private void Window_Drag(object sender, MouseButtonEventArgs e) => DragMove();
 
         private void ToggleTheme(object sender, RoutedEventArgs e) => ThemeChanger.ChangeTheme();
 
-        private void CloseApp(object sender, RoutedEventArgs e) => Close(); // закрываем окно
+        private void CloseApp(object sender, RoutedEventArgs e) => Close();
 
-        private void MinimizeApp(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized; // сворачиваем окно
+        private void MinimizeApp(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
 
         private void TabChanged(object sender, RoutedEventArgs e)
         {
@@ -32,7 +31,7 @@ namespace Source.View.Windows
             if (!radioBtn.IsEnabled)
                 return;
 
-            switch (radioBtn.Name) // переключаемся на страницу с названием кнопки
+            switch (radioBtn.Name)
             {
                 case "rbSZVM":
                     RootFrame.Navigate(new Pages.SZVMPage());

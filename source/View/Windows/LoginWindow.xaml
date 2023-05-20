@@ -8,39 +8,48 @@
         Title="Авторизация" 
         Height="220" MinHeight="220"
         Width="320" MinWidth="320"
-        WindowStartupLocation="CenterScreen">
-    <Grid>
-        <StackPanel 
-            VerticalAlignment="Center" 
-            HorizontalAlignment="Center"
-            MinWidth="200">
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True"
+        Background="Transparent" 
+        MouseLeftButtonDown="Window_Drag"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+    <Border CornerRadius="6" Background="{DynamicResource MaterialDesignPaper}" 
+            BorderBrush="Transparent" BorderThickness="0.25">
+        <Grid>
+            <StackPanel VerticalAlignment="Center" 
+                        HorizontalAlignment="Center"
+                        MinWidth="200">
 
-            <Label Content="Логин"/>
-            <TextBox x:Name="tbLogin" Margin="5, 0, 5, 5"
-                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                <Label Content="Логин"/>
+                <TextBox x:Name="tbLogin" Margin="5, 0, 5, 5"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
 
-            <Label Content="Пароль"/>
-            <PasswordBox x:Name="pbPassword" Margin="5, 0, 5, 5"
-                         Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}"/>
+                <Label Content="Пароль"/>
+                <PasswordBox x:Name="pbPassword" Margin="5, 0, 5, 5"
+                             Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}"
+                             materialDesign:PasswordBoxAssist.Password="{Binding Password1, Mode=TwoWay}"
+                             materialDesign:TextFieldAssist.HasClearButton="True"/>
 
-            <DockPanel>
-                <Button x:Name="bExit" 
-                        Height="30" Width="90"
-                        Content="Выйти" 
-                        HorizontalAlignment="Left" 
-                        Margin="5, 5, 0, 0"
-                        Background="Red"
-                        Click="bExit_Click"/>
+                <DockPanel>
+                    <Button x:Name="bExit" 
+                            Height="30" Width="90"
+                            Content="Выйти" 
+                            HorizontalAlignment="Left" 
+                            Margin="5, 5, 0, 0"
+                            Background="Red"
+                            Click="bExit_Click"/>
 
-                <Button x:Name="bSignIn"
-                        Height="30" Width="90"
-                        Content="Войти" 
-                        HorizontalAlignment="Right"
-                        Margin="0, 5, 5, 0" 
-                        Background="LawnGreen"
-                        Click="bSignIn_Click"/>
-            </DockPanel>
-
-        </StackPanel>
-    </Grid>
+                    <Button x:Name="bSignIn"
+                            Height="30" Width="90"
+                            Content="Войти" 
+                            HorizontalAlignment="Right"
+                            Margin="0, 5, 5, 0" 
+                            Background="LawnGreen"
+                            Click="bSignIn_Click"/>
+                </DockPanel>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Window>

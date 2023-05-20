@@ -21,7 +21,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Background="#f2bd38" 
-                    Margin="0, 5" 
+                    Margin="5" 
                     Grid.Row="0" Grid.Column="0" 
                     Orientation="Horizontal"
                     HorizontalAlignment="Stretch" 
@@ -34,8 +34,7 @@
         <Button x:Name="bInsurer"                                           
                 Grid.Column="1" Grid.Row="0"                                          
                 Content="Сменить"                       
-                Click="bChangeInsurer"                       
-                Style="{DynamicResource CustomButtonStyle}"/>
+                Click="bChangeInsurer"/>
 
         <DockPanel Grid.Row="1" Grid.Column="0">
             <Grid>
@@ -79,7 +78,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                             
+
                 <DockPanel Grid.Row="0">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -90,19 +89,16 @@
 
                         <Button x:Name="bAddSZVM" 
                                 Grid.Row="0"
-                                Style="{DynamicResource CustomButtonStyle}"
                                 Content="Добавить" 
                                 Click="bAddSZVM_Click"/>
 
                         <Button x:Name="bEditSZVM" 
                                 Grid.Row="1"
-                                Style="{DynamicResource CustomButtonStyle}"
                                 Content="Изменить" 
                                 Click="bEditSZVM_Click"/>
 
                         <Button x:Name="bRemoveSZVM" 
                                 Grid.Row="2"
-                                Style="{DynamicResource CustomButtonStyle}"
                                 Content="Удалить" 
                                 Click="bRemoveSZVM_Click"/>
 
@@ -119,7 +115,6 @@
 
                         <Button x:Name="bShowUsers" 
                                 Grid.Row="0"
-                                Style="{DynamicResource CustomButtonStyle}"
                                 Content="Добавить" 
                                 Click="bShowUsers_Click"/>
                     </Grid>
@@ -127,18 +122,21 @@
             </Grid>
         </DockPanel>
 
-        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
-            <Button x:Name="bGoBack" 
-                    Click="bGoBack_Click" 
-                    Width="150"                                       
-                    Content="&lt;&lt; Назад" 
-                    Style="{DynamicResource CustomButtonStyle}"/>
+        <DockPanel Grid.Row="2" Grid.Column="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
 
-            <Button x:Name="bMakeReport" 
-                    Click="bMakeReport_Click" 
-                    Width="150"                                        
-                    Content="Создать XML" 
-                    Style="{DynamicResource CustomButtonStyle}"/>
-        </StackPanel>
+                <Button x:Name="bMakeReport" 
+                        Click="bMakeReport_Click"
+                        Margin="2"
+                        Grid.Column="0"                                        
+                        Content="Создать XML"/>
+            </Grid>
+        </DockPanel>
     </Grid>
 </Page>

@@ -48,5 +48,7 @@ namespace source.View.Windows
             }
             else MessageBox.Show("Ошибка входа, првоерьте данные на корректность!");
         }
+
+        private void Window_Drag(object sender, System.Windows.Input.MouseButtonEventArgs e) => DragMove();
     }
 }
