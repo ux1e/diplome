@@ -30,5 +30,7 @@ namespace Source.Model
         public virtual DbSet<Sex> Sexes { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Worker> Workers { get; set; }
+        public virtual DbSet<FormsSZV_M> FormsSZV_M { get; set; }
+        public virtual DbSet<FormsSZV_TD> FormsSZV_TD { get; set; }
     }
 }

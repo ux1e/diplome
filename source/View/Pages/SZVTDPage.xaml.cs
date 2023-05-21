@@ -1,8 +1,12 @@
 ﻿using Source.Core;
+using Source.Model;
+using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Source.View.Pages
 {
@@ -14,6 +18,7 @@ namespace Source.View.Pages
         public SZVTDPage()
         {
             InitializeComponent();
+
 
             //List<Insurer> insurerList = new List<Insurer>
             //{
@@ -35,6 +40,27 @@ namespace Source.View.Pages
 
         private void bMakeReport_Click(object sender, RoutedEventArgs e)
         {
+            MakeSZVTDXml(3274523);
+        }
+
+        private void MakeSZVTDXml(int szvtdID)
+        {
+            try
+            {
+                DataClass.FormsSZV_TD = DataClass.DataBase.FormsSZV_TD.First((FormsSZV_TD x) => x.Id == szvtdID);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Произошла ошибка: \n{ex}\nОбратитесь к администратору!", "Произошла ошибка");
+                return;
+            }
+
+            if (DataClass.FormsSZV_TD == null)
+            {
+                MessageBox.Show("FormsSZV_TD == null", "Ошибка", (MessageBoxButton)MessageBoxImage.Error);
+                return;
+            }
+
             string fileName = string.Format("ПФР_СЗВ-ТД_{0}_{1}.XML", DataClass.UserInfo.Name, DataClass.GetDateTime());
 
             XNamespace xnamespace = "http://пф.рф/СЗВ-ТД/2020-09-26";
@@ -57,22 +83,43 @@ namespace Source.View.Pages
                 })
             });
 
+            string orgName = "";
+            if (!string.IsNullOrEmpty(DataClass.SelectedInsurer.NameShort))
+            {
+                orgName = DataClass.SelectedInsurer.NameShort;
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(DataClass.SelectedInsurer.Name))
+                {
+                    orgName = DataClass.SelectedInsurer.Name;
+                }
+            }
+
             XElement xelement = new XElement(xnamespace + "Работодатель", new object[]
             {
-                new XElement(xnamespace2 + "РегНомер", 123),
-                new XElement(xnamespace + "НаименованиеОрганизации", 123),
+                new XElement(xnamespace2 + "РегНомер", DataClass.GetInsurerINN()),
+                new XElement(xnamespace + "НаименованиеОрганизации", orgName),
                 new XElement(xnamespace2 + "ИНН",
                 (DataClass.SelectedInsurer == null) ? "" : DataClass.SelectedInsurer.INN.ToString())
             });
             XElement xelement2 = new XElement(xnamespace + "Страхователь", new object[]
             {
-                new XElement(xnamespace3 + "РегНомер", 123),
-                new XElement(xnamespace3 + "Наименование", 123),
+                new XElement(xnamespace3 + "РегНомер", DataClass.GetInsurerINN()),
+                new XElement(xnamespace3 + "НаименованиеОрганизации", orgName),
                 new XElement(xnamespace2 + "ИНН",
                 (DataClass.SelectedInsurer == null) ? "" : DataClass.SelectedInsurer.INN.ToString())
             });
 
             XElement xelement3 = new XElement(xnamespace + "СЗВ-ТД", xelement);
+
+            XElement content = new XElement(xnamespace + "ОтчетныйПериод", new object[]
+            {
+                new XElement(xnamespace + "Месяц", DataClass.FormsSZV_TD.Month),
+                new XElement(xnamespace + "КалендарныйГод", DataClass.FormsSZV_TD.Year)
+            });
+            xelement3.Add(content);
+
             XElement xelement4 = new XElement(xnamespace + "ЕФС-1", xelement2);
 
             XElement xelement25 = new XElement(xnamespace + "СлужебнаяИнформация", new object[]

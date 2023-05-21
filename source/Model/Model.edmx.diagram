@@ -12,6 +12,8 @@
         <EntityTypeShape EntityType="diplomeModel.Worker" Width="1.5" PointX="3" PointY="1" />
         <AssociationConnector Association="diplomeModel.FK_Workers_Profession" />
         <AssociationConnector Association="diplomeModel.FK_Workers_Sex" />
+        <EntityTypeShape EntityType="diplomeModel.FormsSZV_M" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="diplomeModel.FormsSZV_TD" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

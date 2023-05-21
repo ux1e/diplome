@@ -12,19 +12,12 @@ namespace Source.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Worker
+    public partial class FormsSZV_M
     {
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string MiddleName { get; set; }
-        public Nullable<long> InsuranceNumber { get; set; }
-        public Nullable<long> INN { get; set; }
-        public Nullable<int> Sex { get; set; }
-        public Nullable<int> Profession { get; set; }
-        public Nullable<bool> IsFired { get; set; }
-    
-        public virtual Profession Profession1 { get; set; }
-        public virtual Sex Sex1 { get; set; }
+        public Nullable<int> Year { get; set; }
+        public Nullable<int> Month { get; set; }
+        public Nullable<int> InsurerId { get; set; }
+        public Nullable<System.DateTime> DateFilling { get; set; }
     }
 }

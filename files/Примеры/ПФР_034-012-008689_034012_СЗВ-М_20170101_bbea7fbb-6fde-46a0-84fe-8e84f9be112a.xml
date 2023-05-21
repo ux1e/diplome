@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ЭДПФР xmlns="http://пф.рф/ВС/СЗВ-М/2017-01-01" xmlns:АФ3="http://пф.рф/АФ/2017-01-01" xmlns:АФ="http://пф.рф/АФ" xmlns:УТ="http://пф.рф/унифицированныеТипы/2014-01-01">
+	<СЗВ-М>
+		<ТипФормы>1</ТипФормы>
+		<Страхователь>
+			<РегНомер>034-012-008689</РегНомер>
+			<НаименованиеКраткое>Открытое Акционерное Общество "Командор"</НаименованиеКраткое>
+			<ИНН>2460003068</ИНН>
+			<КПП>246032012</КПП>
+		</Страхователь>
+		<ОтчетныйПериод>
+			<Месяц>4</Месяц>
+			<КалендарныйГод>2016</КалендарныйГод>
+		</ОтчетныйПериод>
+		<СписокЗЛ>
+			<ЗЛ НомерПП="1">
+				<ФИО>
+					<УТ:Фамилия>Буднев</УТ:Фамилия>
+					<УТ:Имя>Максим</УТ:Имя>
+					<УТ:Отчество>Федорович</УТ:Отчество>
+				</ФИО>
+				<СНИЛС>077-242-533 68</СНИЛС>
+				<ИНН>463403005126</ИНН>
+			</ЗЛ>
+			<ЗЛ НомерПП="2">
+				<ФИО>
+					<УТ:Фамилия>Астахов</УТ:Фамилия>
+					<УТ:Имя>Сергей</УТ:Имя>
+					<УТ:Отчество>Михайлович</УТ:Отчество>
+				</ФИО>
+				<СНИЛС>032-230-518 90</СНИЛС>
+				<ИНН>771865050406</ИНН>
+			</ЗЛ>
+			<ЗЛ НомерПП="3">
+				<ФИО>
+					<УТ:Фамилия>Павлов</УТ:Фамилия>
+					<УТ:Имя>Евгений</УТ:Имя>
+					<УТ:Отчество>Павлович</УТ:Отчество>
+				</ФИО>
+				<СНИЛС>116-637-097 62</СНИЛС>
+				<ИНН>773404623384</ИНН>
+			</ЗЛ>
+			<ЗЛ НомерПП="4">
+				<ФИО>
+					<УТ:Фамилия>Иванов</УТ:Фамилия>
+					<УТ:Имя>Петр</УТ:Имя>
+					<УТ:Отчество>Петрович</УТ:Отчество>
+				</ФИО>
+				<СНИЛС>032-539-153 34</СНИЛС>
+				<ИНН>222490425273</ИНН>
+			</ЗЛ>
+		</СписокЗЛ>
+		<ДатаЗаполнения>2016-05-04</ДатаЗаполнения>
+	</СЗВ-М>
+	<СлужебнаяИнформация>
+		<АФ:GUID>bbca7fbb-6fde-46a0-84fe-8e84f9be112a</АФ:GUID>
+		<АФ:ДатаВремя>2016-05-04T12:00:00-05:00</АФ:ДатаВремя>
+		<АФ3:ПрограммаПодготовки>СБИС В.2.4.309</АФ3:ПрограммаПодготовки>
+	</СлужебнаяИнформация>
+	<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+		<SignedInfo>
+			<CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+			<SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#gostr34102001-gostr3411" />
+			<Reference URI="#xpointer(/ЭДПФР/СЗВ-М)">
+				<Transforms>
+					<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+					<Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+				</Transforms>
+				<DigestMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#gostr3411" />
+				<DigestValue>mB5fPKMMhBSHgw+E+0M+E6wRAVabnBNYSsSDI0zWVsA=</DigestValue>
+			</Reference>
+		</SignedInfo>
+		<SignatureValue>xW77F646D1QMMNMwq6JSs648Mxsf/7w+i0QPflbp0n5HVB4RIdrZJICaF8YxI1Cz
+FX6c5HW1z7k1B5H0JeGSPw==</SignatureValue>
+		<KeyInfo>
+			<X509Data>
+				<X509Certificate>MIIIEDCCB72gAwIBAgIQAdM2rld6UkAAACkrAa4ACDAKBgYqhQMCAgMFADCCAaAx
+				KjAoBgNVBAkMIdCa0LDRgNC70LAg0JzQsNGA0LrRgdCwLCDQtC4yNzLQsDEYMBYG
+				BSqFA2QBEg0xMDIxODAxNjY4NDM3MRowGAYIKoUDA4EDAQESDDAwMTgzMzAwNTE5
+				NjELMAkGA1UEBhMCUlUxFTATBgNVBAcMDNCY0LbQtdCy0YHQujE1MDMGA1UECAws
+				MTgg0KPQtNC80YPRgNGC0YHQutCw0Y8g0KDQtdGB0L/Rg9Cx0LvQuNC60LAxHDAa
+				BgkqhkiG9w0BCQEWDWNhQDAxOS5wZnIucnUxQDA+BgNVBAoMN9Ce0J/QpNCgINC/
+				0L4g0KPQtNC80YPRgNGC0YHQutC+0Lkg0KDQtdGB0L/Rg9Cx0LvQuNC60LUxOjA4
+				BgNVBAsMMdC+0YLQtNC10Lsg0L/QviDQt9Cw0YnQuNGC0LUg0LjQvdGE0L7RgNC8
+				0LDRhtC40LgxRTBDBgNVBAMMPNCj0KYg0J7Qn9Ck0KAg0L/QviDQo9C00LzRg9GA
+				0YLRgdC60L7QuSDQoNC10YHQv9GD0LHQu9C40LrQtTAeFw0xNzA5MjYxMDAxMDBa
+				Fw0yMjA5MjYxMDAxMDBaMIIBgDEhMB8GA1UEAwwYQ3J5cHRvKyBEb3dubG9hZCBT
+				ZXJ2aWNlMSgwJgYDVQQEDB/RgtC10YHRgtC+0LLQsNGPINGE0LDQvNC40LvQuNGP
+				MSAwHgYDVQQqDBfRgtC10YHRgtC+0LLQvtC1INC40LzRjzELMAkGA1UEBhMCUlUx
+				GDAWBgUqhQNkARINMTE1MDEwMTkwMDAwMzEWMBQGBSqFA2QDEgsxMTExMTExMTE0
+				NTEaMBgGCCqFAwOBAwEBEgw1MDAxOTAwMDAwNjMxNTAzBgNVBAgMLDE4INCj0LTQ
+				vNGD0YDRgtGB0LrQsNGPINCg0LXRgdC/0YPQsdC70LjQutCwMRUwEwYDVQQHDAzQ
+				mNC20LXQstGB0LoxDTALBgNVBAgMBHRlc3QxGjAYBgNVBAoMEXRlc3Qgb3JnYW5p
+				emF0aW9uMRMwEQYDVQQMDAp0ZXN0IHRpdGxlMQ8wDQYDVQQLDAZkZXBhcnQxFTAT
+				BgNVBAkMDHRlc3QgYWRkcmVzczBjMBwGBiqFAwICEzASBgcqhQMCAiMBBgcqhQMC
+				Ah4BA0MABED3bNVwedZ0HPS7K9xlD4qut0CF0A6CbCxkBIIqVD4/5SbgbT1CJFUu
+				HmAKnkjYuDcYBLkVK9zzqXGhe2osokWrgQkAMDFBRTAwMDijggPeMIID2jALBgNV
+				HQ8EBAMCA/gwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMEMAwGA1UdEwEB
+				/wQCMAAwIwYFKoUDZG8EGgwYVmlQTmV0IENTUCBmb3IgTGludXggNC4zMIH3BgUq
+				hQNkcASB7TCB6gwMVmlQTmV0IENTUCA0DDBWaVBOZXQg0KPQtNC+0YHRgtC+0LLQ
+				tdGA0Y/RjtGJ0LjQuSDRhtC10L3RgtGAIDQMU9Ch0LXRgNGC0LjRhNC40LrQsNGC
+				INGB0L7QvtGC0LLQtdGC0YHRgtCy0LjRjyDihJYg0KHQpC8xMjQtMjg2MCDQvtGC
+				IDE1LjAzLjIwMTYg0LMuDFPQodC10YDRgtC40YTQuNC60LDRgiDRgdC+0L7RgtCy
+				0LXRgtGB0YLQstC40Y8g4oSWINCh0KQvMTI4LTI5MzIg0L7RgiAxMC4wOC4yMDE2
+				INCzLjAdBgNVHSAEFjAUMAgGBiqFA2RxATAIBgYqhQNkcQIwSgYIKwYBBQUHAQEE
+				PjA8MDoGCCsGAQUFBzAChi5odHRwOi8vY2EucGZyZi5ydS9vdF91ZG11cnQvY2Ff
+				dWRtdXJ0XzIwMTcuY2VyMD8GA1UdHwQ4MDYwNKAyoDCGLmh0dHA6Ly9jYS5wZnJm
+				LnJ1L290X3VkbXVydC9jYV91ZG11cnRfMjAxNy5jcmwwggGFBgNVHSMEggF8MIIB
+				eIAUSVCfuCU6+B6+6JHZXoobxrEi3OmhggFSpIIBTjCCAUoxHjAcBgkqhkiG9w0B
+				CQEWD2RpdEBtaW5zdnlhei5ydTELMAkGA1UEBhMCUlUxHDAaBgNVBAgMEzc3INCz
+				LiDQnNC+0YHQutCy0LAxFTATBgNVBAcMDNCc0L7RgdC60LLQsDE/MD0GA1UECQw2
+				MTI1Mzc1INCzLiDQnNC+0YHQutCy0LAsINGD0LsuINCi0LLQtdGA0YHQutCw0Y8s
+				INC0LiA3MSwwKgYDVQQKDCPQnNC40L3QutC+0LzRgdCy0Y/Qt9GMINCg0L7RgdGB
+				0LjQuDEYMBYGBSqFA2QBEg0xMDQ3NzAyMDI2NzAxMRowGAYIKoUDA4EDAQESDDAw
+				NzcxMDQ3NDM3NTFBMD8GA1UEAww40JPQvtC70L7QstC90L7QuSDRg9C00L7RgdGC
+				0L7QstC10YDRj9GO0YnQuNC5INGG0LXQvdGC0YCCCiyhoXsAAAAAALIwKwYDVR0Q
+				BCQwIoAPMjAxNzA5MjYxMDAxMDBagQ8yMDE4MTIyNjEwMDEwMFowHQYDVR0OBBYE
+				FEJ/is0BzhdSSgM2zMvya4eb/4/NMAoGBiqFAwICAwUAA0EAk1zF6JtbAM1qTxbC
+				n58r6ZWwId3CmriwT6tvhGBp/kkDq0mnip2PsP+I/bhdtapkRo43/+7+QW109ii+
+				VQZtPw==</X509Certificate>
+			</X509Data>
+		</KeyInfo>
+	</Signature>
+</ЭДПФР>

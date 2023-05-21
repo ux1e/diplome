@@ -5,6 +5,32 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="diplomeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'diplome.dbo.FormsSZV_M' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="FormsSZV_M">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Year" Type="int" />
+          <Property Name="Month" Type="int" />
+          <Property Name="InsurerId" Type="int" />
+          <Property Name="DateFilling" Type="date" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'diplome.dbo.FormsSZV_TD' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="FormsSZV_TD">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InsurerID" Type="int" />
+          <Property Name="Year" Type="int" />
+          <Property Name="Month" Type="int" />
+          <Property Name="Annuled" Type="bit" />
+          <Property Name="AnnulDate" Type="date" />
+          <Property Name="DateFilling" Type="date" />
+        </EntityType>
         <EntityType Name="Insurers">
           <Key>
             <PropertyRef Name="Id" />
@@ -55,6 +81,7 @@
           <Property Name="INN" Type="bigint" />
           <Property Name="Sex" Type="int" />
           <Property Name="Profession" Type="int" />
+          <Property Name="IsFired" Type="bit" />
         </EntityType>
         <Association Name="FK_Workers_Profession">
           <End Role="Profession" Type="Self.Profession" Multiplicity="0..1" />
@@ -86,6 +113,26 @@
           <EntitySet Name="Sex" EntityType="Self.Sex" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Workers" EntityType="Self.Workers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormsSZV_M" EntityType="Self.FormsSZV_M" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [FormsSZV_M].[Id] AS [Id], 
+    [FormsSZV_M].[Year] AS [Year], 
+    [FormsSZV_M].[Month] AS [Month], 
+    [FormsSZV_M].[InsurerId] AS [InsurerId], 
+    [FormsSZV_M].[DateFilling] AS [DateFilling]
+    FROM [dbo].[FormsSZV_M] AS [FormsSZV_M]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="FormsSZV_TD" EntityType="Self.FormsSZV_TD" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [FormsSZV_TD].[Id] AS [Id], 
+    [FormsSZV_TD].[InsurerID] AS [InsurerID], 
+    [FormsSZV_TD].[Year] AS [Year], 
+    [FormsSZV_TD].[Month] AS [Month], 
+    [FormsSZV_TD].[Annuled] AS [Annuled], 
+    [FormsSZV_TD].[AnnulDate] AS [AnnulDate], 
+    [FormsSZV_TD].[DateFilling] AS [DateFilling]
+    FROM [dbo].[FormsSZV_TD] AS [FormsSZV_TD]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Workers_Profession" Association="Self.FK_Workers_Profession">
             <End Role="Profession" EntitySet="Profession" />
             <End Role="Workers" EntitySet="Workers" />
@@ -113,6 +160,8 @@
             <End Role="Sex" EntitySet="Sexes" />
             <End Role="Worker" EntitySet="Workers" />
           </AssociationSet>
+          <EntitySet Name="FormsSZV_M" EntityType="diplomeModel.FormsSZV_M" />
+          <EntitySet Name="FormsSZV_TD" EntityType="diplomeModel.FormsSZV_TD" />
         </EntityContainer>
         <EntityType Name="Insurer">
           <Key>
@@ -168,6 +217,7 @@
           <Property Name="Profession" Type="Int32" />
           <NavigationProperty Name="Profession1" Relationship="diplomeModel.FK_Workers_Profession" FromRole="Worker" ToRole="Profession" />
           <NavigationProperty Name="Sex1" Relationship="diplomeModel.FK_Workers_Sex" FromRole="Worker" ToRole="Sex" />
+          <Property Name="IsFired" Type="Boolean" />
         </EntityType>
         <Association Name="FK_Workers_Profession">
           <End Type="diplomeModel.Profession" Role="Profession" Multiplicity="0..1" />
@@ -193,6 +243,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="FormsSZV_M">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="Month" Type="Int32" />
+          <Property Name="InsurerId" Type="Int32" />
+          <Property Name="DateFilling" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="FormsSZV_TD">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InsurerID" Type="Int32" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="Month" Type="Int32" />
+          <Property Name="Annuled" Type="Boolean" />
+          <Property Name="AnnulDate" Type="DateTime" Precision="0" />
+          <Property Name="DateFilling" Type="DateTime" Precision="0" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -244,6 +316,7 @@
           <EntitySetMapping Name="Workers">
             <EntityTypeMapping TypeName="diplomeModel.Worker">
               <MappingFragment StoreEntitySet="Workers">
+                <ScalarProperty Name="IsFired" ColumnName="IsFired" />
                 <ScalarProperty Name="Profession" ColumnName="Profession" />
                 <ScalarProperty Name="Sex" ColumnName="Sex" />
                 <ScalarProperty Name="INN" ColumnName="INN" />
@@ -251,6 +324,30 @@
                 <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormsSZV_M">
+            <EntityTypeMapping TypeName="diplomeModel.FormsSZV_M">
+              <MappingFragment StoreEntitySet="FormsSZV_M">
+                <ScalarProperty Name="DateFilling" ColumnName="DateFilling" />
+                <ScalarProperty Name="InsurerId" ColumnName="InsurerId" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormsSZV_TD">
+            <EntityTypeMapping TypeName="diplomeModel.FormsSZV_TD">
+              <MappingFragment StoreEntitySet="FormsSZV_TD">
+                <ScalarProperty Name="DateFilling" ColumnName="DateFilling" />
+                <ScalarProperty Name="AnnulDate" ColumnName="AnnulDate" />
+                <ScalarProperty Name="Annuled" ColumnName="Annuled" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="InsurerID" ColumnName="InsurerID" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

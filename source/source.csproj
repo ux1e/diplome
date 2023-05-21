@@ -105,6 +105,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Core\XMLValidator.cs" />
+    <Compile Include="Model\FormsSZV_M.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\FormsSZV_TD.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Profession.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

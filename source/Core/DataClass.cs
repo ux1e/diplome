@@ -15,6 +15,7 @@ namespace Source.Core
         public static User UserInfo = null;
         public static Insurer SelectedInsurer = null;
         public static User SelectedUser = null;
+        public static FormsSZV_TD FormsSZV_TD = null;
 
         public static string GetUUID()
         {

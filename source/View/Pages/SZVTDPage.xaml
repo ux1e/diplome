@@ -47,7 +47,7 @@
 
                 <StackPanel Grid.Row="0" Margin="5">
                     <DataGrid x:Name="InsurerGrid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" 
-                      CanUserReorderColumns="False" CanUserSortColumns="False" IsReadOnly="True" FontSize="10">
+                              CanUserReorderColumns="False" CanUserSortColumns="False" IsReadOnly="True" FontSize="10">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Дата" Binding="{Binding Path=Date}" Width="110" />
                             <DataGridTextColumn Header="Год" Binding="{Binding Path=Year}" Width="110" />
@@ -59,7 +59,7 @@
 
                 <StackPanel Grid.Row="1" Margin="5">
                     <DataGrid x:Name="WorkerGrid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" 
-                      CanUserReorderColumns="False" CanUserSortColumns="False" IsReadOnly="True" FontSize="10">
+                              CanUserReorderColumns="False" CanUserSortColumns="False" IsReadOnly="True" FontSize="10">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ФИО" Binding="{Binding Path=FIO}" Width="*" />
                             <DataGridTextColumn Header="СНИЛС" Binding="{Binding Path=SNILS}" Width="*" />

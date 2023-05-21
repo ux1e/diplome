@@ -14,7 +14,7 @@ namespace Source.View.Windows
         {
             InitializeComponent();
             ThemeChanger.SetTheme(DataClass.UserInfo.IsUsingDarkMode ?? false);
-            tbUserWelcome.Text += DataClass.UserInfo.Name;
+            tbUserWelcome.Text += DataClass.UserInfo.Name + "!";
         }
 
         private void Window_Drag(object sender, MouseButtonEventArgs e) => DragMove();
