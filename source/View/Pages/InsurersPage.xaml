@@ -11,7 +11,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition x:Name="FuncPanel" Width="0.5*"/>
+            <ColumnDefinition x:Name="FuncPanel" Width="0"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -24,25 +24,35 @@
             
         </DataGrid>
 
-        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
-            <Button x:Name="bGoBack" 
-                    Click="bGoBack_Click" 
-                    Width="150"                                       
-                    Content="&lt;&lt; Назад" 
-                    Style="{DynamicResource CustomButtonStyle}"/>
+        <DockPanel Grid.Row="1" Grid.Column="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
 
-            <Button x:Name="bSelectInsurer" 
-                    Click="bSelectInsurer_Click" 
-                    Width="150"                                        
-                    Content="Выбрать" 
-                    Style="{DynamicResource CustomButtonStyle}"/>
-            
-            <Button x:Name="bMakeNewInsurer" 
-                    Click="bMakeNewInsurer_Click" 
-                    Width="150"                                        
-                    Content="Создать" 
-                    Style="{DynamicResource CustomButtonStyle}"/>
-        </StackPanel>
+                <Button x:Name="bGoBack" 
+                        Click="bGoBack_Click" 
+                        Margin="2"
+                        Grid.Column="0"
+                        Content="&lt;&lt; Назад" />
+
+                <Button x:Name="bSelectInsurer" 
+                        Click="bSelectInsurer_Click" 
+                        Margin="2"
+                        Grid.Column="1"                                        
+                        Content="Выбрать"/>
+
+                <Button x:Name="bMakeNewInsurer" 
+                        Click="bMakeNewInsurer_Click" 
+                        Margin="2"
+                        Grid.Column="2"                                        
+                        Content="Создать"/>
+            </Grid>
+
+        </DockPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
@@ -82,19 +92,21 @@
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0">
                 <Button x:Name="AddCommit"
-                    Background="#a1b281" BorderBrush="#a1b281"                                  
-                    Content="Добавить"                                 
-                    Width="70" Height="35" 
-                    Margin="5"
-                    Click="AddCommit_Click">
+                        Background="#a1b281" BorderBrush="#a1b281"                                  
+                        Content="Добавить"                                 
+                        Width="70" Height="35" 
+                        Margin="5"
+                        FontSize="8"
+                        Click="AddCommit_Click">
                 </Button>
 
                 <Button x:Name="AddRollback"
-                    Background="#fbceb1" BorderBrush="#fbceb1"                                  
-                    Content="Отменить"                                 
-                    Width="70" Height="35" 
-                    Margin="5" 
-                    Click="AddRollback_Click">
+                        Background="#fbceb1" BorderBrush="#fbceb1"                                  
+                        Content="Отменить"                                 
+                        Width="70" Height="35" 
+                        Margin="5" 
+                        FontSize="8"
+                        Click="AddRollback_Click">
                 </Button>
             </StackPanel>
             

@@ -7,11 +7,11 @@ using System.Windows;
 namespace Source.View.Windows
 {
     /// <summary>
-    /// Interaction logic for AddNewUserWindow.xaml
+    /// Interaction logic for ActionWithUserWindow.xaml
     /// </summary>
-    public partial class AddNewUserWindow : Window
+    public partial class ActionWithUserWindow : Window
     {
-        public AddNewUserWindow()
+        public ActionWithUserWindow()
         {
             InitializeComponent();
         }
@@ -29,7 +29,7 @@ namespace Source.View.Windows
                 return;
             }
 
-            string randomPassword = DataClass.GetRandomPassword(7);
+            string randomPassword = Utils.GetRandomPassword(7);
 
             User NewItem = new User();
             NewItem.Name = tbLogin.Text;

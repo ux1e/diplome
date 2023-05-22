@@ -28,8 +28,8 @@ namespace Source.View.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            lINN.Content = DataClass.GetInsurerINN();
-            lName.Content = DataClass.GetInsurerShortName();
+            lINN.Content = Utils.GetFormatedInsurerINN();
+            lName.Content = Utils.GetInsurerShortName();
         }
 
         private void bMakeReport_Click(object sender, RoutedEventArgs e)

@@ -104,6 +104,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Core\Utils.cs" />
     <Compile Include="Core\XMLValidator.cs" />
     <Compile Include="Model\FormsSZV_M.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -175,7 +176,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Windows\AddNewUserWindow.xaml">
+    <Page Include="View\Windows\ActionWithUserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -227,8 +228,8 @@
     <Compile Include="View\Pages\SZVTDPage.xaml.cs">
       <DependentUpon>SZVTDPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Windows\AddNewUserWindow.xaml.cs">
-      <DependentUpon>AddNewUserWindow.xaml</DependentUpon>
+    <Compile Include="View\Windows\ActionWithUserWindow.xaml.cs">
+      <DependentUpon>ActionWithUserWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>

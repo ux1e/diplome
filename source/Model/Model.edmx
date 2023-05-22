@@ -17,8 +17,6 @@ warning 6002: The table/view 'diplome.dbo.FormsSZV_M' does not have a primary ke
           <Property Name="InsurerId" Type="int" />
           <Property Name="DateFilling" Type="date" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'diplome.dbo.FormsSZV_TD' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="FormsSZV_TD">
           <Key>
             <PropertyRef Name="Id" />
@@ -30,6 +28,7 @@ warning 6002: The table/view 'diplome.dbo.FormsSZV_TD' does not have a primary k
           <Property Name="Annuled" Type="bit" />
           <Property Name="AnnulDate" Type="date" />
           <Property Name="DateFilling" Type="date" />
+          <Property Name="WorkersCount" Type="int" />
         </EntityType>
         <EntityType Name="Insurers">
           <Key>
@@ -43,6 +42,7 @@ warning 6002: The table/view 'diplome.dbo.FormsSZV_TD' does not have a primary k
           <Property Name="MiddleName" Type="nvarchar(max)" />
           <Property Name="InsuranceNumber" Type="nvarchar(max)" />
           <Property Name="INN" Type="bigint" />
+          <Property Name="RegNumber" Type="bigint" />
         </EntityType>
         <EntityType Name="Profession">
           <Key>
@@ -108,6 +108,7 @@ warning 6002: The table/view 'diplome.dbo.FormsSZV_TD' does not have a primary k
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="diplomeModelStoreContainer">
+          <EntitySet Name="FormsSZV_TD" EntityType="Self.FormsSZV_TD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Insurers" EntityType="Self.Insurers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profession" EntityType="Self.Profession" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sex" EntityType="Self.Sex" Schema="dbo" store:Type="Tables" />
@@ -121,17 +122,6 @@ warning 6002: The table/view 'diplome.dbo.FormsSZV_TD' does not have a primary k
     [FormsSZV_M].[InsurerId] AS [InsurerId], 
     [FormsSZV_M].[DateFilling] AS [DateFilling]
     FROM [dbo].[FormsSZV_M] AS [FormsSZV_M]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="FormsSZV_TD" EntityType="Self.FormsSZV_TD" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [FormsSZV_TD].[Id] AS [Id], 
-    [FormsSZV_TD].[InsurerID] AS [InsurerID], 
-    [FormsSZV_TD].[Year] AS [Year], 
-    [FormsSZV_TD].[Month] AS [Month], 
-    [FormsSZV_TD].[Annuled] AS [Annuled], 
-    [FormsSZV_TD].[AnnulDate] AS [AnnulDate], 
-    [FormsSZV_TD].[DateFilling] AS [DateFilling]
-    FROM [dbo].[FormsSZV_TD] AS [FormsSZV_TD]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Workers_Profession" Association="Self.FK_Workers_Profession">
             <End Role="Profession" EntitySet="Profession" />
@@ -175,6 +165,7 @@ warning 6002: The table/view 'diplome.dbo.FormsSZV_TD' does not have a primary k
           <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="InsuranceNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="INN" Type="Int64" />
+          <Property Name="RegNumber" Type="Int64" />
         </EntityType>
         <EntityType Name="Profession">
           <Key>
@@ -264,6 +255,7 @@ warning 6002: The table/view 'diplome.dbo.FormsSZV_TD' does not have a primary k
           <Property Name="Annuled" Type="Boolean" />
           <Property Name="AnnulDate" Type="DateTime" Precision="0" />
           <Property Name="DateFilling" Type="DateTime" Precision="0" />
+          <Property Name="WorkersCount" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -274,6 +266,7 @@ warning 6002: The table/view 'diplome.dbo.FormsSZV_TD' does not have a primary k
           <EntitySetMapping Name="Insurers">
             <EntityTypeMapping TypeName="diplomeModel.Insurer">
               <MappingFragment StoreEntitySet="Insurers">
+                <ScalarProperty Name="RegNumber" ColumnName="RegNumber" />
                 <ScalarProperty Name="INN" ColumnName="INN" />
                 <ScalarProperty Name="InsuranceNumber" ColumnName="InsuranceNumber" />
                 <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
@@ -342,6 +335,7 @@ warning 6002: The table/view 'diplome.dbo.FormsSZV_TD' does not have a primary k
           <EntitySetMapping Name="FormsSZV_TD">
             <EntityTypeMapping TypeName="diplomeModel.FormsSZV_TD">
               <MappingFragment StoreEntitySet="FormsSZV_TD">
+                <ScalarProperty Name="WorkersCount" ColumnName="WorkersCount" />
                 <ScalarProperty Name="DateFilling" ColumnName="DateFilling" />
                 <ScalarProperty Name="AnnulDate" ColumnName="AnnulDate" />
                 <ScalarProperty Name="Annuled" ColumnName="Annuled" />

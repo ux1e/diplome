@@ -21,5 +21,6 @@ namespace Source.Model
         public Nullable<bool> Annuled { get; set; }
         public Nullable<System.DateTime> AnnulDate { get; set; }
         public Nullable<System.DateTime> DateFilling { get; set; }
+        public Nullable<int> WorkersCount { get; set; }
     }
 }

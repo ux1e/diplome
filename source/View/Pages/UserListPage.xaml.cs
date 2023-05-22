@@ -52,7 +52,7 @@ namespace Source.View.Pages
 
         private void bMakeNewUser_Click(object sender, RoutedEventArgs e)
         {
-            Windows.AddNewUserWindow addNewUserWindow = new Windows.AddNewUserWindow();
+            Windows.ActionWithUserWindow addNewUserWindow = new Windows.ActionWithUserWindow();
             addNewUserWindow.ShowDialog();
             //DlgLoad(true);
             //DataContext = null;

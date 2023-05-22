@@ -1,0 +1,16 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://пф.рф/УТ/2017-08-21" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="РегНомер" type="xs:string"/>
+  <xs:element name="ИНН" type="xs:long"/>
+  <xs:element name="КПП" type="xs:int"/>
+  <xs:element name="ФИО">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element type="xs:string" name="Фамилия"/>
+        <xs:element type="xs:string" name="Имя"/>
+        <xs:element type="xs:string" name="Отчество"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="СНИЛС" type="xs:string"/>
+  <xs:element name="Должность" type="xs:string"/>
+</xs:schema>
