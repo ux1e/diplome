@@ -14,6 +14,12 @@ namespace Source.Model
     
     public partial class Worker
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Worker()
+        {
+            this.FormsSZV_TD_Stuff = new HashSet<FormsSZV_TD_Stuff>();
+        }
+    
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -24,6 +30,8 @@ namespace Source.Model
         public Nullable<int> Profession { get; set; }
         public Nullable<bool> IsFired { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FormsSZV_TD_Stuff> FormsSZV_TD_Stuff { get; set; }
         public virtual Profession Profession1 { get; set; }
         public virtual Sex Sex1 { get; set; }
     }

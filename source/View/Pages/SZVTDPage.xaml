@@ -6,10 +6,15 @@
       xmlns:local="clr-namespace:Source.View.Pages" 
       xmlns:local1="clr-namespace:Source.Core" 
       xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+      xmlns:local_convert="clr-namespace:Source.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="SZVTDPage"
       Loaded="Page_Loaded">
+
+    <Page.Resources>
+        <local_convert:BoolConverter x:Key="BoolConverter"/>
+    </Page.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -47,7 +52,7 @@
 
                 <StackPanel Grid.Row="0" Margin="5">
                     <DataGrid x:Name="SZVTDGrid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" 
-                              CanUserReorderColumns="False" CanUserSortColumns="False" IsReadOnly="True" FontSize="10">
+                              CanUserReorderColumns="False" CanUserSortColumns="False" IsReadOnly="True" FontSize="10" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Дата" Binding="{Binding Path=DateFilling}" Width="110" />
                             <DataGridTextColumn Header="Год" Binding="{Binding Path=Year}" Width="110" />
@@ -59,14 +64,15 @@
 
                 <StackPanel Grid.Row="1" Margin="5">
                     <DataGrid x:Name="WorkerGrid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" 
-                              CanUserReorderColumns="False" CanUserSortColumns="False" IsReadOnly="True" FontSize="10">
+                              CanUserReorderColumns="False" CanUserSortColumns="False" IsReadOnly="True" FontSize="10"
+                              ItemsSource = "{Binding ElementName=SZVTDGrid, Path=SelectedItem.FormsSZV_TD_Stuff}" >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ФИО" Binding="{Binding Path=FIO}" Width="*" />
-                            <DataGridTextColumn Header="СНИЛС" Binding="{Binding Path=SNILS}" Width="*" />
-                            <DataGridTextColumn Header="ИНН" Binding="{Binding Path=INN}" Width="*" />
-                            <DataGridTextColumn Header="Пол" Binding="{Binding Path=Sex}" Width="*" />
-                            <DataGridTextColumn Header="Уволен" Binding="{Binding Path=IsFired}" Width="*" />
-                            <DataGridTextColumn Header="Дата Рождения" Binding="{Binding Path=DOB}" Width="*" />
+                            <DataGridTextColumn Header="ФИО" Binding="{Binding Path=Worker.FirstName}" Width="*" />
+                            <!--<DataGridTextColumn Header="СНИЛС" Binding="{Binding Path=SNILS}" Width="*" />-->
+                            <DataGridTextColumn Header="ИНН" Binding="{Binding Path=Worker.INN}" Width="*" />
+                            <DataGridTextColumn Header="Пол" Binding="{Binding Path=Worker.Sex1.Name}" Width="*" />
+                            <DataGridTextColumn Header="Уволен" Binding="{Binding Path=Worker.IsFired, Converter={StaticResource BoolConverter}}" Width="*" />
+                            <!--<DataGridTextColumn Header="Дата Рождения" Binding="{Binding Path=DOB}" Width="*" />-->
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
@@ -130,6 +136,16 @@
                                 Grid.Row="0"
                                 Content="Добавить" 
                                 Click="bShowUsers_Click"/>
+
+                        <Button x:Name="bChangeUsers" 
+                                Grid.Row="1"
+                                Content="Изменить" 
+                                Click="bChangeUsers_Click"/>
+
+                        <Button x:Name="bDeleteUsers" 
+                                Grid.Row="2"
+                                Content="Удалить" 
+                                Click="bDeleteUsers_Click"/>
                     </Grid>
                    
                 </DockPanel>

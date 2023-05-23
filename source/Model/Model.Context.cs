@@ -25,12 +25,13 @@ namespace Source.Model
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<FormsSZV_M> FormsSZV_M { get; set; }
+        public virtual DbSet<FormsSZV_TD> FormsSZV_TD { get; set; }
+        public virtual DbSet<FormsSZV_TD_Stuff> FormsSZV_TD_Stuff { get; set; }
         public virtual DbSet<Insurer> Insurers { get; set; }
         public virtual DbSet<Profession> Professions { get; set; }
         public virtual DbSet<Sex> Sexes { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Worker> Workers { get; set; }
-        public virtual DbSet<FormsSZV_M> FormsSZV_M { get; set; }
-        public virtual DbSet<FormsSZV_TD> FormsSZV_TD { get; set; }
     }
 }

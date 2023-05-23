@@ -5,8 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="diplomeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'diplome.dbo.FormsSZV_M' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="FormsSZV_M">
           <Key>
             <PropertyRef Name="Id" />
@@ -29,6 +27,14 @@ warning 6002: The table/view 'diplome.dbo.FormsSZV_M' does not have a primary ke
           <Property Name="AnnulDate" Type="date" />
           <Property Name="DateFilling" Type="date" />
           <Property Name="WorkersCount" Type="int" />
+        </EntityType>
+        <EntityType Name="FormsSZV_TD_Stuff">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SZV_TD_Id" Type="int" />
+          <Property Name="WorkerId" Type="int" />
         </EntityType>
         <EntityType Name="Insurers">
           <Key>
@@ -83,6 +89,42 @@ warning 6002: The table/view 'diplome.dbo.FormsSZV_M' does not have a primary ke
           <Property Name="Profession" Type="int" />
           <Property Name="IsFired" Type="bit" />
         </EntityType>
+        <Association Name="FK_FormsSZV_TD_Insurers">
+          <End Role="Insurers" Type="Self.Insurers" Multiplicity="0..1" />
+          <End Role="FormsSZV_TD" Type="Self.FormsSZV_TD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Insurers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormsSZV_TD">
+              <PropertyRef Name="InsurerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormsSZV_TD_Stuff_FormsSZV_TD">
+          <End Role="FormsSZV_TD" Type="Self.FormsSZV_TD" Multiplicity="0..1" />
+          <End Role="FormsSZV_TD_Stuff" Type="Self.FormsSZV_TD_Stuff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormsSZV_TD">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormsSZV_TD_Stuff">
+              <PropertyRef Name="SZV_TD_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormsSZV_TD_Stuff_Workers">
+          <End Role="Workers" Type="Self.Workers" Multiplicity="0..1" />
+          <End Role="FormsSZV_TD_Stuff" Type="Self.FormsSZV_TD_Stuff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormsSZV_TD_Stuff">
+              <PropertyRef Name="WorkerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Workers_Profession">
           <End Role="Profession" Type="Self.Profession" Multiplicity="0..1" />
           <End Role="Workers" Type="Self.Workers" Multiplicity="*" />
@@ -108,21 +150,26 @@ warning 6002: The table/view 'diplome.dbo.FormsSZV_M' does not have a primary ke
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="diplomeModelStoreContainer">
+          <EntitySet Name="FormsSZV_M" EntityType="Self.FormsSZV_M" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormsSZV_TD" EntityType="Self.FormsSZV_TD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormsSZV_TD_Stuff" EntityType="Self.FormsSZV_TD_Stuff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Insurers" EntityType="Self.Insurers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profession" EntityType="Self.Profession" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sex" EntityType="Self.Sex" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Workers" EntityType="Self.Workers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FormsSZV_M" EntityType="Self.FormsSZV_M" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [FormsSZV_M].[Id] AS [Id], 
-    [FormsSZV_M].[Year] AS [Year], 
-    [FormsSZV_M].[Month] AS [Month], 
-    [FormsSZV_M].[InsurerId] AS [InsurerId], 
-    [FormsSZV_M].[DateFilling] AS [DateFilling]
-    FROM [dbo].[FormsSZV_M] AS [FormsSZV_M]</DefiningQuery>
-          </EntitySet>
+          <AssociationSet Name="FK_FormsSZV_TD_Insurers" Association="Self.FK_FormsSZV_TD_Insurers">
+            <End Role="Insurers" EntitySet="Insurers" />
+            <End Role="FormsSZV_TD" EntitySet="FormsSZV_TD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormsSZV_TD_Stuff_FormsSZV_TD" Association="Self.FK_FormsSZV_TD_Stuff_FormsSZV_TD">
+            <End Role="FormsSZV_TD" EntitySet="FormsSZV_TD" />
+            <End Role="FormsSZV_TD_Stuff" EntitySet="FormsSZV_TD_Stuff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormsSZV_TD_Stuff_Workers" Association="Self.FK_FormsSZV_TD_Stuff_Workers">
+            <End Role="Workers" EntitySet="Workers" />
+            <End Role="FormsSZV_TD_Stuff" EntitySet="FormsSZV_TD_Stuff" />
+          </AssociationSet>
           <AssociationSet Name="FK_Workers_Profession" Association="Self.FK_Workers_Profession">
             <End Role="Profession" EntitySet="Profession" />
             <End Role="Workers" EntitySet="Workers" />
@@ -136,104 +183,6 @@ warning 6002: The table/view 'diplome.dbo.FormsSZV_M' does not have a primary ke
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="diplomeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="diplomeEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Insurers" EntityType="diplomeModel.Insurer" />
-          <EntitySet Name="Professions" EntityType="diplomeModel.Profession" />
-          <EntitySet Name="Sexes" EntityType="diplomeModel.Sex" />
-          <EntitySet Name="Users" EntityType="diplomeModel.User" />
-          <EntitySet Name="Workers" EntityType="diplomeModel.Worker" />
-          <AssociationSet Name="FK_Workers_Profession" Association="diplomeModel.FK_Workers_Profession">
-            <End Role="Profession" EntitySet="Professions" />
-            <End Role="Worker" EntitySet="Workers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Workers_Sex" Association="diplomeModel.FK_Workers_Sex">
-            <End Role="Sex" EntitySet="Sexes" />
-            <End Role="Worker" EntitySet="Workers" />
-          </AssociationSet>
-          <EntitySet Name="FormsSZV_M" EntityType="diplomeModel.FormsSZV_M" />
-          <EntitySet Name="FormsSZV_TD" EntityType="diplomeModel.FormsSZV_TD" />
-        </EntityContainer>
-        <EntityType Name="Insurer">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="NameShort" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="InsuranceNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="INN" Type="Int64" />
-          <Property Name="RegNumber" Type="Int64" />
-        </EntityType>
-        <EntityType Name="Profession">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Code" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Workers" Relationship="diplomeModel.FK_Workers_Profession" FromRole="Profession" ToRole="Worker" />
-        </EntityType>
-        <EntityType Name="Sex">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Workers" Relationship="diplomeModel.FK_Workers_Sex" FromRole="Sex" ToRole="Worker" />
-        </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IsUsingDarkMode" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="Worker">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="InsuranceNumber" Type="Int64" />
-          <Property Name="INN" Type="Int64" />
-          <Property Name="Sex" Type="Int32" />
-          <Property Name="Profession" Type="Int32" />
-          <NavigationProperty Name="Profession1" Relationship="diplomeModel.FK_Workers_Profession" FromRole="Worker" ToRole="Profession" />
-          <NavigationProperty Name="Sex1" Relationship="diplomeModel.FK_Workers_Sex" FromRole="Worker" ToRole="Sex" />
-          <Property Name="IsFired" Type="Boolean" />
-        </EntityType>
-        <Association Name="FK_Workers_Profession">
-          <End Type="diplomeModel.Profession" Role="Profession" Multiplicity="0..1" />
-          <End Type="diplomeModel.Worker" Role="Worker" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Profession">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Worker">
-              <PropertyRef Name="Profession" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Workers_Sex">
-          <End Type="diplomeModel.Sex" Role="Sex" Multiplicity="0..1" />
-          <End Type="diplomeModel.Worker" Role="Worker" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sex">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Worker">
-              <PropertyRef Name="Sex" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="FormsSZV_M">
           <Key>
             <PropertyRef Name="Id" />
@@ -256,93 +205,263 @@ warning 6002: The table/view 'diplome.dbo.FormsSZV_M' does not have a primary ke
           <Property Name="AnnulDate" Type="DateTime" Precision="0" />
           <Property Name="DateFilling" Type="DateTime" Precision="0" />
           <Property Name="WorkersCount" Type="Int32" />
+          <NavigationProperty Name="FormsSZV_TD_Stuff" Relationship="Self.FK_FormsSZV_TD_Stuff_FormsSZV_TD" FromRole="FormsSZV_TD" ToRole="FormsSZV_TD_Stuff" />
+          <NavigationProperty Name="Insurer" Relationship="diplomeModel.FK_FormsSZV_TD_Insurers" FromRole="FormsSZV_TD" ToRole="Insurer" />
         </EntityType>
-        </Schema>
+        <EntityType Name="FormsSZV_TD_Stuff">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="SZV_TD_Id" Type="Int32" />
+          <Property Name="WorkerId" Type="Int32" />
+          <NavigationProperty Name="FormsSZV_TD" Relationship="Self.FK_FormsSZV_TD_Stuff_FormsSZV_TD" FromRole="FormsSZV_TD_Stuff" ToRole="FormsSZV_TD" />
+          <NavigationProperty Name="Worker" Relationship="Self.FK_FormsSZV_TD_Stuff_Workers" FromRole="FormsSZV_TD_Stuff" ToRole="Workers" />
+        </EntityType>
+        <EntityType Name="Insurer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NameShort" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InsuranceNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="INN" Type="Int64" />
+          <Property Name="RegNumber" Type="Int64" />
+          <NavigationProperty Name="FormsSZV_TD" Relationship="diplomeModel.FK_FormsSZV_TD_Insurers" FromRole="Insurer" ToRole="FormsSZV_TD" />
+        </EntityType>
+        <EntityType Name="Profession">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Workers" Relationship="Self.FK_Workers_Profession" FromRole="Profession" ToRole="Workers" />
+        </EntityType>
+        <EntityType Name="Sex">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Workers" Relationship="Self.FK_Workers_Sex" FromRole="Sex" ToRole="Workers" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsUsingDarkMode" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Worker">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InsuranceNumber" Type="Int64" />
+          <Property Name="INN" Type="Int64" />
+          <Property Name="Sex" Type="Int32" />
+          <Property Name="Profession" Type="Int32" />
+          <Property Name="IsFired" Type="Boolean" />
+          <NavigationProperty Name="FormsSZV_TD_Stuff" Relationship="Self.FK_FormsSZV_TD_Stuff_Workers" FromRole="Workers" ToRole="FormsSZV_TD_Stuff" />
+          <NavigationProperty Name="Profession1" Relationship="Self.FK_Workers_Profession" FromRole="Workers" ToRole="Profession" />
+          <NavigationProperty Name="Sex1" Relationship="Self.FK_Workers_Sex" FromRole="Workers" ToRole="Sex" />
+        </EntityType>
+        <Association Name="FK_FormsSZV_TD_Stuff_FormsSZV_TD">
+          <End Role="FormsSZV_TD" Type="Self.FormsSZV_TD" Multiplicity="0..1" />
+          <End Role="FormsSZV_TD_Stuff" Type="Self.FormsSZV_TD_Stuff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormsSZV_TD">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormsSZV_TD_Stuff">
+              <PropertyRef Name="SZV_TD_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormsSZV_TD_Stuff_Workers">
+          <End Role="Workers" Type="Self.Worker" Multiplicity="0..1" />
+          <End Role="FormsSZV_TD_Stuff" Type="Self.FormsSZV_TD_Stuff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormsSZV_TD_Stuff">
+              <PropertyRef Name="WorkerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Workers_Profession">
+          <End Role="Profession" Type="Self.Profession" Multiplicity="0..1" />
+          <End Role="Workers" Type="Self.Worker" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profession">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Workers">
+              <PropertyRef Name="Profession" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Workers_Sex">
+          <End Role="Sex" Type="Self.Sex" Multiplicity="0..1" />
+          <End Role="Workers" Type="Self.Worker" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sex">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Workers">
+              <PropertyRef Name="Sex" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="diplomeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FormsSZV_M" EntityType="Self.FormsSZV_M" />
+          <EntitySet Name="FormsSZV_TD" EntityType="Self.FormsSZV_TD" />
+          <EntitySet Name="FormsSZV_TD_Stuff" EntityType="Self.FormsSZV_TD_Stuff" />
+          <EntitySet Name="Insurers" EntityType="Self.Insurer" />
+          <EntitySet Name="Professions" EntityType="Self.Profession" />
+          <EntitySet Name="Sexes" EntityType="Self.Sex" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Workers" EntityType="Self.Worker" />
+          <AssociationSet Name="FK_FormsSZV_TD_Stuff_FormsSZV_TD" Association="Self.FK_FormsSZV_TD_Stuff_FormsSZV_TD">
+            <End Role="FormsSZV_TD" EntitySet="FormsSZV_TD" />
+            <End Role="FormsSZV_TD_Stuff" EntitySet="FormsSZV_TD_Stuff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormsSZV_TD_Stuff_Workers" Association="Self.FK_FormsSZV_TD_Stuff_Workers">
+            <End Role="Workers" EntitySet="Workers" />
+            <End Role="FormsSZV_TD_Stuff" EntitySet="FormsSZV_TD_Stuff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Workers_Profession" Association="Self.FK_Workers_Profession">
+            <End Role="Profession" EntitySet="Professions" />
+            <End Role="Workers" EntitySet="Workers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Workers_Sex" Association="Self.FK_Workers_Sex">
+            <End Role="Sex" EntitySet="Sexes" />
+            <End Role="Workers" EntitySet="Workers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormsSZV_TD_Insurers" Association="diplomeModel.FK_FormsSZV_TD_Insurers">
+            <End Role="Insurer" EntitySet="Insurers" />
+            <End Role="FormsSZV_TD" EntitySet="FormsSZV_TD" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_FormsSZV_TD_Insurers">
+          <End Type="diplomeModel.Insurer" Role="Insurer" Multiplicity="0..1" />
+          <End Type="diplomeModel.FormsSZV_TD" Role="FormsSZV_TD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Insurer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormsSZV_TD">
+              <PropertyRef Name="InsurerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="diplomeModelStoreContainer" CdmEntityContainer="diplomeEntities">
-          <EntitySetMapping Name="Insurers">
-            <EntityTypeMapping TypeName="diplomeModel.Insurer">
-              <MappingFragment StoreEntitySet="Insurers">
-                <ScalarProperty Name="RegNumber" ColumnName="RegNumber" />
-                <ScalarProperty Name="INN" ColumnName="INN" />
-                <ScalarProperty Name="InsuranceNumber" ColumnName="InsuranceNumber" />
-                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="NameShort" ColumnName="NameShort" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Professions">
-            <EntityTypeMapping TypeName="diplomeModel.Profession">
-              <MappingFragment StoreEntitySet="Profession">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Sexes">
-            <EntityTypeMapping TypeName="diplomeModel.Sex">
-              <MappingFragment StoreEntitySet="Sex">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="diplomeModel.User">
-              <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="IsUsingDarkMode" ColumnName="IsUsingDarkMode" />
-                <ScalarProperty Name="Mail" ColumnName="Mail" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Workers">
-            <EntityTypeMapping TypeName="diplomeModel.Worker">
-              <MappingFragment StoreEntitySet="Workers">
-                <ScalarProperty Name="IsFired" ColumnName="IsFired" />
-                <ScalarProperty Name="Profession" ColumnName="Profession" />
-                <ScalarProperty Name="Sex" ColumnName="Sex" />
-                <ScalarProperty Name="INN" ColumnName="INN" />
-                <ScalarProperty Name="InsuranceNumber" ColumnName="InsuranceNumber" />
-                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="FormsSZV_M">
             <EntityTypeMapping TypeName="diplomeModel.FormsSZV_M">
               <MappingFragment StoreEntitySet="FormsSZV_M">
-                <ScalarProperty Name="DateFilling" ColumnName="DateFilling" />
-                <ScalarProperty Name="InsurerId" ColumnName="InsurerId" />
-                <ScalarProperty Name="Month" ColumnName="Month" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="InsurerId" ColumnName="InsurerId" />
+                <ScalarProperty Name="DateFilling" ColumnName="DateFilling" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FormsSZV_TD">
             <EntityTypeMapping TypeName="diplomeModel.FormsSZV_TD">
               <MappingFragment StoreEntitySet="FormsSZV_TD">
-                <ScalarProperty Name="WorkersCount" ColumnName="WorkersCount" />
-                <ScalarProperty Name="DateFilling" ColumnName="DateFilling" />
-                <ScalarProperty Name="AnnulDate" ColumnName="AnnulDate" />
-                <ScalarProperty Name="Annuled" ColumnName="Annuled" />
-                <ScalarProperty Name="Month" ColumnName="Month" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="InsurerID" ColumnName="InsurerID" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="InsurerID" ColumnName="InsurerID" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Annuled" ColumnName="Annuled" />
+                <ScalarProperty Name="AnnulDate" ColumnName="AnnulDate" />
+                <ScalarProperty Name="DateFilling" ColumnName="DateFilling" />
+                <ScalarProperty Name="WorkersCount" ColumnName="WorkersCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormsSZV_TD_Stuff">
+            <EntityTypeMapping TypeName="diplomeModel.FormsSZV_TD_Stuff">
+              <MappingFragment StoreEntitySet="FormsSZV_TD_Stuff">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SZV_TD_Id" ColumnName="SZV_TD_Id" />
+                <ScalarProperty Name="WorkerId" ColumnName="WorkerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Insurers">
+            <EntityTypeMapping TypeName="diplomeModel.Insurer">
+              <MappingFragment StoreEntitySet="Insurers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NameShort" ColumnName="NameShort" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="InsuranceNumber" ColumnName="InsuranceNumber" />
+                <ScalarProperty Name="INN" ColumnName="INN" />
+                <ScalarProperty Name="RegNumber" ColumnName="RegNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Professions">
+            <EntityTypeMapping TypeName="diplomeModel.Profession">
+              <MappingFragment StoreEntitySet="Profession">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sexes">
+            <EntityTypeMapping TypeName="diplomeModel.Sex">
+              <MappingFragment StoreEntitySet="Sex">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="diplomeModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="IsUsingDarkMode" ColumnName="IsUsingDarkMode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Workers">
+            <EntityTypeMapping TypeName="diplomeModel.Worker">
+              <MappingFragment StoreEntitySet="Workers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="InsuranceNumber" ColumnName="InsuranceNumber" />
+                <ScalarProperty Name="INN" ColumnName="INN" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Profession" ColumnName="Profession" />
+                <ScalarProperty Name="IsFired" ColumnName="IsFired" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

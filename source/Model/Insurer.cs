@@ -14,6 +14,12 @@ namespace Source.Model
     
     public partial class Insurer
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Insurer()
+        {
+            this.FormsSZV_TD = new HashSet<FormsSZV_TD>();
+        }
+    
         public int Id { get; set; }
         public string Name { get; set; }
         public string NameShort { get; set; }
@@ -23,5 +29,8 @@ namespace Source.Model
         public string InsuranceNumber { get; set; }
         public Nullable<long> INN { get; set; }
         public Nullable<long> RegNumber { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FormsSZV_TD> FormsSZV_TD { get; set; }
     }
 }

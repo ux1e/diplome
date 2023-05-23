@@ -6,7 +6,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
-using System.Xml.Linq;
 
 namespace Source.View.Pages
 {
@@ -16,16 +15,14 @@ namespace Source.View.Pages
     public partial class SZVTDPage : Page
     {
         public ObservableCollection<FormsSZV_TD> FormSZV_TD;
+        public ObservableCollection<FormsSZV_TD_Stuff> FormSZV_TD_Stuff;
 
         public SZVTDPage()
         {
             InitializeComponent();
-
-            //FormSZV_TD = new ObservableCollection<FormsSZV_TD>(DataClass.DataBase.FormsSZV_TD);
-            //SZVTDGrid.ItemsSource = FormSZV_TD;
         }
 
-        public void UpdateGrid(FormsSZV_TD f)
+        private void UpdateSZVTDGrid(FormsSZV_TD f)
         {
             if ((f == null) && (SZVTDGrid.ItemsSource != null))
                 f = (FormsSZV_TD)SZVTDGrid.SelectedItem;
@@ -35,15 +32,25 @@ namespace Source.View.Pages
             SZVTDGrid.SelectedItem = f;
         }
 
+        private void UpdateWorkersGrid(FormsSZV_TD_Stuff f)
+        {
+            if ((f == null) && (WorkerGrid.ItemsSource != null))
+                f = (FormsSZV_TD_Stuff)WorkerGrid.SelectedItem;
+
+            FormSZV_TD_Stuff = new ObservableCollection<FormsSZV_TD_Stuff>(DataClass.DataBase.FormsSZV_TD_Stuff);
+            WorkerGrid.ItemsSource = FormSZV_TD;
+            WorkerGrid.SelectedItem = f;
+        }
+
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             lINN.Content = Utils.GetFormatedInsurerINN();
             lName.Content = Utils.GetInsurerShortName();
-        }
 
-        private void bGoBack_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.GoBack();
+            if (DataClass.SelectedInsurer != null)
+            {
+                SZVTDGrid.ItemsSource = DataClass.DataBase.FormsSZV_TD.Where(list => list.InsurerID == DataClass.SelectedInsurer.Id).ToList();
+            }
         }
 
         private void bMakeReport_Click(object sender, RoutedEventArgs e)
@@ -58,6 +65,14 @@ namespace Source.View.Pages
 
         private void bShowUsers_Click(object sender, RoutedEventArgs e)
         {
+            if (SZVTDGrid.SelectedItem == null)
+            {
+                MessageBox.Show("Нужно выбрать форму", "Предупрждение");
+                return;
+            }
+
+            DataClass.CurrentFormsSZV_TD = (FormsSZV_TD)SZVTDGrid.SelectedItem;
+
             NavigationService.Navigate(new WorkersPage());
         }
 
@@ -82,7 +97,7 @@ namespace Source.View.Pages
             try
             {
                 DataClass.DataBase.SaveChanges();
-                UpdateGrid(DataClass.CurrentFormsSZV_TD);
+                UpdateSZVTDGrid(DataClass.CurrentFormsSZV_TD);
             }
             catch (Exception ex)
             {
@@ -107,7 +122,7 @@ namespace Source.View.Pages
                     DataClass.CurrentFormsSZV_TD = (FormsSZV_TD)SZVTDGrid.SelectedItem;
                     DataClass.DataBase.FormsSZV_TD.Remove(DeletingItem);
                     DataClass.DataBase.SaveChanges();
-                    UpdateGrid(DataClass.CurrentFormsSZV_TD);
+                    UpdateSZVTDGrid(DataClass.CurrentFormsSZV_TD);
                 }
                 catch (Exception ex)
                 {
@@ -117,6 +132,43 @@ namespace Source.View.Pages
                         MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.None);
                 }
             }
+        }
+
+        private void bDeleteUsers_Click(object sender, RoutedEventArgs e)
+        {
+            if (WorkerGrid.SelectedIndex == null)
+                return;
+
+            if (MessageBox.Show("Удалить человека?", "Внимание", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK)
+            {
+                try
+                {
+                    FormsSZV_TD_Stuff DeletingItem = (FormsSZV_TD_Stuff)WorkerGrid.SelectedItem;
+                    if (WorkerGrid.SelectedIndex < WorkerGrid.Items.Count - 1)
+                        WorkerGrid.SelectedIndex++;
+                    else
+                    {
+                        if (WorkerGrid.SelectedIndex > 0)
+                            WorkerGrid.SelectedIndex--;
+                    }
+                    DataClass.CurrentFormsSZV_TD_Stuff = (FormsSZV_TD_Stuff)WorkerGrid.SelectedItem;
+                    DataClass.DataBase.FormsSZV_TD_Stuff.Remove(DeletingItem);
+                    DataClass.DataBase.SaveChanges();
+                    UpdateWorkersGrid(DataClass.CurrentFormsSZV_TD_Stuff);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        $"Невозможно выполнить удаление\nОшибка: {ex}.",
+                        "Предупреждение",
+                        MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.None);
+                }
+            }
+        }
+
+        private void bChangeUsers_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

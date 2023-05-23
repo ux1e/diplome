@@ -62,7 +62,8 @@ namespace Source.View.Pages
 
         private void bSelectInsurer_Click(object sender, RoutedEventArgs e)
         {
-            DataClass.SelectedInsurer = Grid.SelectedItem as Insurer;
+            DataClass.SelectedInsurer = (Insurer)Grid.SelectedItem;
+            NavigationService.GoBack();
             MessageBox.Show($"Выбран страховщик: {DataClass.SelectedInsurer.Name}");
         }
 

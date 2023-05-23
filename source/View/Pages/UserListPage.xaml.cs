@@ -15,7 +15,7 @@ namespace Source.View.Pages
     /// </summary>
     public partial class UserListPage : Page
     {
-        private int DlgMode;
+        //private int DlgMode;
         public ObservableCollection<User> User;
 
         public UserListPage()
@@ -41,7 +41,7 @@ namespace Source.View.Pages
             lvUsers.IsHitTestVisible = !b;
             if (b == true)
             {
-                DlgMode = -1;
+                //DlgMode = -1;
             }
         }
 

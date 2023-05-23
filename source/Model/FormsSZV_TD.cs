@@ -14,6 +14,12 @@ namespace Source.Model
     
     public partial class FormsSZV_TD
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public FormsSZV_TD()
+        {
+            this.FormsSZV_TD_Stuff = new HashSet<FormsSZV_TD_Stuff>();
+        }
+    
         public int Id { get; set; }
         public Nullable<int> InsurerID { get; set; }
         public Nullable<int> Year { get; set; }
@@ -22,5 +28,9 @@ namespace Source.Model
         public Nullable<System.DateTime> AnnulDate { get; set; }
         public Nullable<System.DateTime> DateFilling { get; set; }
         public Nullable<int> WorkersCount { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FormsSZV_TD_Stuff> FormsSZV_TD_Stuff { get; set; }
+        public virtual Insurer Insurer { get; set; }
     }
 }

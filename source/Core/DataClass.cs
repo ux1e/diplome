@@ -8,6 +8,8 @@ namespace Source.Core
         public static User UserInfo = null;
         public static Insurer SelectedInsurer = null;
         public static User SelectedUser = null;
+        public static Worker SelectedWorker = null;
         public static FormsSZV_TD CurrentFormsSZV_TD = null;
+        public static FormsSZV_TD_Stuff CurrentFormsSZV_TD_Stuff = null;
     }
 }

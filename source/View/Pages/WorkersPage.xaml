@@ -11,7 +11,7 @@
     <Grid Style="{DynamicResource BackgroundColor}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition x:Name="FuncPanel" Width="275"/>
+            <ColumnDefinition x:Name="FuncPanel" Width="0"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>

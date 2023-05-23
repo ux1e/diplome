@@ -40,7 +40,32 @@ namespace Source.View.Pages
 
         private void bSelectWorker_Click(object sender, RoutedEventArgs e)
         {
+            if (Grid.SelectedItem == null)
+            {
+                MessageBox.Show("Нужно выбрать работника", "Предупрждение");
+                return;
+            }
 
+            DataClass.SelectedWorker = (Worker)Grid.SelectedItem;
+
+            FormsSZV_TD_Stuff NewForm = new FormsSZV_TD_Stuff();
+            NewForm.WorkerId = DataClass.SelectedWorker.Id;
+            NewForm.SZV_TD_Id = DataClass.CurrentFormsSZV_TD.Id;
+
+            DataClass.DataBase.FormsSZV_TD_Stuff.Add(NewForm);
+
+            var EditItem = new FormsSZV_TD();
+            EditItem = DataClass.CurrentFormsSZV_TD;
+            EditItem.WorkersCount++;
+
+            try
+            {
+                DataClass.DataBase.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Произошла ошибка!!!!\n{ex}\nОбратитесь к администратору!!!!");
+            }
         }
 
         private void bMakeNewWorker_Click(object sender, RoutedEventArgs e)
