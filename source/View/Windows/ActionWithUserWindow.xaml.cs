@@ -1,8 +1,4 @@
-﻿using Source.Core;
-using Source.Model;
-using System;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 
 namespace Source.View.Windows
 {
@@ -11,51 +7,22 @@ namespace Source.View.Windows
     /// </summary>
     public partial class ActionWithUserWindow : Window
     {
-        public ActionWithUserWindow()
+        private System.Windows.Controls.Page _pageForTransit;
+        public ActionWithUserWindow(System.Windows.Controls.Page page)
         {
             InitializeComponent();
+            _pageForTransit = page;
         }
 
-        private void bCreate_Click(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            StringBuilder errors = new StringBuilder();
-
-            if (string.IsNullOrEmpty(tbLogin.Text))
-                errors.AppendLine("Укажите логин");
-
-            if (errors.Length > 0)
-            {
-                MessageBox.Show($"Произошла ошибка: {errors}");
-                return;
-            }
-
-            string randomPassword = Utils.GetRandomPassword(7);
-
-            User NewItem = new User();
-            NewItem.Name = tbLogin.Text;
-            NewItem.Mail = tbMail.Text;
-            NewItem.Password = pbPassword.Password.Length == 0 ? randomPassword : pbPassword.Password;
-
-            DataClass.DataBase.Users.Add(NewItem);
-            DataClass.SelectedUser = NewItem;
-
-            try
-            {
-                DataClass.DataBase.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Произошла ошибка!!!!\n{ex}\nОбратитесь к администратору!!!!");
-            }
-            finally
-            {
-                MessageBox.Show($"Логин: {DataClass.SelectedUser.Name}\nПароль: {DataClass.SelectedUser.Password}", 
-                    "Пользователь создан");
-            }
+            RootFrame.Content = _pageForTransit;
         }
-
-        private void bCancel_Click(object sender, RoutedEventArgs e) => Close();
 
         private void Window_Drag(object sender, System.Windows.Input.MouseButtonEventArgs e) => DragMove();
+
+        private void CloseApp(object sender, RoutedEventArgs e) => Close();
+
+        private void MinimizeApp(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
     }
 }

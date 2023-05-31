@@ -44,7 +44,7 @@ namespace Source.View.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            lINN.Content = Utils.GetFormatedInsurerINN();
+            lINN.Content = Utils.GetInsurerRegNumber(true);
             lName.Content = Utils.GetInsurerShortName();
 
             if (DataClass.SelectedInsurer != null)
@@ -55,7 +55,11 @@ namespace Source.View.Pages
 
         private void bMakeReport_Click(object sender, RoutedEventArgs e)
         {
-            Utils.MakeSZVTDXml(DataClass.CurrentFormsSZV_TD.Id);
+            DataClass.CurrentFormsSZV_TD = (FormsSZV_TD)SZVTDGrid.SelectedItem;
+
+            if (DataClass.CurrentFormsSZV_TD != null)
+                Utils.MakeSZVTDXml(DataClass.CurrentFormsSZV_TD.Id);
+            else MessageBox.Show("Форма null");
         }
 
         private void bChangeInsurer(object sender, RoutedEventArgs e)

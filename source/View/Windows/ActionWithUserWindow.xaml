@@ -14,42 +14,59 @@
         AllowsTransparency="True"
         Background="Transparent" 
         MouseLeftButtonDown="Window_Drag"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Loaded="Window_Loaded">
     <Border CornerRadius="6" Background="{DynamicResource MaterialDesignPaper}" 
             BorderBrush="Black" BorderThickness="0.25">
         <Grid>
-            <StackPanel VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        MinWidth="200">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.05*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-                <Label Content="Логин"/>
-                <TextBox x:Name="tbLogin" Margin="5, 0, 5, 5"/>
+            <DockPanel Grid.Row="0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.05*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.15*"/>
+                    </Grid.ColumnDefinitions>
 
-                <Label Content="Пароль" ToolTip="Можно оставить пустым, тогда пароль сгенерируется сам"/>
-                <PasswordBox x:Name="pbPassword" Margin="5, 0, 5, 5"
-                             ToolTip="Можно оставить пустым, тогда пароль сгенерируется сам"/>
+                    <DockPanel Grid.Column="2">
+                        <Button Background="#FFDECF34"                            
+                                BorderBrush="#FFDECF34"                           
+                                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"                           
+                                ToolTip="Minimize"                           
+                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"                           
+                                Width="12" Height="12" Margin="10,0,0,0"                           
+                                HorizontalAlignment="Left" VerticalAlignment="Center"                            
+                                Click="MinimizeApp">
+                            <materialDesign:PackIcon                                        
+                                Kind="minus"                                 
+                                Height="10"                           
+                                Width="10" />
+                        </Button>
+                        <Button Background="Red"                           
+                                BorderBrush="Red"                            
+                                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"                           
+                                ToolTip="Close"                            
+                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"                           
+                                Width="12" Height="12" Margin="10,0,0,0"                                                     
+                                HorizontalAlignment="Left" VerticalAlignment="Center"                             
+                                Click="CloseApp">
+                            <materialDesign:PackIcon
+                                Kind="WindowClose"
+                                Height="10"
+                                Width="10" />
+                        </Button>
+                    </DockPanel>
+                </Grid>
+            </DockPanel>
 
-                <Label Content="Почта" ToolTip="Можно оставить пустым"/>
-                <TextBox x:Name="tbMail" Margin="5, 0, 5, 5" ToolTip="Можно оставить пустым"/>
-
-                <DockPanel>
-                    <Button x:Name="bCancel" 
-                            Height="30" Width="90"
-                            Content="Отмена" 
-                            HorizontalAlignment="Left" 
-                            Margin="5, 5, 0, 0"
-                            Background="Red"
-                            Click="bCancel_Click"/>
-
-                    <Button x:Name="bCreate"
-                            Height="30" Width="90"
-                            Content="Создать" 
-                            HorizontalAlignment="Right"
-                            Margin="0, 5, 5, 0" 
-                            Background="LawnGreen"
-                            Click="bCreate_Click"/>
-                </DockPanel>
-            </StackPanel>
+            <Frame x:Name="RootFrame"
+                   Grid.Row="1"
+                   Margin="2"
+                   NavigationUIVisibility="Hidden"/>
         </Grid>
     </Border>
 </Window>

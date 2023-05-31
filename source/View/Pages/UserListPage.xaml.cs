@@ -52,11 +52,9 @@ namespace Source.View.Pages
 
         private void bMakeNewUser_Click(object sender, RoutedEventArgs e)
         {
-            Windows.ActionWithUserWindow addNewUserWindow = new Windows.ActionWithUserWindow();
+            AddNewUser addNewUser = new AddNewUser();
+            Windows.ActionWithUserWindow addNewUserWindow = new Windows.ActionWithUserWindow(addNewUser);
             addNewUserWindow.ShowDialog();
-            //DlgLoad(true);
-            //DataContext = null;
-            //DlgMode = 0;
         }
 
         private void AddRollback_Click(object sender, RoutedEventArgs e)
@@ -64,62 +62,7 @@ namespace Source.View.Pages
             DlgLoad(false);
             UpdateListView(null);
         }
-
-        private void AddCommit_Click(object sender, RoutedEventArgs e)
-        {
-            /*
-            StringBuilder errors = new StringBuilder();
-
-            if (string.IsNullOrEmpty(NameTextBox.Text))
-                errors.AppendLine("Укажите имя");
-
-            //if (string.IsNullOrEmpty(MailTextBox.Text))
-            //    errors.AppendLine("Укажите почту");
-
-            if (errors.Length > 0)
-            {
-                MessageBox.Show($"Произошла ошибка: {errors}");
-                return;
-            }
-
-            string randomPassword = DataClass.GetRandomPassword(7);
-            if (DlgMode == 0)
-            {
-                var NewItem = new User();
-                NewItem.Name = NameTextBox.Text;
-                NewItem.Mail = MailTextBox.Text;
-                NewItem.Password = randomPassword;
-                DataClass.DataBase.Users.Add(NewItem);
-                DataClass.SelectedUser = NewItem;
-            }
-            else
-            {
-                var EditItem = new User();
-                EditItem = DataClass.DataBase.Users.FirstOrDefault(p => p.Id == DataClass.SelectedUser.Id);
-                EditItem.Name = NameTextBox.Text;
-                EditItem.Mail = MailTextBox.Text;
-            }
-
-            try
-            {
-                DataClass.DataBase.SaveChanges();
-                DlgLoad(false);
-                UpdateGrid(DataClass.SelectedUser);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Произошла ошибка!!!!\n{ex}\nОбратитесь к администратору!!!!");
-            }
-            finally
-            {
-                if (DlgMode == 0)
-                {
-                    MessageBox.Show($"Логин: {DataClass.SelectedUser.Name}\nПароль: {randomPassword}", "Пользователь создан");
-                }
-            }
-            */
-        }
-
+     
         private void bDeleteUser_Click(object sender, RoutedEventArgs e)
         {
             if (lvUsers.SelectedItem == DataClass.UserInfo)
@@ -167,23 +110,15 @@ namespace Source.View.Pages
 
         private void bEditUser_Click(object sender, RoutedEventArgs e)
         {
-            /*
-            if (Grid.SelectedItem == DataClass.DataBase.Users.FirstOrDefault(p => p.Name == "Администратор"))
+            if (lvUsers.SelectedItem != null)
             {
-                MessageBox.Show("НЕЛЬЗЯ ИЗМЕНИТЬ АДМИНИСТРАТОРА (◣_◢)", "ПРЕДУПРЕЖДЕНИЕ!!!!!");
-                return;
-            }
-            if (Grid.SelectedItem == null)
-            {
-                MessageBox.Show("Для удаления необходимо выбрать пользователя", "Информация");
-                return;
-            }
+                DataClass.SelectedUser = (User)lvUsers.SelectedItem;
 
-            DlgLoad(true);
-            DataClass.SelectedUser = (User)Grid.SelectedItem;
-            NameTextBox.Text = DataClass.SelectedUser.Name;
-            MailTextBox.Text = DataClass.SelectedUser.Mail;
-            */
+                EditUser editUser = new EditUser();
+                Windows.ActionWithUserWindow editUserWindow = new Windows.ActionWithUserWindow(editUser);
+                editUserWindow.ShowDialog();
+            }
+            else MessageBox.Show("Не выбрано ниодной строки!", "Сообщение", MessageBoxButton.OK);
         }
 
         private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)

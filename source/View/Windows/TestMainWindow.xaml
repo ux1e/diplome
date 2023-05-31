@@ -50,30 +50,30 @@
 
                     <DockPanel Grid.Column="2">
                         <Button Background="#FFDECF34"
-                            BorderBrush="#FFDECF34"
-                            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                            ToolTip="Minimize"
-                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                            Width="12" Height="12" Margin="10,0,0,0"
-                            HorizontalAlignment="Left" VerticalAlignment="Center" 
-                            Click="MinimizeApp">
+                                BorderBrush="#FFDECF34"
+                                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                ToolTip="Minimize"
+                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                Width="12" Height="12" Margin="10,0,0,0"
+                                HorizontalAlignment="Left" VerticalAlignment="Center" 
+                                Click="MinimizeApp">
                             <materialDesign:PackIcon             
-                            Kind="minus"      
-                            Height="10"
-                            Width="10" />
+                                Kind="minus"      
+                                Height="10"
+                                Width="10" />
                         </Button>
                         <Button Background="Red"
-                            BorderBrush="Red"
-                            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                            ToolTip="Close"
-                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                            Width="12" Height="12" Margin="10,0,0,0"                           
-                            HorizontalAlignment="Left" VerticalAlignment="Center" 
-                            Click="CloseApp">
+                                BorderBrush="Red"
+                                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                ToolTip="Close"
+                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                Width="12" Height="12" Margin="10,0,0,0"                           
+                                HorizontalAlignment="Left" VerticalAlignment="Center" 
+                                Click="CloseApp">
                             <materialDesign:PackIcon
-                            Kind="WindowClose"
-                            Height="10"
-                            Width="10" />
+                                Kind="WindowClose"
+                                Height="10"
+                                Width="10" />
                         </Button>
                     </DockPanel>
 

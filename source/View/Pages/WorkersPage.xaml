@@ -22,13 +22,30 @@
             <DataGrid x:Name="Grid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" 
                       CanUserReorderColumns="False" CanUserSortColumns="False" IsReadOnly="True" FontSize="10">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Имя" Binding="{Binding Path=FirstName}" Width="*" />
+                    <!--<DataGridTextColumn Header="Имя" Binding="{Binding Path=FirstName}" Width="*" />
                     <DataGridTextColumn Header="Фамилия" Binding="{Binding Path=LastName}" Width="*" />
-                    <DataGridTextColumn Header="Отчество" Binding="{Binding Path=MiddleName}" Width="*" />
+                    <DataGridTextColumn Header="Отчество" Binding="{Binding Path=MiddleName}" Width="*" />-->
+
+                    <DataGridTemplateColumn Header="ФИО" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} {1} {2}">
+                                            <Binding Path="FirstName"/>
+                                            <Binding Path="LastName"/>
+                                            <Binding Path="MiddleName"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
                     <DataGridTextColumn Header="СНИЛС" Binding="{Binding Path=InsuranceNumber}" Width="*" />
                     <DataGridTextColumn Header="ИНН" Binding="{Binding Path=INN}" Width="*" />
-                    <DataGridTextColumn Header="Пол" Binding="{Binding Path=Sex1.Name}" Width="*" />
-                    <DataGridTextColumn Header="Профессия" Binding="{Binding Path=Profession1.Name}" Width="*" />
+                    <!--<DataGridTextColumn Header="Пол" Binding="{Binding Path=Sex1.Name}" Width="*" />
+                    <DataGridTextColumn Header="Профессия" Binding="{Binding Path=Profession1.Name}" Width="*" />-->
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>

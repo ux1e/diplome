@@ -64,13 +64,13 @@ namespace Source.Core
 
             XElement xelement = new XElement(xnamespace + "Работодатель", new object[]
             {
-                new XElement(xnamespace2 + "РегНомер", GetInsurerRegNumber()),
+                new XElement(xnamespace2 + "РегНомер", GetInsurerRegNumber(false)),
                 new XElement(xnamespace + "НаименованиеОрганизации", orgName),
                 new XElement(xnamespace2 + "ИНН", GetInsurerINN())
             });
             XElement xelement2 = new XElement(xnamespace + "Страхователь", new object[]
             {
-                new XElement(xnamespace3 + "РегНомер", GetInsurerRegNumber()),
+                new XElement(xnamespace3 + "РегНомер", GetInsurerRegNumber(false)),
                 new XElement(xnamespace3 + "НаименованиеОрганизации", orgName),
                 new XElement(xnamespace2 + "ИНН", GetInsurerINN())
             });
@@ -109,7 +109,7 @@ namespace Source.Core
             return currentDateTime.ToString("MM-dd-yyyy HH.mm.ss");
         }
 
-        public static string ParseRegNum(long n)
+        public static string ParseNum(long n)
         {
             string s = n.ToString();
             if (!string.IsNullOrEmpty(s) && s.Length == 12)
@@ -136,7 +136,7 @@ namespace Source.Core
 
         public static string GetFormatedInsurerINN()
         {
-            return DataClass.SelectedInsurer != null ? $"[{ParseRegNum((long)DataClass.SelectedInsurer.INN)}]" : "[___-___-______]";
+            return DataClass.SelectedInsurer != null ? $"[{ParseNum((long)DataClass.SelectedInsurer.INN)}]" : "[___-___-______]";
         }
 
         public static string GetInsurerINN()
@@ -144,9 +144,16 @@ namespace Source.Core
             return DataClass.SelectedInsurer != null ? DataClass.SelectedInsurer.INN.ToString() : "";
         }
 
-        public static string GetInsurerRegNumber()
+        public static string GetInsurerRegNumber(bool isFormated)
         {
-            return DataClass.SelectedInsurer != null ? DataClass.SelectedInsurer.RegNumber.ToString() : "";
+            if (isFormated)
+            {
+                return DataClass.SelectedInsurer != null ? $"{ParseNum((long)DataClass.SelectedInsurer.RegNumber)}" : "";
+            }
+            else
+            {
+                return DataClass.SelectedInsurer != null ? DataClass.SelectedInsurer.RegNumber.ToString() : "";
+            }
         }
 
         public static string GetInsurerShortName()
