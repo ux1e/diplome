@@ -29,8 +29,8 @@ namespace Source.Model
         public Nullable<System.DateTime> DateFilling { get; set; }
         public Nullable<int> WorkersCount { get; set; }
     
+        public virtual Insurer Insurer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FormsSZV_TD_Stuff> FormsSZV_TD_Stuff { get; set; }
-        public virtual Insurer Insurer { get; set; }
     }
 }

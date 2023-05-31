@@ -14,10 +14,20 @@ namespace Source.Model
     
     public partial class FormsSZV_M
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public FormsSZV_M()
+        {
+            this.FormsSZV_M_Stuff = new HashSet<FormsSZV_M_Stuff>();
+        }
+    
         public int Id { get; set; }
         public Nullable<int> Year { get; set; }
         public Nullable<int> Month { get; set; }
         public Nullable<int> InsurerId { get; set; }
         public Nullable<System.DateTime> DateFilling { get; set; }
+        public Nullable<int> WorkersCount { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FormsSZV_M_Stuff> FormsSZV_M_Stuff { get; set; }
     }
 }

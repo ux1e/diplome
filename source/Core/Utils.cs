@@ -9,7 +9,7 @@ namespace Source.Core
 {
     static internal class Utils
     {
-        static public void MakeSZVTDXml(int szvtdID)
+        public static void MakeSZVTDXml(int szvtdID)
         {
             try
             {
@@ -97,6 +97,124 @@ namespace Source.Core
 
             xdocument.Save(fileName);
         }
+
+        public static void MakeSZVMXml(int szvmID)
+        {
+            try
+            {
+                DataClass.CurrentFormsSZV_M = DataClass.DataBase.FormsSZV_M.First((FormsSZV_M x) => x.Id == szvmID);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Произошла ошибка: \n{ex}\nОбратитесь к администратору!", "Произошла ошибка");
+                return;
+            }
+
+            if (DataClass.CurrentFormsSZV_M == null)
+            {
+                MessageBox.Show("FormsSZV_M == null", "Ошибка", (MessageBoxButton)MessageBoxImage.Error);
+                return;
+            }
+
+            string fileName = string.Format("ПФР_СЗВ-М_{0}_{1}.XML", DataClass.UserInfo.Name, GetDateTime());
+
+            XNamespace ns = "http://пф.рф/ВС/СЗВ-М/2017-01-01";
+            XNamespace xnamespace = "http://пф.рф/унифицированныеТипы/2014-01-01";
+            XNamespace xnamespace2 = "http://пф.рф/АФ";
+            XNamespace xnamespace3 = "http://пф.рф/АФ/2017-01-01";
+            XNamespace xnamespace4 = "http://www.w3.org/2001/XMLSchema-instance";
+            XNamespace xnamespace5 = "http://www.w3.org/2000/09/xmldsig#";
+
+            XDocument xdocument = new XDocument(new XDeclaration("1.0", "UTF-8", null), new object[]
+            {
+                new XElement(ns + "ЭДПФР", new object[]
+                {
+                    new XAttribute(XNamespace.Xmlns + "УТ", xnamespace.NamespaceName),
+                    new XAttribute(XNamespace.Xmlns + "АФ", xnamespace2.NamespaceName),
+                    new XAttribute(XNamespace.Xmlns + "АФ2", xnamespace3.NamespaceName)
+                })
+            });
+
+            string orgName = "";
+            if (!string.IsNullOrEmpty(DataClass.SelectedInsurer.NameShort))
+            {
+                orgName = DataClass.SelectedInsurer.NameShort;
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(DataClass.SelectedInsurer.Name))
+                {
+                    orgName = DataClass.SelectedInsurer.Name;
+                }
+            }
+
+            XElement xelement = new XElement(ns + "СЗВ-М", new object[]
+            {
+                new XElement(ns + "ТипФормы", 1),
+                new XElement(ns + "Страхователь", new object[]
+                {
+                    new XElement(ns + "РегНомер", GetInsurerRegNumber(false)),
+                    new XElement(ns + "Наименование", orgName),
+                    new XElement(ns + "ИНН", GetInsurerINN())
+                }),
+
+                new XElement(ns + "ОтчетныйПериод", new object[]
+                {
+                    new XElement(xnamespace + "Месяц", DataClass.CurrentFormsSZV_M.Month),
+                    new XElement(xnamespace + "КалендарныйГод", DataClass.CurrentFormsSZV_M.Year)
+                })
+            });
+
+            //if (!string.IsNullOrEmpty(DataClass.SelectedInsurer.KPP))
+            //{
+            //    xelement.Element(ns + "Страхователь").Add(new XElement(ns + "КПП",
+            //        DataClass.SelectedInsurer.KPP.Substring(0,
+            //            (DataClass.SelectedInsurer.KPP.Length > 9)
+            //            ? 9 : DataClass.SelectedInsurer.KPP.Length))
+            //        );
+            //}
+
+            XElement xelement2 = new XElement(ns + "СписокЗЛ");
+            int num3 = 0;
+
+            foreach (var staffCont in DataClass.DataBase.FormsSZV_M_Stuff)
+            {
+                num3++;
+                XElement xelement3 = new XElement(ns + "ЗЛ", new XAttribute("НомерПП", num3));
+                XElement xelement4 = new XElement(ns + "ФИО");
+                if (!string.IsNullOrEmpty(staffCont.Worker.LastName))
+                {
+                    xelement4.Add(new XElement(xnamespace + "Фамилия", staffCont.Worker.LastName.Trim().ToUpper()));
+                }
+                if (!string.IsNullOrEmpty(staffCont.Worker.FirstName))
+                {
+                    xelement4.Add(new XElement(xnamespace + "Имя", staffCont.Worker.FirstName.Trim().ToUpper()));
+                }
+                if (!string.IsNullOrEmpty(staffCont.Worker.MiddleName))
+                {
+                    xelement4.Add(new XElement(xnamespace + "Отчество", staffCont.Worker.MiddleName.Trim().ToUpper()));
+                }
+                xelement3.Add(xelement4);
+                //xelement3.Add(new XElement(ns + "СНИЛС", Utils.ParseSNILS(staffCont.InsuranceNumber, new short?((staffCont.ControlNumber != null) ? staffCont.ControlNumber.Value : 0))));
+                if (!string.IsNullOrEmpty(staffCont.Worker.INN.ToString()) && staffCont.Worker.INN.ToString() != "0")
+                {
+                    xelement3.Add(new XElement(ns + "ИНН", staffCont.Worker.INN.ToString().PadLeft(12, '0')));
+                }
+                xelement2.Add(xelement3);
+            }
+            xelement.Add(xelement2);
+
+            xelement.Add(new XElement(ns + "ДатаЗаполнения", DataClass.CurrentFormsSZV_M.DateFilling));
+            xdocument.Element(ns + "ЭДПФР").Add(xelement);
+            xdocument.Element(ns + "ЭДПФР").Add(new XElement(ns + "СлужебнаяИнформация", new object[]
+            {                            
+                new XElement(xnamespace2 + "GUID", GetUUID()),                           
+                new XElement(xnamespace2 + "ДатаВремя", GetDateTime())
+            }));
+
+            xdocument.Save(fileName);
+        }
+
         public static string GetUUID()
         {
             Guid myuuid = Guid.NewGuid();

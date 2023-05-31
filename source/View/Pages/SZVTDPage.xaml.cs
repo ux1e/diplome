@@ -77,7 +77,7 @@ namespace Source.View.Pages
 
             DataClass.CurrentFormsSZV_TD = (FormsSZV_TD)SZVTDGrid.SelectedItem;
 
-            NavigationService.Navigate(new WorkersPage());
+            NavigationService.Navigate(new WorkersPage(2));
         }
 
         private void bAddSZVTDForms_Click(object sender, RoutedEventArgs e)
@@ -168,11 +168,6 @@ namespace Source.View.Pages
                         MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.None);
                 }
             }
-        }
-
-        private void bChangeUsers_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

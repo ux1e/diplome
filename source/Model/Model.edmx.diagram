@@ -5,19 +5,22 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="1d576f07eda149d089ef9fa0f5ba4568" Name="Diagram1">
-        <EntityTypeShape EntityType="diplomeModel.FormsSZV_M" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="diplomeModel.FormsSZV_TD" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="diplomeModel.FormsSZV_TD_Stuff" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="diplomeModel.Insurer" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="diplomeModel.Profession" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="diplomeModel.Sex" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="diplomeModel.User" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="diplomeModel.Worker" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <AssociationConnector Association="diplomeModel.FK_FormsSZV_TD_Stuff_FormsSZV_TD" ManuallyRouted="false" />
-        <AssociationConnector Association="diplomeModel.FK_FormsSZV_TD_Stuff_Workers" ManuallyRouted="false" />
-        <AssociationConnector Association="diplomeModel.FK_Workers_Profession" ManuallyRouted="false" />
-        <AssociationConnector Association="diplomeModel.FK_Workers_Sex" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="diplomeModel.FormsSZV_M" Width="1.5" PointX="3" PointY="11.625" />
+        <EntityTypeShape EntityType="diplomeModel.FormsSZV_M_Stuff" Width="1.5" PointX="5.25" PointY="3.75" />
+        <EntityTypeShape EntityType="diplomeModel.FormsSZV_TD" Width="1.5" PointX="3" PointY="7.375" />
+        <EntityTypeShape EntityType="diplomeModel.FormsSZV_TD_Stuff" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="diplomeModel.Insurer" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="diplomeModel.Profession" Width="1.5" PointX="0.75" PointY="0.875" />
+        <EntityTypeShape EntityType="diplomeModel.Sex" Width="1.5" PointX="0.75" PointY="4" />
+        <EntityTypeShape EntityType="diplomeModel.User" Width="1.5" PointX="5.75" PointY="7.125" />
+        <EntityTypeShape EntityType="diplomeModel.Worker" Width="1.5" PointX="3" PointY="3" />
+        <AssociationConnector Association="diplomeModel.FK_FormsSZV_M_Stuff_FormsSZV_M" />
+        <AssociationConnector Association="diplomeModel.FK_FormsSZV_M_Stuff_Workers" />
         <AssociationConnector Association="diplomeModel.FK_FormsSZV_TD_Insurers" />
+        <AssociationConnector Association="diplomeModel.FK_FormsSZV_TD_Stuff_FormsSZV_TD" />
+        <AssociationConnector Association="diplomeModel.FK_FormsSZV_TD_Stuff_Workers" />
+        <AssociationConnector Association="diplomeModel.FK_Workers_Profession" />
+        <AssociationConnector Association="diplomeModel.FK_Workers_Sex" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

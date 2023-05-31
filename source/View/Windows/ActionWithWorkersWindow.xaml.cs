@@ -5,16 +5,17 @@ using System.Windows.Input;
 namespace Source.View.Windows
 {
     /// <summary>
-    /// Interaction logic for ActionWithUserWindow.xaml
+    /// Interaction logic for ActionWithWorkersWindow.xaml
     /// </summary>
-    public partial class ActionWithUserWindow : Window
+    public partial class ActionWithWorkersWindow : Window
     {
         private Page _pageForTransit;
 
-        public ActionWithUserWindow(Page page)
+        public ActionWithWorkersWindow(Page page)
         {
             InitializeComponent();
             _pageForTransit = page;
+            tbLabel.Text = "";
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) => RootFrame.Content = _pageForTransit;

@@ -23,9 +23,6 @@ namespace Source.Model
         public int Id { get; set; }
         public string Name { get; set; }
         public string NameShort { get; set; }
-        public string LastName { get; set; }
-        public string FirstName { get; set; }
-        public string MiddleName { get; set; }
         public string InsuranceNumber { get; set; }
         public Nullable<long> INN { get; set; }
         public Nullable<long> RegNumber { get; set; }

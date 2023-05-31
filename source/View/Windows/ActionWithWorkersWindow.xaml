@@ -1,12 +1,12 @@
-﻿<Window x:Class="Source.View.Windows.ActionWithUserWindow"
+﻿<Window x:Class="Source.View.Windows.ActionWithWorkersWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Source.View.Windows"
         mc:Ignorable="d"
-        Title="Действия с пользователем" 
-        Height="450" MinHeight="450"
+        Title="Действия с работниками" 
+        Height="550" MinHeight="550"
         Width="450" MinWidth="450"
         ResizeMode="NoResize"
         WindowStyle="None"
@@ -17,14 +17,14 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Loaded="Window_Loaded">
     <Border CornerRadius="6" Background="{DynamicResource MaterialDesignPaper}" 
-            BorderBrush="Black" BorderThickness="0.25">
+            BorderBrush="Transparent" BorderThickness="0.25">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.05*"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <DockPanel Grid.Row="0">
+            <DockPanel Grid.Row="0" Grid.Column="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.05*"/>
@@ -40,32 +40,32 @@
                             HorizontalAlignment="Center" VerticalAlignment="Center"
                             Click="ToggleTheme">
                         <materialDesign:PackIcon                                
-                            Kind="ThemeLightDark"                               
-                            Height="10"                               
+                            Kind="ThemeLightDark"                                
+                            Height="10"                                
                             Width="10" />
                     </Button>
-                    
+
                     <DockPanel Grid.Column="2">
-                        <Button Background="#FFDECF34"                            
-                                BorderBrush="#FFDECF34"                           
-                                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"                           
-                                ToolTip="Minimize"                           
-                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"                           
-                                Width="12" Height="12" Margin="10,0,0,0"                           
-                                HorizontalAlignment="Left" VerticalAlignment="Center"                            
+                        <Button Background="#FFDECF34"
+                                BorderBrush="#FFDECF34"
+                                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                ToolTip="Minimize"
+                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                Width="12" Height="12" Margin="10,0,0,0"
+                                HorizontalAlignment="Left" VerticalAlignment="Center" 
                                 Click="MinimizeApp">
-                            <materialDesign:PackIcon                                        
-                                Kind="minus"                                 
-                                Height="10"                           
+                            <materialDesign:PackIcon             
+                                Kind="minus"      
+                                Height="10"
                                 Width="10" />
                         </Button>
-                        <Button Background="Red"                           
-                                BorderBrush="Red"                            
-                                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"                           
-                                ToolTip="Close"                            
-                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"                           
-                                Width="12" Height="12" Margin="10,0,0,0"                                                     
-                                HorizontalAlignment="Left" VerticalAlignment="Center"                             
+                        <Button Background="Red"
+                                BorderBrush="Red"
+                                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                ToolTip="Close"
+                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                Width="12" Height="12" Margin="10,0,0,0"                           
+                                HorizontalAlignment="Left" VerticalAlignment="Center" 
                                 Click="CloseApp">
                             <materialDesign:PackIcon
                                 Kind="WindowClose"
@@ -73,6 +73,11 @@
                                 Width="10" />
                         </Button>
                     </DockPanel>
+
+                    <TextBlock x:Name="tbLabel" 
+                               VerticalAlignment="Center" HorizontalAlignment="Center" 
+                               Grid.Column="1" 
+                               Text=":3"/>
                 </Grid>
             </DockPanel>
 

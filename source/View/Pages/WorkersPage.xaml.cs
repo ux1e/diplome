@@ -1,20 +1,10 @@
 ﻿using Source.Core;
 using Source.Model;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Source.View.Pages
 {
@@ -24,13 +14,15 @@ namespace Source.View.Pages
     public partial class WorkersPage : Page
     {
         public ObservableCollection<Worker> Worker;
+        private DataClass.FormEnum _form = 0; // 1 - SZVM; 2 - SZVTD;
 
-        public WorkersPage()
+        public WorkersPage(int form)
         {
             InitializeComponent();
             FuncPanel.Width = new GridLength(0);
             Worker = new ObservableCollection<Worker>(DataClass.DataBase.Workers);
             Grid.ItemsSource = Worker;
+            _form = (DataClass.FormEnum)form;
         }
 
         private void bGoBack_Click(object sender, RoutedEventArgs e)
@@ -48,15 +40,30 @@ namespace Source.View.Pages
 
             DataClass.SelectedWorker = (Worker)Grid.SelectedItem;
 
-            FormsSZV_TD_Stuff NewForm = new FormsSZV_TD_Stuff();
-            NewForm.WorkerId = DataClass.SelectedWorker.Id;
-            NewForm.SZV_TD_Id = DataClass.CurrentFormsSZV_TD.Id;
+            if (_form == DataClass.FormEnum.SZV_M)
+            {
+                FormsSZV_M_Stuff NewForm = new FormsSZV_M_Stuff();
+                NewForm.WorkerId = DataClass.SelectedWorker.Id;
+                NewForm.SZV_M_Id = DataClass.CurrentFormsSZV_M.Id;
 
-            DataClass.DataBase.FormsSZV_TD_Stuff.Add(NewForm);
+                DataClass.DataBase.FormsSZV_M_Stuff.Add(NewForm);
 
-            var EditItem = new FormsSZV_TD();
-            EditItem = DataClass.CurrentFormsSZV_TD;
-            EditItem.WorkersCount++;
+                var EditItem = new FormsSZV_M();
+                EditItem = DataClass.CurrentFormsSZV_M;
+                EditItem.WorkersCount++;
+            }
+            else if (_form == DataClass.FormEnum.SZV_TD)
+            {
+                FormsSZV_TD_Stuff NewForm = new FormsSZV_TD_Stuff();
+                NewForm.WorkerId = DataClass.SelectedWorker.Id;
+                NewForm.SZV_TD_Id = DataClass.CurrentFormsSZV_TD.Id;
+
+                DataClass.DataBase.FormsSZV_TD_Stuff.Add(NewForm);
+
+                var EditItem = new FormsSZV_TD();
+                EditItem = DataClass.CurrentFormsSZV_TD;
+                EditItem.WorkersCount++;
+            }
 
             try
             {
@@ -69,6 +76,13 @@ namespace Source.View.Pages
         }
 
         private void bMakeNewWorker_Click(object sender, RoutedEventArgs e)
+        {
+            AddNewWorker addNewWorker = new AddNewWorker();
+            Windows.ActionWithWorkersWindow addNewWorkerWindow = new Windows.ActionWithWorkersWindow(addNewWorker);
+            addNewWorkerWindow.ShowDialog();
+        }
+
+        private void bEditWorker_Click(object sender, RoutedEventArgs e)
         {
 
         }

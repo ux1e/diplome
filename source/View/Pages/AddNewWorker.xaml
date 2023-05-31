@@ -1,0 +1,51 @@
+﻿<Page x:Class="Source.View.Pages.AddNewWorker"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Source.View.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddNewWorker"
+      Loaded="Page_Loaded">
+
+    <Grid Background="{DynamicResource MaterialDesignPaper}">
+        <StackPanel VerticalAlignment="Center"                       
+                    HorizontalAlignment="Center"                        
+                    MinWidth="200">
+
+            <Label Content="Имя"/>
+            <TextBox x:Name="tbFirstName" Margin="5, 0, 5, 5"/>
+            
+            <Label Content="Фамилия"/>
+            <TextBox x:Name="tbLastName" Margin="5, 0, 5, 5"/>
+
+            <Label Content="Отчество"/>
+            <TextBox x:Name="tbMiddleName" Margin="5, 0, 5, 5"/>
+
+            <Label Content="Страховой номер" ToolTip="СНИЛС - 11 СИМВОЛОВ"/>
+            <TextBox x:Name="tbInsuranceNumber" Margin="5, 0, 5, 5"/>
+            
+            <Label Content="ИНН" ToolTip="12 СИМВОЛОВ"/>
+            <TextBox x:Name="tbINN" Margin="5, 0, 5, 5"/>
+
+            <Label Content="Пол"/>
+            <ComboBox x:Name="cbSex" Margin="5, 0, 5, 5" DisplayMemberPath="Name"/>
+
+            <Label Content="Профессия"/>
+            <ComboBox x:Name="cbProfession" Margin="5, 0, 5, 5" DisplayMemberPath="Name"/>
+
+            <CheckBox Content="Уволен" x:Name="bIsFired" Margin="5"/>
+
+            <DockPanel>
+                <Button x:Name="bCreate"                            
+                        Height="30" Width="180"                           
+                        Content="Создать"                            
+                        HorizontalAlignment="Center"                          
+                        Margin="0, 5, 5, 0"                            
+                        Background="LawnGreen"                          
+                        Click="bCreate_Click"/>
+            </DockPanel>
+        </StackPanel>
+    </Grid>
+</Page>

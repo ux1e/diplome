@@ -73,6 +73,11 @@
                         Click="bMakeNewWorker_Click" 
                         Grid.Column="2" Margin="2"                                                   
                         Content="Создать"/>
+
+                <Button x:Name="bEditWorker" 
+                        Click="bEditWorker_Click" 
+                        Grid.Column="3" Margin="2"                                                   
+                        Content="Редактировать"/>
             </Grid>
         </DockPanel>
 

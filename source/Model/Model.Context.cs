@@ -26,6 +26,7 @@ namespace Source.Model
         }
     
         public virtual DbSet<FormsSZV_M> FormsSZV_M { get; set; }
+        public virtual DbSet<FormsSZV_M_Stuff> FormsSZV_M_Stuff { get; set; }
         public virtual DbSet<FormsSZV_TD> FormsSZV_TD { get; set; }
         public virtual DbSet<FormsSZV_TD_Stuff> FormsSZV_TD_Stuff { get; set; }
         public virtual DbSet<Insurer> Insurers { get; set; }

@@ -67,10 +67,24 @@
                               CanUserReorderColumns="False" CanUserSortColumns="False" IsReadOnly="True" FontSize="10"
                               ItemsSource = "{Binding ElementName=SZVTDGrid, Path=SelectedItem.FormsSZV_TD_Stuff}" >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ФИО" Binding="{Binding Path=Worker.FirstName}" Width="*" />
+                            <DataGridTemplateColumn Header="ФИО" Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock>
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="{}{0} {1} {2}">
+                                                    <Binding Path="Worker.FirstName"/>
+                                                    <Binding Path="Worker.LastName"/>
+                                                    <Binding Path="Worker.MiddleName"/>
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                             <!--<DataGridTextColumn Header="СНИЛС" Binding="{Binding Path=SNILS}" Width="*" />-->
                             <DataGridTextColumn Header="ИНН" Binding="{Binding Path=Worker.INN}" Width="*" />
-                            <DataGridTextColumn Header="Пол" Binding="{Binding Path=Worker.Sex1.Name}" Width="*" />
+                            <!--<DataGridTextColumn Header="Пол" Binding="{Binding Path=Worker.Sex1.Name}" Width="*" />-->
                             <DataGridTextColumn Header="Уволен" Binding="{Binding Path=Worker.IsFired, Converter={StaticResource BoolConverter}}" Width="*" />
                             <!--<DataGridTextColumn Header="Дата Рождения" Binding="{Binding Path=DOB}" Width="*" />-->
                         </DataGrid.Columns>
@@ -131,19 +145,14 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        
+
                         <Button x:Name="bShowUsers" 
                                 Grid.Row="0"
                                 Content="Добавить" 
                                 Click="bShowUsers_Click"/>
 
-                        <Button x:Name="bChangeUsers" 
-                                Grid.Row="1"
-                                Content="Изменить" 
-                                Click="bChangeUsers_Click"/>
-
                         <Button x:Name="bDeleteUsers" 
-                                Grid.Row="2"
+                                Grid.Row="1"
                                 Content="Удалить" 
                                 Click="bDeleteUsers_Click"/>
                     </Grid>
