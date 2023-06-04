@@ -1,6 +1,7 @@
 ﻿using Source.Model;
 using System;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Security.Cryptography;
 using System.Windows;
 using System.Xml.Linq;
@@ -9,7 +10,7 @@ namespace Source.Core
 {
     static internal class Utils
     {
-        public static void MakeSZVTDXml(int szvtdID)
+        public static void MakeSZVTDXml(int szvtdID) //[W.I.P]
         {
             try
             {
@@ -86,6 +87,43 @@ namespace Source.Core
 
             XElement xelement4 = new XElement(xnamespace + "ЕФС-1", xelement2);
 
+            XElement xelement7 = new XElement(xnamespace + "СЗВ");
+
+            foreach (var staff in DataClass.DataBase.FormsSZV_TD_Stuff)
+            {
+                XElement xelement8 = new XElement(xnamespace + "ЗЛ");
+                XElement xelement9 = new XElement(xnamespace2 + "ФИО");
+
+                if (!string.IsNullOrEmpty(staff.Worker.LastName))
+                {
+                    xelement9.Add(new XElement(xnamespace2 + "Фамилия", staff.Worker.LastName.Trim()));
+                }
+                if (!string.IsNullOrEmpty(staff.Worker.FirstName))
+                {
+                    xelement9.Add(new XElement(xnamespace2 + "Имя", staff.Worker.FirstName.Trim()));
+                }
+                if (!string.IsNullOrEmpty(staff.Worker.MiddleName))
+                {
+                    xelement9.Add(new XElement(xnamespace2 + "Отчество", staff.Worker.MiddleName.Trim()));
+                }
+
+                xelement8.Add(xelement9);
+
+                long? insuranceNumber = staff.Worker.InsuranceNumber;
+                xelement8.Add(new XElement(xnamespace2 + "СНИЛС", insuranceNumber));
+
+                if (staff.Worker.INN != null)
+                {
+                    xelement8.Add(new XElement(xnamespace + "ИНН", staff.Worker.INN));
+                }
+                xelement8.Add(xelement9);
+
+                XElement xelement13 = new XElement(xnamespace + "СЗВ-ТД");
+
+                xelement7.Add(xelement8);
+            }
+            xelement4.Add(xelement7);
+
             XElement xelement25 = new XElement(xnamespace + "СлужебнаяИнформация", new object[]
             {
                 new XElement(xnamespace5 + "GUID", GetUUID()),
@@ -98,7 +136,7 @@ namespace Source.Core
             xdocument.Save(fileName);
         }
 
-        public static void MakeSZVMXml(int szvmID)
+        public static void MakeSZVMXml(int szvmID) //[completed]
         {
             try
             {
@@ -165,15 +203,19 @@ namespace Source.Core
                 })
             });
 
-            //if (!string.IsNullOrEmpty(DataClass.SelectedInsurer.KPP))
-            //{
-            //    xelement.Element(ns + "Страхователь").Add(new XElement(ns + "КПП",
-            //        DataClass.SelectedInsurer.KPP.Substring(0,
-            //            (DataClass.SelectedInsurer.KPP.Length > 9)
-            //            ? 9 : DataClass.SelectedInsurer.KPP.Length))
-            //        );
-            //}
-
+            /*
+             * пока не смог понять нужен ли кпп если есть инн, но пускай будет
+             */
+            /*
+            if (!string.IsNullOrEmpty(DataClass.SelectedInsurer.KPP))
+            {
+                xelement.Element(ns + "Страхователь").Add(new XElement(ns + "КПП",
+                    DataClass.SelectedInsurer.KPP.Substring(0,
+                        (DataClass.SelectedInsurer.KPP.Length > 9)
+                        ? 9 : DataClass.SelectedInsurer.KPP.Length))
+                    );
+            }
+            */
             XElement xelement2 = new XElement(ns + "СписокЗЛ");
             int num3 = 0;
 
@@ -195,7 +237,14 @@ namespace Source.Core
                     xelement4.Add(new XElement(xnamespace + "Отчество", staffCont.Worker.MiddleName.Trim().ToUpper()));
                 }
                 xelement3.Add(xelement4);
-                //xelement3.Add(new XElement(ns + "СНИЛС", Utils.ParseSNILS(staffCont.InsuranceNumber, new short?((staffCont.ControlNumber != null) ? staffCont.ControlNumber.Value : 0))));
+                /* 
+                xelement3.Add(new XElement(ns + "СНИЛС", 
+                                Utils.ParseSNILS(staffCont.InsuranceNumber, 
+                                new short?((staffCont.ControlNumber != null) ? 
+                                            taffCont.ControlNumber.Value : 0)
+                                          ))
+                             );
+                */
                 if (!string.IsNullOrEmpty(staffCont.Worker.INN.ToString()) && staffCont.Worker.INN.ToString() != "0")
                 {
                     xelement3.Add(new XElement(ns + "ИНН", staffCont.Worker.INN.ToString().PadLeft(12, '0')));
@@ -207,8 +256,8 @@ namespace Source.Core
             xelement.Add(new XElement(ns + "ДатаЗаполнения", DataClass.CurrentFormsSZV_M.DateFilling));
             xdocument.Element(ns + "ЭДПФР").Add(xelement);
             xdocument.Element(ns + "ЭДПФР").Add(new XElement(ns + "СлужебнаяИнформация", new object[]
-            {                            
-                new XElement(xnamespace2 + "GUID", GetUUID()),                           
+            {
+                new XElement(xnamespace2 + "GUID", GetUUID()),
                 new XElement(xnamespace2 + "ДатаВремя", GetDateTime())
             }));
 
@@ -221,13 +270,13 @@ namespace Source.Core
             return myuuid.ToString();
         }
 
-        public static string GetDateTime()
+        public static string GetDateTime() //get normal date format
         {
             DateTime currentDateTime = DateTime.Now;
             return currentDateTime.ToString("MM-dd-yyyy HH.mm.ss");
         }
 
-        public static string ParseNum(long n)
+        public static string ParseNum(long n) //parse reg num to new view
         {
             string s = n.ToString();
             if (!string.IsNullOrEmpty(s) && s.Length == 12)
@@ -252,7 +301,7 @@ namespace Source.Core
             return Convert.ToBase64String(data);
         }
 
-        public static string GetFormatedInsurerINN()
+        public static string GetFormatedInsurerINN() //get formater inn for insurer [legacy]
         {
             return DataClass.SelectedInsurer != null ? $"[{ParseNum((long)DataClass.SelectedInsurer.INN)}]" : "[___-___-______]";
         }
