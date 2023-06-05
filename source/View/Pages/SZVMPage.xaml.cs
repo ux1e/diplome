@@ -159,6 +159,11 @@ namespace Source.View.Pages
                     }
                     DataClass.CurrentFormsSZV_M_Stuff = (FormsSZV_M_Stuff)WorkerGrid.SelectedItem;
                     DataClass.DataBase.FormsSZV_M_Stuff.Remove(DeletingItem);
+
+                    var EditItem = new FormsSZV_M();
+                    EditItem = DataClass.CurrentFormsSZV_M;
+                    EditItem.WorkersCount++;
+
                     DataClass.DataBase.SaveChanges();
                     UpdateWorkersGrid(DataClass.CurrentFormsSZV_M_Stuff);
                 }

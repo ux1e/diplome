@@ -27,21 +27,20 @@
             <TextBox Width="300" x:Name="tbSearch" TextChanged="tbSearch_TextChanged"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.Column="0" Margin="5, 0, 5, 0">
-            <ListView x:Name="lvUsers">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <Label Content="{Binding Id}" ContentStringFormat="ID: {0}"/>
-                            <Label Content="{Binding Name}" ContentStringFormat="Логин: {0}"/>
-                            <Label Content="{Binding Password}" ContentStringFormat="Пароль: {0}"/>
-                            <Label Content="{Binding Mail}" ContentStringFormat="Почта: {0}"/>
-                            <!--<Image />-->
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <!--<DataGrid x:Name="Grid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" 
+        <ListView x:Name="lvUsers" Grid.Row="1" Grid.Column="0">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Label Content="{Binding Id}" ContentStringFormat="ID: {0}"/>
+                        <Label Content="{Binding Name}" ContentStringFormat="Логин: {0}"/>
+                        <Label Content="{Binding Password}" ContentStringFormat="Пароль: {0}"/>
+                        <Label Content="{Binding Mail}" ContentStringFormat="Почта: {0}"/>
+                        <!--<Image />-->
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <!--<DataGrid x:Name="Grid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" 
                       CanUserReorderColumns="False" CanUserSortColumns="False" IsReadOnly="True" FontSize="10">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}" Width="*" />
@@ -61,7 +60,6 @@
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>-->
-        </StackPanel>
 
         <DockPanel Grid.Row="2" Grid.Column="0">
             <Grid>
@@ -71,7 +69,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                
+
                 <Button x:Name="bMakeNewUser" 
                         Click="bMakeNewUser_Click" 
                         Margin="2"
