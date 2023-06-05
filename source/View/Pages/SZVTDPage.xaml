@@ -50,47 +50,44 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="0" Margin="5">
-                    <DataGrid x:Name="SZVTDGrid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" 
-                              CanUserReorderColumns="False" CanUserSortColumns="False" IsReadOnly="True" FontSize="10" >
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Дата" Binding="{Binding Path=DateFilling}" Width="110" />
-                            <DataGridTextColumn Header="Год" Binding="{Binding Path=Year}" Width="110" />
-                            <DataGridTextColumn Header="Месяц" Binding="{Binding Path=Month}" Width="110" />
-                            <DataGridTextColumn Header="Количество сотрудников" Binding="{Binding Path=WorkersCount}" Width="*" />
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </StackPanel>
+                <DataGrid x:Name="SZVTDGrid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeColumns="False"                               
+                          CanUserReorderColumns="False" CanUserSortColumns="False" IsReadOnly="True" FontSize="10"                              
+                          Grid.Row="0" Margin="5">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Дата" Binding="{Binding Path=DateFilling}" Width="110" />
+                        <DataGridTextColumn Header="Год" Binding="{Binding Path=Year}" Width="110" />
+                        <DataGridTextColumn Header="Месяц" Binding="{Binding Path=Month}" Width="110" />
+                        <DataGridTextColumn Header="Количество сотрудников" Binding="{Binding Path=WorkersCount}" Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
 
-                <StackPanel Grid.Row="1" Margin="5">
-                    <DataGrid x:Name="WorkerGrid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeColumns="False" 
-                              CanUserReorderColumns="False" CanUserSortColumns="False" IsReadOnly="True" FontSize="10"
-                              ItemsSource = "{Binding ElementName=SZVTDGrid, Path=SelectedItem.FormsSZV_TD_Stuff}" >
-                        <DataGrid.Columns>
-                            <DataGridTemplateColumn Header="ФИО" Width="*">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock>
-                                            <TextBlock.Text>
-                                                <MultiBinding StringFormat="{}{0} {1} {2}">
-                                                    <Binding Path="Worker.FirstName"/>
-                                                    <Binding Path="Worker.LastName"/>
-                                                    <Binding Path="Worker.MiddleName"/>
-                                                </MultiBinding>
-                                            </TextBlock.Text>
-                                        </TextBlock>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <!--<DataGridTextColumn Header="СНИЛС" Binding="{Binding Path=SNILS}" Width="*" />-->
-                            <DataGridTextColumn Header="ИНН" Binding="{Binding Path=Worker.INN}" Width="*" />
-                            <!--<DataGridTextColumn Header="Пол" Binding="{Binding Path=Worker.Sex1.Name}" Width="*" />-->
-                            <DataGridTextColumn Header="Уволен" Binding="{Binding Path=Worker.IsFired, Converter={StaticResource BoolConverter}}" Width="*" />
-                            <!--<DataGridTextColumn Header="Дата Рождения" Binding="{Binding Path=DOB}" Width="*" />-->
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </StackPanel>
-
+                <DataGrid x:Name="WorkerGrid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeColumns="False"                               
+                          CanUserReorderColumns="False" CanUserSortColumns="False" IsReadOnly="True" FontSize="10"                             
+                          ItemsSource = "{Binding ElementName=SZVTDGrid, Path=SelectedItem.FormsSZV_TD_Stuff}"                             
+                          Grid.Row="1" Margin="5">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="ФИО" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0} {1} {2}">
+                                                <Binding Path="Worker.FirstName"/>
+                                                <Binding Path="Worker.LastName"/>
+                                                <Binding Path="Worker.MiddleName"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!--<DataGridTextColumn Header="СНИЛС" Binding="{Binding Path=SNILS}" Width="*" />-->
+                        <DataGridTextColumn Header="ИНН" Binding="{Binding Path=Worker.INN}" Width="*" />
+                        <!--<DataGridTextColumn Header="Пол" Binding="{Binding Path=Worker.Sex1.Name}" Width="*" />-->
+                        <DataGridTextColumn Header="Уволен" Binding="{Binding Path=Worker.IsFired, Converter={StaticResource BoolConverter}}" Width="*" />
+                        <!--<DataGridTextColumn Header="Дата Рождения" Binding="{Binding Path=DOB}" Width="*" />-->
+                    </DataGrid.Columns>
+                </DataGrid>
             </Grid>
         </DockPanel>
 
@@ -108,6 +105,13 @@
                         Margin="2"
                         Grid.Column="0"                                        
                         Content="Создать XML"/>
+
+                <Button x:Name="bOpenFolder" 
+                        Click="bOpenFolder_Click"
+                        Margin="2"
+                        Grid.Column="1"       
+                        FontSize="12"
+                        Content="Открыть папку"/>
             </Grid>
         </DockPanel>
 
@@ -156,7 +160,7 @@
                                 Content="Удалить" 
                                 Click="bDeleteUsers_Click"/>
                     </Grid>
-                   
+
                 </DockPanel>
             </Grid>
         </DockPanel>

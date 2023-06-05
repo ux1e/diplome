@@ -1,4 +1,5 @@
 ﻿using Source.Model;
+using System.Data.Entity;
 
 namespace Source.Core
 {

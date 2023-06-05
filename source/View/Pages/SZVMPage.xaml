@@ -54,7 +54,6 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Год" Binding="{Binding Path=Year}" Width="*" />
                         <DataGridTextColumn Header="Месяц" Binding="{Binding Path=Month}" Width="*" />
-                        <DataGridTextColumn Header="Тип формы" Binding="{Binding Path=Month}" Width="*" />
                         <DataGridTextColumn Header="Количество сотрудников" Binding="{Binding Path=WorkersCount}" Width="*" />
                     </DataGrid.Columns>
                 </DataGrid>
@@ -153,6 +152,13 @@
                         Margin="2"
                         Grid.Column="0"                                        
                         Content="Создать XML"/>
+
+                <Button x:Name="bOpenFolder" 
+                        Click="bOpenFolder_Click"
+                        Margin="2"
+                        Grid.Column="1"       
+                        FontSize="12"
+                        Content="Открыть папку"/>
             </Grid>
         </DockPanel>
     </Grid>

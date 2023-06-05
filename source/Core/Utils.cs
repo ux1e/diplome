@@ -1,6 +1,8 @@
 ﻿using Source.Model;
 using System;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Remoting.Contexts;
 using System.Security.Cryptography;
 using System.Windows;
@@ -10,6 +12,10 @@ namespace Source.Core
 {
     static internal class Utils
     {
+        public static string GetExePath() => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+        public static string GetReportsPath(string fileName) => GetExePath() + "\\Reports\\" + fileName;
+
         public static void MakeSZVTDXml(int szvtdID) //[W.I.P]
         {
             try
@@ -89,40 +95,46 @@ namespace Source.Core
 
             XElement xelement7 = new XElement(xnamespace + "СЗВ");
 
-            foreach (var staff in DataClass.DataBase.FormsSZV_TD_Stuff)
+            using (var context = new diplomeEntities())
             {
-                XElement xelement8 = new XElement(xnamespace + "ЗЛ");
-                XElement xelement9 = new XElement(xnamespace2 + "ФИО");
+                var currentStaff = context.FormsSZV_TD_Stuff.Where(q => q.SZV_TD_Id == DataClass.CurrentFormsSZV_TD.Id);
 
-                if (!string.IsNullOrEmpty(staff.Worker.LastName))
+                foreach (var staff in currentStaff)
                 {
-                    xelement9.Add(new XElement(xnamespace2 + "Фамилия", staff.Worker.LastName.Trim()));
+                    XElement xelement8 = new XElement(xnamespace + "ЗЛ");
+                    XElement xelement9 = new XElement(xnamespace2 + "ФИО");
+
+                    if (!string.IsNullOrEmpty(staff.Worker.LastName))
+                    {
+                        xelement9.Add(new XElement(xnamespace2 + "Фамилия", staff.Worker.LastName.Trim()));
+                    }
+                    if (!string.IsNullOrEmpty(staff.Worker.FirstName))
+                    {
+                        xelement9.Add(new XElement(xnamespace2 + "Имя", staff.Worker.FirstName.Trim()));
+                    }
+                    if (!string.IsNullOrEmpty(staff.Worker.MiddleName))
+                    {
+                        xelement9.Add(new XElement(xnamespace2 + "Отчество", staff.Worker.MiddleName.Trim()));
+                    }
+
+                    xelement8.Add(xelement9);
+
+                    long? insuranceNumber = staff.Worker.InsuranceNumber;
+                    xelement8.Add(new XElement(xnamespace2 + "СНИЛС", insuranceNumber));
+
+                    if (staff.Worker.INN != null)
+                    {
+                        xelement8.Add(new XElement(xnamespace + "ИНН", staff.Worker.INN));
+                    }
+                    xelement8.Add(xelement9);
+
+                    XElement xelement13 = new XElement(xnamespace + "СЗВ-ТД");
+
+                    xelement7.Add(xelement8);
                 }
-                if (!string.IsNullOrEmpty(staff.Worker.FirstName))
-                {
-                    xelement9.Add(new XElement(xnamespace2 + "Имя", staff.Worker.FirstName.Trim()));
-                }
-                if (!string.IsNullOrEmpty(staff.Worker.MiddleName))
-                {
-                    xelement9.Add(new XElement(xnamespace2 + "Отчество", staff.Worker.MiddleName.Trim()));
-                }
+                xelement4.Add(xelement7);
 
-                xelement8.Add(xelement9);
-
-                long? insuranceNumber = staff.Worker.InsuranceNumber;
-                xelement8.Add(new XElement(xnamespace2 + "СНИЛС", insuranceNumber));
-
-                if (staff.Worker.INN != null)
-                {
-                    xelement8.Add(new XElement(xnamespace + "ИНН", staff.Worker.INN));
-                }
-                xelement8.Add(xelement9);
-
-                XElement xelement13 = new XElement(xnamespace + "СЗВ-ТД");
-
-                xelement7.Add(xelement8);
             }
-            xelement4.Add(xelement7);
 
             XElement xelement25 = new XElement(xnamespace + "СлужебнаяИнформация", new object[]
             {
@@ -134,6 +146,8 @@ namespace Source.Core
             xdocument.Element(xnamespace + "ЭДПФР").Add(xelement25);
 
             xdocument.Save(fileName);
+
+            MessageBox.Show("Отчёт создан!", "Информация");
         }
 
         public static void MakeSZVMXml(int szvmID) //[completed]
@@ -203,55 +217,40 @@ namespace Source.Core
                 })
             });
 
-            /*
-             * пока не смог понять нужен ли кпп если есть инн, но пускай будет
-             */
-            /*
-            if (!string.IsNullOrEmpty(DataClass.SelectedInsurer.KPP))
-            {
-                xelement.Element(ns + "Страхователь").Add(new XElement(ns + "КПП",
-                    DataClass.SelectedInsurer.KPP.Substring(0,
-                        (DataClass.SelectedInsurer.KPP.Length > 9)
-                        ? 9 : DataClass.SelectedInsurer.KPP.Length))
-                    );
-            }
-            */
             XElement xelement2 = new XElement(ns + "СписокЗЛ");
-            int num3 = 0;
+            int ppCount = 0;
 
-            foreach (var staffCont in DataClass.DataBase.FormsSZV_M_Stuff)
+            using (var context = new diplomeEntities())
             {
-                num3++;
-                XElement xelement3 = new XElement(ns + "ЗЛ", new XAttribute("НомерПП", num3));
-                XElement xelement4 = new XElement(ns + "ФИО");
-                if (!string.IsNullOrEmpty(staffCont.Worker.LastName))
+                var currentStaff = context.FormsSZV_M_Stuff.Where(q => q.SZV_M_Id == DataClass.CurrentFormsSZV_M.Id);
+
+                foreach (var staff in currentStaff)
                 {
-                    xelement4.Add(new XElement(xnamespace + "Фамилия", staffCont.Worker.LastName.Trim().ToUpper()));
+                    ppCount++;
+                    XElement xelement3 = new XElement(ns + "ЗЛ", new XAttribute("НомерПП", ppCount));
+                    XElement xelement4 = new XElement(ns + "ФИО");
+                    if (!string.IsNullOrEmpty(staff.Worker.LastName))
+                    {
+                        xelement4.Add(new XElement(xnamespace + "Фамилия", staff.Worker.LastName.Trim().ToUpper()));
+                    }
+                    if (!string.IsNullOrEmpty(staff.Worker.FirstName))
+                    {
+                        xelement4.Add(new XElement(xnamespace + "Имя", staff.Worker.FirstName.Trim().ToUpper()));
+                    }
+                    if (!string.IsNullOrEmpty(staff.Worker.MiddleName))
+                    {
+                        xelement4.Add(new XElement(xnamespace + "Отчество", staff.Worker.MiddleName.Trim().ToUpper()));
+                    }
+                    xelement3.Add(xelement4);
+
+                    if (!string.IsNullOrEmpty(staff.Worker.INN.ToString()) && staff.Worker.INN.ToString() != "0")
+                    {
+                        xelement3.Add(new XElement(ns + "ИНН", staff.Worker.INN.ToString().PadLeft(12, '0')));
+                    }
+                    xelement2.Add(xelement3);
                 }
-                if (!string.IsNullOrEmpty(staffCont.Worker.FirstName))
-                {
-                    xelement4.Add(new XElement(xnamespace + "Имя", staffCont.Worker.FirstName.Trim().ToUpper()));
-                }
-                if (!string.IsNullOrEmpty(staffCont.Worker.MiddleName))
-                {
-                    xelement4.Add(new XElement(xnamespace + "Отчество", staffCont.Worker.MiddleName.Trim().ToUpper()));
-                }
-                xelement3.Add(xelement4);
-                /* 
-                xelement3.Add(new XElement(ns + "СНИЛС", 
-                                Utils.ParseSNILS(staffCont.InsuranceNumber, 
-                                new short?((staffCont.ControlNumber != null) ? 
-                                            taffCont.ControlNumber.Value : 0)
-                                          ))
-                             );
-                */
-                if (!string.IsNullOrEmpty(staffCont.Worker.INN.ToString()) && staffCont.Worker.INN.ToString() != "0")
-                {
-                    xelement3.Add(new XElement(ns + "ИНН", staffCont.Worker.INN.ToString().PadLeft(12, '0')));
-                }
-                xelement2.Add(xelement3);
+                xelement.Add(xelement2);
             }
-            xelement.Add(xelement2);
 
             xelement.Add(new XElement(ns + "ДатаЗаполнения", DataClass.CurrentFormsSZV_M.DateFilling));
             xdocument.Element(ns + "ЭДПФР").Add(xelement);
@@ -262,6 +261,8 @@ namespace Source.Core
             }));
 
             xdocument.Save(fileName);
+
+            MessageBox.Show("Отчёт создан!", "Информация");
         }
 
         public static string GetUUID()

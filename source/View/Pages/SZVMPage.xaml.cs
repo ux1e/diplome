@@ -2,7 +2,10 @@
 using Source.Model;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -174,6 +177,14 @@ namespace Source.View.Pages
                         "Предупреждение",
                         MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.None);
                 }
+            }
+        }
+
+        private void bOpenFolder_Click(object sender, RoutedEventArgs e)
+        {
+            if (Directory.Exists(Utils.GetExePath()))
+            {
+                Process.Start("explorer.exe", Utils.GetExePath());
             }
         }
     }
