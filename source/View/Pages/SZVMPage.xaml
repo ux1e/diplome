@@ -78,11 +78,8 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <!--<DataGridTextColumn Header="СНИЛС" Binding="{Binding Path=SNILS}" Width="*" />-->
                         <DataGridTextColumn Header="ИНН" Binding="{Binding Path=Worker.INN}" Width="*" />
-                        <!--<DataGridTextColumn Header="Пол" Binding="{Binding Path=Worker.Sex1.Name}" Width="*" />-->
                         <DataGridTextColumn Header="Уволен" Binding="{Binding Path=Worker.IsFired, Converter={StaticResource BoolConverter}}" Width="*" />
-                        <!--<DataGridTextColumn Header="Дата Рождения" Binding="{Binding Path=DOB}" Width="*" />-->
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
