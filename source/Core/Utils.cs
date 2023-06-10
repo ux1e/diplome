@@ -3,7 +3,6 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Remoting.Contexts;
 using System.Security.Cryptography;
 using System.Windows;
 using System.Xml.Linq;
@@ -265,7 +264,7 @@ namespace Source.Core
             MessageBox.Show("Отчёт создан!", "Информация");
         }
 
-        public static string GetUUID()
+        public static string GetUUID() //get uuid for report
         {
             Guid myuuid = Guid.NewGuid();
             return myuuid.ToString();
@@ -294,7 +293,7 @@ namespace Source.Core
             return "";
         }
 
-        public static string GetRandomPassword(int length)
+        public static string GetRandomPassword(int length) //just a generator of string using crypto
         {
             byte[] data = new byte[length];
             RNGCryptoServiceProvider rngCrypt = new RNGCryptoServiceProvider();
