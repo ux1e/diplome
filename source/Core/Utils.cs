@@ -1,5 +1,6 @@
 ﻿using Source.Model;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -12,6 +13,14 @@ namespace Source.Core
     static internal class Utils
     {
         public static string GetExePath() => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+        public static void OpenExeFolder()
+        {
+            if (Directory.Exists(GetExePath()))
+            {
+                Process.Start("explorer.exe", GetExePath());
+            }
+        }
 
         public static string GetReportsPath(string fileName) => GetExePath() + "\\Reports\\" + fileName;
 

@@ -170,12 +170,6 @@ namespace Source.View.Pages
             }
         }
 
-        private void bOpenFolder_Click(object sender, RoutedEventArgs e)
-        {
-            if (Directory.Exists(Utils.GetExePath()))
-            {
-                Process.Start("explorer.exe", Utils.GetExePath());
-            }
-        }
+        private void bOpenFolder_Click(object sender, RoutedEventArgs e) => Utils.OpenExeFolder();
     }
 }

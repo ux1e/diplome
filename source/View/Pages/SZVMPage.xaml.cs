@@ -164,10 +164,11 @@ namespace Source.View.Pages
                     DataClass.DataBase.FormsSZV_M_Stuff.Remove(DeletingItem);
 
                     var EditItem = new FormsSZV_M();
-                    EditItem = DataClass.CurrentFormsSZV_M;
-                    EditItem.WorkersCount++;
+                    EditItem = DataClass.CurrentFormsSZV_M_Stuff.FormsSZV_M;
+                    EditItem.WorkersCount--;
 
                     DataClass.DataBase.SaveChanges();
+                    UpdateSZVMGrid(DataClass.CurrentFormsSZV_M);
                     UpdateWorkersGrid(DataClass.CurrentFormsSZV_M_Stuff);
                 }
                 catch (Exception ex)
@@ -180,12 +181,6 @@ namespace Source.View.Pages
             }
         }
 
-        private void bOpenFolder_Click(object sender, RoutedEventArgs e)
-        {
-            if (Directory.Exists(Utils.GetExePath()))
-            {
-                Process.Start("explorer.exe", Utils.GetExePath());
-            }
-        }
+        private void bOpenFolder_Click(object sender, RoutedEventArgs e) => Utils.OpenExeFolder();
     }
 }
